@@ -5,7 +5,6 @@ import Logo from '../Image/LogoGym.png';
 function Navbar() {
   return (
     <>
-
     <div className="Columna">
         
         <div className="Fila1">
@@ -22,9 +21,6 @@ function Navbar() {
           <a href=""><h3>LISTA DE ASISTENCIAS</h3></a>
         </div>
     </div>
-
-    
-   
     </>
   );
 }
