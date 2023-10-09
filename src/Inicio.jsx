@@ -3,7 +3,7 @@ import React from 'react'
 const Inicio = () => {
   return (
     <div>
-      HOL
+      HOLA MUNDO
     </div>
   )
 }
