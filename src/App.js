@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import Inicio from "./Inicio"
+import Inicio from '../src/Inicio';
 import Rutina from './Pages/AgregarRutina';
 import Menu from './Pages/Menu';
 import Asistencias from './Pages/ListaAsistencias';
@@ -14,17 +14,17 @@ import Navbar from './Components/Navbar';
 function App() {
   return (
    <>
-   <Navbar></Navbar>
+   {/* <Navbar></Navbar> */}
     <Router>
     <Routes>
-      <Route path="/" element={<Inicio/>}>
-        <Route path="/Menu" element={<Menu/>} />
+        <Route path="/" element={<Inicio/>}/>
+        {/* <Route path="/Menu" element={<Menu/>} />
         <Route path="/Rutinas" element={<Rutina/>} />
         <Route path="/Asistencias" element={<Asistencias/>} />
         <Route path="/Editar" element={<Editar/>} />
         <Route path="/RecuperarContraseña" element={<Recuperar/>} />
-        <Route path="/Ganancias" element={<Ganancias/>} />
-      </Route>
+        <Route path="/Ganancias" element={<Ganancias/>} /> */}
+      
     </Routes>
     </Router>
     </>
