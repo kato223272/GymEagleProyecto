@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import '../Css/AgregarRutina.css';
 
-const AgregarRutina = () => {
-  return (
-    <div>
-      Holis
-    </div>
+
+function AgregarRutina (){
+  return(
+    <>
+      <div className='chula'>
+        <h1>hola</h1>
+      </div>
+    </>
   )
 }
 
