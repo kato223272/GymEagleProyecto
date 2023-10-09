@@ -14,17 +14,17 @@ import Navbar from './Components/Navbar';
 function App() {
   return (
    <>
-   {/* <Navbar></Navbar> */}
+   <Inicio></Inicio>
+  
     <Router>
     <Routes>
         <Route path="/" element={<Inicio/>}/>
-        {/* <Route path="/Menu" element={<Menu/>} />
+        <Route path="/Menu" element={<Menu/>} />
         <Route path="/Rutinas" element={<Rutina/>} />
         <Route path="/Asistencias" element={<Asistencias/>} />
         <Route path="/Editar" element={<Editar/>} />
         <Route path="/RecuperarContraseña" element={<Recuperar/>} />
-        <Route path="/Ganancias" element={<Ganancias/>} /> */}
-      
+        <Route path="/Ganancias" element={<Ganancias/>} />
     </Routes>
     </Router>
     </>
