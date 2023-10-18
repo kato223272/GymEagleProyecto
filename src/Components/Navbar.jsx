@@ -1,6 +1,6 @@
+
 import './Navbar.css';
 import Logo from '../Image/LogoGym.png';
-
 
 function Navbar() {
   return (

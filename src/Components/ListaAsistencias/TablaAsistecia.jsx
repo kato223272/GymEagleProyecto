@@ -8,7 +8,6 @@ const TablaAsistencias = () => {
     {
       name: 'username',
       label: 'No.Lista',
-     
     },
     {
       name: 'rfc',

@@ -4,17 +4,46 @@ body.containerGlobal{
     position: relative;
     margin: 0;
 }
-
-nav.NavbarSesion{
+/***************************************************************/
+/* Estilo para la barra de navegación */
+nav.NavbarSesion {
     background-color: rgba(255, 230, 0, 0.934);
     width: 100%;
     display: flex;
-    position: inherit;
+    position: relative; 
     height: 110px;
     z-index: 100;
     top: 0;
-}
+    align-items: center;
+    justify-content: space-between; 
+    padding: 0 20px; 
+  }
+  
+  /* Estilo para el contenedor del logo */
+  div.containerLogo {
+    position: relative;
+    /* background-color: aqua; */
+    width: 15%;
+    display: flex; 
+    align-items: center; 
+    padding-right: 20px; 
+  }
+  
+  div.containerLogo > .img-logo {
+    width: 65%;
+    height: 100%;
+  }
+  
+  h1.tituloSesion {
+    color: black;
+    margin-left: -15%;
+    text-align: center;
+    font-size: 320%;
+    font-weight: 700;
+    flex: 1; 
+  }  
 
+/******************************************************************/
 main.mainSesion{
     background-color: #3E3E3E;
     width: 100%;
@@ -27,8 +56,435 @@ main.mainSesion{
 
 div.containerSesion{
     background-color: white;
-    width: 25%;
-    height: 80%;
+    width: 22%;
+    height: 75%;
     position: absolute;
     border-radius: 12px;
+    padding: 2%;
+}
+
+div.containerSesion-Logo{
+    position: relative;
+    height: 20%;
+    width: 35%;
+    border-radius: 90px;
+    /* border: firebrick 5px solid; */
+    margin-left: 27%;
+}
+
+div.containerSesion-Logo > .logo-pesas{
+  width: 110%;
+  height: 100%;
+}
+
+div.containerSesion > h3{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+label.lb-text{
+    font-size: 110%;
+    font-weight: 500;
+    margin-top: 4%;
+}
+
+div.containerSesion > .inputs{
+  background-color: rgb(223, 223, 223);
+  margin-top: 2.5%;
+}
+
+Button.bt-Acceder{
+  width: 70%;
+  text-align: center;
+  margin-top: 8%;
+  margin-bottom: 10%;
+  margin-left: 15%;
+  font-size: 120%;
+}
+
+.LinkA{
+  font-size: 100%;
+  margin-left: 18%;
+}
+
+@media(hover:hover){
+  Button.bt-Acceder:hover{
+    background-color: #3E3E3E;
+    color: white;
+  }
+}
+
+/**********************CREANDO A LA ANIMACION*********************/
+.barra{
+  background-color: rgba(255, 230, 0, 0.934);
+  border: black 5px solid;
+  width: 50%;
+  height: 6%;
+
+  animation-duration: 1.5s;
+  animation-name: slidein;
+}
+
+.disco1Left{
+  width: 2%;
+  height: 25%;
+  margin-right: 96%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.5s;
+  animation-name: disco1Left;
+  animation-fill-mode: forwards;
+}
+
+.disco2Left{
+  width: 2%;
+  height: 20%;
+  margin-right:100.5%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.8s;
+  animation-name: disco2Left;
+  animation-fill-mode: forwards;
+}
+
+.disco3Left{
+  background-color: rgba(255, 230, 0, 0.934);
+  width: 2%;
+  height: 15%;
+  margin-right: 80.5%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.5s;
+  animation-name: disco3Left;
+  animation-fill-mode: forwards;
+}
+
+.disco1Right{
+  width: 2%;
+  height: 25%;
+  margin-left: 96%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.5s;
+  animation-name: disco1Right;
+  animation-fill-mode: forwards;
+}
+
+.disco2Right{
+  width: 2%;
+  height: 20%;
+  margin-left: 40.5%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.8s;
+  animation-name: disco2Right;
+  animation-fill-mode: forwards;
+}
+
+.disco3Right{
+  width: 2%;
+  height: 15%;
+  margin-left: 45%;
+  position: absolute;
+  border-radius: 20px;
+
+  animation-duration: 1.5s;
+  animation-name: disco3Right;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slidein {
+  from {
+    margin-bottom: 50%;
+    width: 50%;
+  }
+
+  to {
+    margin-top: 0%;
+    width: 50%;
+  }
+}
+/******************DISCOS IZQUIERDOS ANIMACION********************/
+@keyframes disco1Left {
+  from {
+    margin-left: 0%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 60.7%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+@keyframes disco2Left {
+  from {
+    margin-left: 0%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 60.5%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+@keyframes disco3Left {
+  from {
+    margin-left: 0%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 36%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+
+/******************DISCOS DERECHOS ANIMACION********************/
+@keyframes disco1Right {
+  from {
+    margin-right: -70%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 36%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+@keyframes disco2Right {
+  from {
+    margin-right: -70%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 40.5%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+@keyframes disco3Right {
+  from {
+    margin-right: -70%;
+    width: 2%;
+  }
+
+  to {
+    margin-left: 45%;
+    width: 2%;
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+  }
+}
+/*******************CODIGO PARA HCAER RESPONSIVO LAP PAGINA DE INICIO, SCREEN************/
+@media screen and (min-width: 360px) and (max-width: 480px){
+  h1.tituloSesion {
+    font-size: 160%;
+  }  
+  div.containerLogo {
+    width: 30%;
+  }
+  
+  div.containerLogo > .img-logo {
+    width: 100%;
+    height: 100%;
+  }
+
+  div.containerSesion{
+    background-color: white;
+    width: 60%;
+    height: 70%;
+    position: absolute;
+    border-radius: 12px;
+    padding: 5%;
+  }
+
+  .LinkA{
+    font-size: 100%;
+    margin-left: 10%;
+  }
+
+  .barra{
+    background-color: rgba(255, 230, 0, 0.934);
+    border: black 5px solid;
+    width: 90%;
+    height: 4%;
+
+    animation-duration: 1.5s;
+    animation-name: slidein;
+  }
+  @keyframes slidein {
+    from {
+      margin-bottom: 150%;
+      width: 90%;
+    }
+  
+    to {
+      margin-top: 0%;
+      width: 90%;
+    }
+  }
+  .disco1Left{
+    width: 2%;
+    height: 25%;
+    margin-right:128%;
+    position: absolute;
+  
+    animation-duration: 1.5s;
+    animation-name: disco1Left;
+    animation-fill-mode: forwards;
+  }
+
+  .disco2Left{
+    width: 2%;
+    height: 20%;
+    margin-right:134%;
+    position: absolute;
+    border-radius: 20px;
+  
+    animation-duration: 1.8s;
+    animation-name: disco2Left;
+    animation-fill-mode: forwards;
+  }
+  
+  .disco3Left{
+    width: 2%;
+    height: 15%;
+    margin-right: 116%;
+    position: absolute;
+    border-radius: 20px;
+  
+    animation-duration: 1.5s;
+    animation-name: disco3Left;
+    animation-fill-mode: forwards;
+  }
+
+  .disco1Right{
+    width: 2%;
+    height: 25%;
+    margin-right: -31%;
+    position: absolute;
+    border-radius: 20px;
+  
+    animation-duration: 1.5s;
+    animation-name: disco1Right;
+    animation-fill-mode: forwards;
+  }
+  
+  .disco2Right{
+    width: 2%;
+    height: 20%;
+    margin-right: -32.5%;
+    position: absolute;
+    border-radius: 20px;
+  
+    animation-duration: 1.8s;
+    animation-name: disco2Right;
+    animation-fill-mode: forwards;
+  }
+  
+  .disco3Right{
+    width: 2%;
+    height: 15%;
+    margin-right: -34%;
+    position: absolute;
+    border-radius: 20px;
+  
+    animation-duration: 1.5s;
+    animation-name: disco3Right;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes disco1Left {
+    from {
+      margin-left: 0%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 60.7%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
+  @keyframes disco2Left {
+    from {
+      margin-left: 0%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 60.5%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
+  @keyframes disco3Left {
+    from {
+      margin-left: 0%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 36%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
+  @keyframes disco1Right {
+    from {
+      margin-right: -70%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 36%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
+  @keyframes disco2Right {
+    from {
+      margin-right: -70%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 40.5%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
+  @keyframes disco3Right {
+    from {
+      margin-right: -70%;
+      width: 2%;
+    }
+  
+    to {
+      margin-left: 45%;
+      width: 4%;
+      background-color: rgba(255, 230, 0, 0.934);
+      border: black 4px solid;
+    }
+  }
 }
