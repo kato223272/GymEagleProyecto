@@ -29,8 +29,8 @@ const Inicio = () => {
           <label className='lb-text'>Ingrese Contraseña:</label>
           <Form.Control className='inputs' type="password" placeholder="Contraseña" />
 
-          <Button variant="warning" className='bt-Acceder'>Acceder</Button>
-          <a href='/RecuperarContraseña' className='LinkA'>¿Olvidaste tu contraseña?</a>
+          {/* <Button variant="warning" className='bt-Acceder'>Acceder</Button>
+          <a href='/RecuperarContraseña' className='LinkA'>¿Olvidaste tu contraseña?</a> */}
         </div>
 
         <span className='barra'></span>
