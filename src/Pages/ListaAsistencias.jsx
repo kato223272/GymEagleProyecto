@@ -1,10 +1,14 @@
 import React from 'react'
+import Tabla from '../Components/ListaAsistencias/TablaAsistecia'
 
 const ListaAsistencias = () => {
+  
   return (
-    <div>
-      
-    </div>
+   <>
+  <Tabla/>
+   
+   
+   </>
   )
 }
 
