@@ -44,7 +44,7 @@ const Menu = () => {
       <div className='lista'    
       onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
       onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}>
-        <div className='icono'>
+        <div className='icono' style={{border: '#434343 5px solid'}}>
           <img
             src={imagenHoverAsistencia}
             alt=""          
@@ -60,8 +60,8 @@ const Menu = () => {
      <div className='editar'
       onMouseEnter={() => handleImagenHoverEditar(EditarHover)}
       onMouseLeave={() => handleImagenHoverEditar(Editar)}>
-     <div className='icono'>
-          <img src={imagenHoverEditar} alt="" />
+     <div className='icono' style={{border: '#19345C 5px solid'}}>
+          <img src={imagenHoverEditar} alt=""/>
         </div>
         <div className='letra'>
           <h3>EDITAR USUARIOS</h3>
@@ -72,11 +72,11 @@ const Menu = () => {
 
           {/* INICIO DE LA FILA 2 */}
      <div className='fila2'>
-     <a href="/">
+     <a href="/Rutinas">
       <div className='rutina'    
          onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
          onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
-        <div className='icono'>
+        <div className='icono' style={{border: '#E6862E 5px solid'}}>
           <img
             src={imagenHoverRutina}
             alt=""          
@@ -88,11 +88,11 @@ const Menu = () => {
       </div>
       </a>
 
-      <a href="/">
+      <a href="/Ganancias">
       <div className='ganancia'
       onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}>
-      <div className='icono'>
+      <div className='icono' style={{border: '#2BA53E 5px solid'}}>
           <img src={imagenHoverGanancia} alt="" />
         </div>
         <div className='letra'>

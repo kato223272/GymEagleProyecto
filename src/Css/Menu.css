@@ -28,7 +28,6 @@ body{
     height: 65%;
     border-radius: 100%; 
     overflow: hidden;
-    border: black 5px solid ;
     margin-left: 25%;
     background-color: rgb(255, 255, 255);
    
@@ -49,7 +48,6 @@ body{
 .lista{
     background-color: #434343;
     display: inline-table;
-    border-radius: 1%;
     box-shadow: #000000;
     text-align: center;
     position: fixed;
@@ -60,12 +58,12 @@ body{
     flex: 1; 
 }
 .lista:hover, .rutina:hover{
+    background-color: #383838;
     transform: scale(1.1);
 }
 .rutina{
     background-color: #E6862E;
     display: inline-table;
-    border-radius: 1%;
     box-shadow: #000000;
     position: fixed;
     width: 20%;
@@ -83,7 +81,6 @@ body{
 .editar{
     background-color: #19345C;
     display: inline-table;
-    border-radius: 1%;
     box-shadow: #000000;
     text-align: center;
     position: fixed;
@@ -100,7 +97,6 @@ body{
 .ganancia{
     background-color: #2BA53E;
     display: inline-table;
-    border-radius: 1%;
     box-shadow: #000000;
     text-align: center;
     position: fixed;
