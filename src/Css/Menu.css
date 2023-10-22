@@ -1,90 +1,37 @@
 body{
     background-color: rgb(230, 230, 230);
+    
 }
-
 .fila1{
     display: flex;
-    padding: 4.3%;
-    margin-left: 20%;
+    padding:3%;
+    width: 56%;
+    height: 50%;
     align-items: center;
     align-content: center;
+    margin: 0 auto;
+    margin-top: 2.5%;
 }
 .fila2{
     display: flex;
-    padding: 0.1%;
-    margin-left: 21%;
+    padding:3%;
+    width: 56%;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    margin-top: -1%;
 }
 /* -------------------------------------------------- */
-.lista{
-    background-color: #434343;
-    display: inline-table;
-    border-radius: 1%;
-    box-shadow: #000000;
-    text-align: center;
-    width: 100%;
-    transition: transform 0.5s;
-    border-radius: 8%;
-}
-.lista:hover{
-    transform: scale(1.1);
-}
-
 .icono{
     margin-top: -20%;
-    width: 50%;
-    height: 90%;
+    width: 48%;
+    height: 65%;
     border-radius: 100%; 
     overflow: hidden;
-   margin-left: 25%;
-    /* background-color: rgb(255, 255, 255); */
+    border: black 5px solid ;
+    margin-left: 25%;
+    background-color: rgb(255, 255, 255);
    
-}
-/* .icono:hover{
-    background-image: url(../Image/imgMenu/asistenciaGymHover.png);
-   
-} */
-.iconoE{
-    margin-top: -20%;
-    width: 50%;
-    height: 90%;
-    border-radius: 100%; 
-    overflow: hidden;
-   margin-left: 25%;
-}
-.iconoE img{
-    width: 100%; 
-    height: 100%;
-    object-fit: cover; 
-}
-.iconoR{
-    margin-top: -20%;
-    width: 50%;
-    height: 90%;
-    border-radius: 100%; 
-    overflow: hidden;
-   margin-left: 25%;
-}
-.iconoR img{
-    width: 100%; 
-    height: 100%;
-    object-fit: cover; 
-}
-.iconoG{
-    margin-top: -20%;
-    width: 50%;
-    height: 90%;
-    border-radius: 100%; 
-    overflow: hidden;
-   margin-left: 25%;
-  
-    
-}
-.iconoG img{
-    width: 100%; 
-    height: 100%;
-    object-fit: cover; 
-   
-  
 }
 .icono img{
     width: 100%; 
@@ -94,6 +41,43 @@ body{
 .letra h3{
     padding: 7%;
     color: white;
+    font-size: 180%;
+    text-align: center;
+}
+
+/* ---------------------------------------------- */
+.lista{
+    background-color: #434343;
+    display: inline-table;
+    border-radius: 1%;
+    box-shadow: #000000;
+    text-align: center;
+    position: fixed;
+    width: 20%;
+    height: 28%;
+    transition: transform 0.5s;
+    border-radius: 8%;
+    flex: 1; 
+}
+.lista:hover, .rutina:hover{
+    transform: scale(1.1);
+}
+.rutina{
+    background-color: #E6862E;
+    display: inline-table;
+    border-radius: 1%;
+    box-shadow: #000000;
+    position: fixed;
+    width: 20%;
+    height: 28%;
+    transition: transform 0.5s;
+    border-radius: 8%;
+    flex: 1; 
+    margin-top: 15%;
+}
+.rutina:hover{
+    background-color: #cf7a2b;
+    transform: scale(1.1);
 }
 /* ---------------------------------------------- */
 .editar{
@@ -101,43 +85,33 @@ body{
     display: inline-table;
     border-radius: 1%;
     box-shadow: #000000;
-    margin-left: 100%;
     text-align: center;
-    width: 92%;
+    position: fixed;
+    width: 20%;
+    height: 28.5%;
     transition: transform 0.5s;
     border-radius: 8%;
+    margin-left: 30%;
 }
 .editar:hover{
+    background-color: #152c4f;
     transform: scale(1.1);
 }
-/* ------------------------------------------------------ */
-.rutina{
-    background-color: #E6862E;
-    display: inline-table;
-    border-radius: 1%;
-    box-shadow: #000000;
-    text-align: center;
-    width: 102%;
-    margin-left: 22%;
-    transition: transform 0.5s;
-    border-radius: 8%;
-}
-.rutina:hover{
-    transform: scale(1.1);
-}
-/* ------------------------------------------------------ */
 .ganancia{
     background-color: #2BA53E;
     display: inline-table;
     border-radius: 1%;
     box-shadow: #000000;
-    margin-left: 120%;
     text-align: center;
-    width: 92%;
+    position: fixed;
+    width: 20%;
+    height: 28%;
     transition: transform 0.5s;
-    margin-top: -3%;
     border-radius: 8%;
+    margin-top: 15%;
+    margin-left: 30%;
 }
 .ganancia:hover{
+    background-color: #289b39;
     transform: scale(1.1);
 }
