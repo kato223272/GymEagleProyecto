@@ -28,6 +28,7 @@ body{
     height: 65%;
     border-radius: 100%; 
     overflow: hidden;
+    border: black 5px solid ;
     margin-left: 25%;
     background-color: rgb(255, 255, 255);
    
@@ -81,6 +82,7 @@ body{
 .editar{
     background-color: #19345C;
     display: inline-table;
+    border-radius: 1%;
     box-shadow: #000000;
     text-align: center;
     position: fixed;

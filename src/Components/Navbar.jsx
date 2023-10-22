@@ -20,6 +20,8 @@ function Navbar() {
           <NavLink to="/Editar"><h4>EDITAR USUARIO</h4></NavLink>
           <NavLink to="/Rutinas"><h4>AGREGAR RUTINAS</h4></NavLink>
           <NavLink to="/Ganancias"><h4>VER GANANCIAS</h4></NavLink>
+          <NavLink to="/Ganancias"><h4>VER GANANCIAS</h4></NavLink>
+          <NavLink to="/Rutinas"><h4>AGREGAR RUTINAS</h4></NavLink>
         </div>
       
     </div>
