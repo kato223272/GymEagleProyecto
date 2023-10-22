@@ -18,8 +18,8 @@ function Navbar() {
         <div className="Fila2">
           <NavLink to="/Asistencias"><h4>LISTA DE ASISTENCIA</h4></NavLink>
           <NavLink to="/Editar"><h4>EDITAR USUARIO</h4></NavLink>
-          <NavLink to="/Ganancias"><h4>VER GANANCIAS</h4></NavLink>
           <NavLink to="/Rutinas"><h4>AGREGAR RUTINAS</h4></NavLink>
+          <NavLink to="/Ganancias"><h4>VER GANANCIAS</h4></NavLink>
         </div>
       
     </div>
