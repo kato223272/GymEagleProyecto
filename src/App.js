@@ -11,7 +11,7 @@ import Ganancias from './Pages/Ganancias';
 
 function App() {
   const currentPath = window.location.pathname;
-  const navbarDisplay = currentPath !== '/' && currentPath !== '/Menu' && currentPath !== '/RecuperarContraseña' ? "block" : "none";
+  const navbarDisplay = (currentPath !== '/' && currentPath !== '/Menu' && currentPath !== '/RecuperarContraseña') ? "block" : "none";
 
   return (
     <Router>
