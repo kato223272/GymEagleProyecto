@@ -44,12 +44,11 @@ const Menu = () => {
       <div className='lista'    
       onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
       onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}>
-        <div className='icono'>
+        <div className='icono' style={{border: '#434343 5px solid'}}>
           <img
-                  src={imagenHoverAsistencia}
-                  alt=""
-               
-                />
+            src={imagenHoverAsistencia}
+            alt=""          
+          />
         </div>
         <div className='letra'>
           <h3>LISTA DE ASISTENCIA</h3>
@@ -61,7 +60,9 @@ const Menu = () => {
      <div className='editar'
       onMouseEnter={() => handleImagenHoverEditar(EditarHover)}
       onMouseLeave={() => handleImagenHoverEditar(Editar)}>
-     <div className='iconoE'>
+     <div className='icono' style={{border: '#19345C 5px solid'}}>
+          <img src={imagenHoverEditar} alt=""/>
+     <div className='icono'>
           <img src={imagenHoverEditar} alt="" />
         </div>
         <div className='letra'>
@@ -69,29 +70,41 @@ const Menu = () => {
         </div>
      </div>
      </a>
-
      </div>
 
-
+          {/* INICIO DE LA FILA 2 */}
      <div className='fila2'>
-      <a href="/">
-         <div className='rutina'
+     <a href="/Rutinas">
+      <div className='rutina'    
          onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
          onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
-         <div className='iconoR'>
-          <img src={imagenHoverRutina} alt="" />
+        <div className='icono' style={{border: '#E6862E 5px solid'}}>
+     <a href="/">
+      <div className='rutina'    
+         onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
+         onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
+        <div className='icono'>
+          <img
+            src={imagenHoverRutina}
+            alt=""          
+          />
         </div>
         <div className='letra'>
           <h3>AGREGAR RUTINA</h3>
         </div>
-         </div>
-         </a>
+      </div>
+      </a>
 
-      <a href="">
+      <a href="/Ganancias">
       <div className='ganancia'
       onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}>
-      <div className='iconoG'>
+      <div className='icono' style={{border: '#2BA53E 5px solid'}}>
+      <a href="/">
+      <div className='ganancia'
+      onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
+      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}>
+      <div className='icono'>
           <img src={imagenHoverGanancia} alt="" />
         </div>
         <div className='letra'>

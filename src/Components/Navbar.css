@@ -55,10 +55,11 @@
     font-size: larger;
     font-family:  monospace;
  }
+ 
  .Fila2 a :hover{
     background-color: #FFD600;
     color: black;
     border-radius: 10px;
-    width: 80%;
+    width: 85%;
     margin-left: 10%;
  }
