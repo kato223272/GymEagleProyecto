@@ -29,7 +29,9 @@ const Inicio = () => {
           <label className='lb-text'>Ingrese Contraseña:</label>
           <Form.Control className='inputs' type="password" placeholder="Contraseña" />
 
+          <a href='/Menu'>
           <Button variant="warning" className='bt-Acceder'>Acceder</Button>
+          </a>
           <a href='/RecuperarContraseña' className='LinkA'>¿Olvidaste tu contraseña?</a>
         </div>
 
