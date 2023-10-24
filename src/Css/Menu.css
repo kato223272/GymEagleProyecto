@@ -2,24 +2,28 @@ body{
     background-color: rgb(230, 230, 230);
     
 }
-.fila1{
+div.Contenedor{
+    background-color: #000000;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 6%;
+}
+.fila1Menu{
     display: flex;
-    padding:3%;
+    width: 56%;
+    height: 50%;
+    margin: 0 auto;
+    margin-left:24.5%;
+}
+.fila2Menu{
+    display: flex;
     width: 56%;
     height: 50%;
     align-items: center;
     align-content: center;
-    margin: 0 auto;
-    margin-top: 2.5%;
-}
-.fila2{
-    display: flex;
-    padding:3%;
-    width: 56%;
-    align-items: center;
-    align-content: center;
-    margin: 0 auto;
-    margin-top: -1%;
+    justify-content: space-between;
 }
 /* -------------------------------------------------- */
 .icono{
@@ -72,7 +76,7 @@ body{
     transition: transform 0.5s;
     border-radius: 8%;
     flex: 1; 
-    margin-top: 15%;
+    margin-top: 19.2%;
 }
 .rutina:hover{
     background-color: #cf7a2b;
@@ -90,7 +94,7 @@ body{
     height: 28.5%;
     transition: transform 0.5s;
     border-radius: 8%;
-    margin-left: 30%;
+    margin-left: 31%;
 }
 .editar:hover{
     background-color: #152c4f;
@@ -106,8 +110,8 @@ body{
     height: 28%;
     transition: transform 0.5s;
     border-radius: 8%;
-    margin-top: 15%;
-    margin-left: 30%;
+    margin-top: 19.2%;
+
 }
 .ganancia:hover{
     background-color: #289b39;
