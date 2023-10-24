@@ -39,7 +39,7 @@ const Menu = () => {
     <>
    <Navbar/>
     <div className='Contenedor'>
-     <div className='fila1'> 
+     <div className='fila1Menu'> 
      <a href="/Asistencias">
       <div className='lista'    
       onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
@@ -62,25 +62,21 @@ const Menu = () => {
       onMouseLeave={() => handleImagenHoverEditar(Editar)}>
      <div className='icono' style={{border: '#19345C 5px solid'}}>
           <img src={imagenHoverEditar} alt=""/>
-     <div className='icono'>
-          <img src={imagenHoverEditar} alt="" />
-        </div>
-        <div className='letra'>
+     </div>
+     <div className='letra'>
           <h3>EDITAR USUARIOS</h3>
         </div>
      </div>
-     </div>
      </a>
-    
 
           {/* INICIO DE LA FILA 2 */}
-     <div className='fila2'>
+     <div className='fila2Menu'>
     
      <a href="/">
       <div className='rutina'    
          onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
          onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
-        <div className='icono'>
+        <div className='icono' style={{border: '#E6862E 5px solid'}}>
           <img
             src={imagenHoverRutina}
             alt=""          
