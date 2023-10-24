@@ -1,5 +1,6 @@
 import React from 'react'
 import MUIDataTable from "mui-datatables";
+import "../ListaAsistencias/ListaAsistencias.css"
 
 const TablaAsistencias = () => {
   const title = "Lista de asistencia"
@@ -23,29 +24,30 @@ const TablaAsistencias = () => {
       label: 'Apellido Paterno'
     },
     {
-      name: 'email',
-      label: 'Correo',
-      options:{
-        customBodyRender: (val) => {
-          return val === null ? '---------------------' : val;
-          }
-      }
-    },
-    {
       name: 'phone',
-      label: 'Telefono'
+      label: 'Pagos'
     },
     {
       name: 'tipo',
-      label: 'Tipo'
+      label: 'Asistencia',
+
+      options:{
+        customBodyRender: (val) => {
+          return <>
+          <button className="botonPagado">
+            No pagado
+          </button>
+          </>
+          }
+      }
     }
   ]
   const options = {
     selectableRows: false,
     responsive: "standard",
     sort: false,
-    download: false,
-    print: false,
+    download: true,
+    print: true,
     filterType: "dropdown",
     rowsPerPageOptions: [5, 10, 15, 20],
     labelDisplayedRow: "de",
@@ -63,14 +65,13 @@ const TablaAsistencias = () => {
   };
   return (
    <>
-  
+  <div className="Tabla">
     <MUIDataTable className = 'dtable'
         title={title}
-        // data={datos}
         columns={columns}
         options={options}
       />
-   
+   </div>
    </>
   )
 }

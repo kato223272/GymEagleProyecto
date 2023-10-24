@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
+
 import Navbar from './Components/Navbar';
 import Inicio from '../src/Inicio';
 import Rutina from './Pages/AgregarRutina';
@@ -11,7 +12,7 @@ import Ganancias from './Pages/Ganancias';
 
 function App() {
   const currentPath = window.location.pathname;
-  const navbarDisplay = currentPath !== '/' && currentPath !== '/Menu' ? "block" : "none";
+  const navbarDisplay = (currentPath !== '/' && currentPath !== '/Menu' && currentPath !== '/RecuperarContraseña') ? "block" : "none";
 
   return (
     <Router>
