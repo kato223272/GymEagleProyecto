@@ -49,6 +49,7 @@
  .Fila2 a{
     text-decoration: none;
     color: #FFD600;
+    margin-left: 15%;
     margin:0.5%;
     width: 100%;
     text-align: center;
@@ -60,6 +61,19 @@
     background-color: #FFD600;
     color: black;
     border-radius: 10px;
-    width: 85%;
-    margin-left: 10%;
+    width: 90%;
+    margin-left: 5%;
  }
+
+ .Fila2 a.nav-active {
+    background-color: #FFD600;
+    color: black;
+    border-radius: 10px;
+    width: 90%;
+
+    margin:0.5%;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family:  monospace;
+  }

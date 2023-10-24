@@ -1,0 +1,138 @@
+.contenerdorEditar {
+  margin-left: 10%;
+  width: 80%;
+  border-radius: 5px;
+  display: flex;
+  
+}
+
+
+.col1, .col2 {
+  border: 1px solid black;
+  flex: 1;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 5%; 
+  position: relative;
+  border-radius: 10px;
+}
+
+
+
+.row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.busqueda-boton {
+  border: 1px solid yellow; 
+  background-color: rgb(255, 255, 150);
+}
+
+.busqueda-boton:hover {
+  border: 1px solid rgb(0, 0, 0); 
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.busqueda-contenedor{
+width: 100%;
+}
+
+.row label {
+  align-items: center;
+}
+
+.row .escribirDatos {
+  width: 100%;
+  margin-left: 5%;
+  border-radius: 10px;
+  border: 1px solid grey;
+}
+
+.BotonEliminar button,
+.BotonAgregar button,
+.BotonGuardar button,
+.BotonGuardar2 button {
+  margin-top: 4%;
+  border: none; 
+  text-decoration: none;
+  background: none;
+  outline: none;
+  padding: 0; 
+}
+
+.BotonEliminar,
+.BotonAgregar {
+  position: absolute;
+ 
+}
+
+.BotonEliminar {
+  left: 0;
+}
+
+.BotonAgregar {
+  right: 0;
+}
+
+
+.BotonGuardar button, .BotonGuardar2 button{
+  
+  background-color: rgb(251, 251, 156);
+  padding: 1%;
+  border-radius: 10px;
+}
+.BotonGuardar button{
+  width: 50%;
+  margin-left: 25%;
+}
+
+
+.EditarFila1 {
+  display: flex;
+}
+
+.EditarFila2{
+  margin-top: 7%;
+}
+
+.FilaSuperior{
+  margin-top: 3%;
+  margin-left: 10%;
+}
+/* -------------------------------------------- */
+
+.RenovarPago {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-left: 47%;
+}
+
+.RenovarPago label{
+  align-items: center;
+  margin-top: 10%; 
+}
+
+.RenovarPago button {
+  border: none;
+  background-color: #C0FFB6;
+  border-radius: 10px;
+  margin-top: 10%; 
+  margin-left: 1%;
+}
+.NombreCol2 {
+  display: flex;
+  align-items: center;
+  margin-top: 4%;
+}
+
+.BotonGuardar2 button{
+
+}
