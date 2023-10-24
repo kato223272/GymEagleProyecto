@@ -2,7 +2,7 @@ body{
     background-color: rgb(230, 230, 230);
     
 }
-.fila1{
+/* .fila1{
     display: flex;
     padding:3%;
     width: 56%;
@@ -11,7 +11,7 @@ body{
     align-content: center;
     margin: 0 auto;
     margin-top: 2.5%;
-}
+} */
 .fila2{
     display: flex;
     padding:3%;
