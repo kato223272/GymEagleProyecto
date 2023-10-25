@@ -16,16 +16,16 @@
     margin-left: -18%;
     margin-top: 0.5%;
 }
-.fila1 h6{
+.fila1Lista h6{
     margin-top: 0.5%;
     width: 30%;
 }
-.fila1 h5{
+.fila1Lista h5{
     
     margin-top: 0.5%;
-    width: 30%;
+    width: 40%;
 }
-.fila1{
+.fila1Lista{
     margin-left: 10%;
     display: flex;
     margin-top: 2.5%;

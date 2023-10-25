@@ -32,7 +32,7 @@ const Inicio = () => {
           <a href='/Menu'>
           <Button variant="warning" className='bt-Acceder'>Acceder</Button>
           </a>
-          <a href='/RecuperarContraseña' className='LinkA'>¿Olvidaste tu contraseña?</a>
+          <a href='/recuperarcontrasenia' className='LinkA'>¿Olvidaste tu contraseña?</a>
         </div>
 
         <span className='barra'></span>
