@@ -3,13 +3,11 @@ div.containergraphic{
     width:90%;
     padding: 2%;
     justify-content: space-between;
-    /* background-color: rgb(65, 64, 64); */
 }
 div.graphic{
     width: 75%;
     align-items: center;
     justify-content: center;
-    /* background-color: rgb(94, 94, 94); */
 }
 div.Calender{
     position: relative;
@@ -19,11 +17,31 @@ div.Calender{
     padding: 2%;
 }
 
-Button.btbarras, Button.btescala{
+Button.btnBarras,
+Button.btnEscala {
     width: 45%;
     height: 9%;
     margin-bottom: 10%;
+    border: var(--bg-color-white) 1.5px solid;
 }
+
+/* Estilo para un botón de Bootstrap activado */
+.btnBarras.activo, .btnEscala.activo1 {
+    background-color: var(--animation-bg-fondo);
+    color:var(--bg-color-black);
+    border-color: var(--bg-color-white);
+    width: 45%;
+    height: 9%;
+    margin-bottom: 10%;
+    border: var(--bg-color-white) 1.5px solid;
+  }
+  
+  /* Estilo para un botón de Bootstrap cuando se pasa el mouse sobre él */
+  .btnBarras.activo:hover, .btnEscala.activo1:hover {
+    background-color: var(--animation-bg-fondo);
+    color:var(--bg-color-black);
+  }
+  
 
 .indication{
     color: var(--bg-color-white);
@@ -53,7 +71,7 @@ Button.bt{
     margin-top: 9%;
 }
 @media(hover:hover){
-    Button.bt:hover{
+    Button.bt:hover, Button.btbarras:hover, Button.btnEscala:hover, Button.btnBarras:hover{
         background-color: var(--animation-bg-fondo);
         color: black;
     }

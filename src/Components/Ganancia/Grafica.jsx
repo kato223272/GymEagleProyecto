@@ -6,6 +6,7 @@ import{
     BarElement, Title, Tooltip, Legend, Filler} 
 from 'chart.js';
 import { useState } from 'react';
+import {useLocation} from 'react-router-dom';
 
 ChartJS.register(
     CategoryScale,
@@ -62,11 +63,36 @@ const myOptions={
 export default function Grafica(){
     const [date,setDate]=useState();
 
+    const [activo, setActivo] = useState(false);
+    const [activoEscala, setActivoEscala] = useState(false);
+
+    const handleClic = () => {
+      setActivo(!activo); // Cambiar el estado a su opuesto
+      setActivoEscala(false); 
+    };
+    const handleClicEscala = () => {
+        setActivoEscala(!activoEscala); // Cambiar el estado a su opuesto
+        setActivo(false);
+      };
+
     return <>
     <div className='containergraphic'>
     <div className='Calender'>
-        <Button className='btbarras'>Barras</Button>{' '}
-        <Button className='btescala'>Escala</Button>
+    <Button
+        variant="dark"
+        onClick={handleClic}
+        className={`btnBarras ${activo ? 'activo' : ''}`}>
+        Barras
+      </Button>
+        {' '}
+
+        <Button 
+            variant="dark" 
+            onClick={handleClicEscala}
+            className={`btnEscala ${activoEscala ? 'activo1' : ''}`}>
+            Escala
+        </Button>
+
         <h3 className='indication'>Seleccione Día:</h3>
         <input className='inputCalender' type='date' onChange={e=>setDate(e.target.value)}/>
         <h3 className='indication'>Grafica del Día:</h3>
