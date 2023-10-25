@@ -1,9 +1,9 @@
 body{
-    background-color: rgb(230, 230, 230);
-    
+    background-color: var(--bg-color-body);
 }
+
 div.Contenedor{
-    background-color: #000000;
+    background-color: var(--bg-color-black);
     width: 100%;
     align-items: center;
     align-content: center;
@@ -32,10 +32,9 @@ div.Contenedor{
     height: 65%;
     border-radius: 100%; 
     overflow: hidden;
-    border: black 5px solid ;
+    border: var(--bg-color-black) 5px solid ;
     margin-left: 25%;
-    background-color: rgb(255, 255, 255);
-   
+    background-color: var(--bg-color-white);
 }
 .icono img{
     width: 100%; 
@@ -44,7 +43,7 @@ div.Contenedor{
 }
 .letra h3{
     padding: 7%;
-    color: white;
+    color: var(--bg-color-white);
     font-size: 180%;
     text-align: center;
 }
@@ -53,7 +52,7 @@ div.Contenedor{
 .lista{
     background-color: #434343;
     display: inline-table;
-    box-shadow: #000000;
+    box-shadow: var(--bg-color-black);
     text-align: center;
     position: fixed;
     width: 20%;
@@ -69,7 +68,7 @@ div.Contenedor{
 .rutina{
     background-color: #E6862E;
     display: inline-table;
-    box-shadow: #000000;
+    box-shadow: var(--bg-color-black);
     position: fixed;
     width: 20%;
     height: 28%;
@@ -87,7 +86,7 @@ div.Contenedor{
     background-color: #19345C;
     display: inline-table;
     border-radius: 1%;
-    box-shadow: #000000;
+    box-shadow: var(--bg-color-black);
     text-align: center;
     position: fixed;
     width: 20%;
@@ -103,7 +102,7 @@ div.Contenedor{
 .ganancia{
     background-color: #2BA53E;
     display: inline-table;
-    box-shadow: #000000;
+    box-shadow: var(--bg-color-black);
     text-align: center;
     position: fixed;
     width: 20%;

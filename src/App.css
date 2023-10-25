@@ -1,38 +1,9 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+:root{
+  --main-bg-negro: #3E3E3E;   /* ESTE ES EL COLOR NEGRO DE INICIO Y RECUPERAR CONTRASEÑA, MAIN*/
+  --animation-bg-fondo:rgba(255, 230, 0, 0.934); /*ESTE COLOR ES EL AMARRILLO DEL NAVABAR INICIO Y RECU*/
+  --bg-color-white: #ffffff; /*EL COLOR BLANCO ES GLOBAL SE UTILIZA MUCHO*/
+  --bg-color-black: #000000; /*EL COLOR NEGRO ES GLOBAL SE UTILIZA MUCHO*/
+  --bg-color-green: #008000; /*EL COLOR NEGRO ES UNICO POCO UTILIZABLE*/
+  --bg-color-red:#ff0000;    /*EL COLOR NEGRO ES UNICO POCO UTILIZABLE*/
+  --bg-color-body: #e6e6e6;  /*EL COLOR NEGRO ES UNICO POCO UTILIZABLE*/ 
 }
