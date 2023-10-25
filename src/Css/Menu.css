@@ -2,7 +2,6 @@ body{
     background-color: rgb(230, 230, 230);
     
 }
-
 div.Contenedor{
     background-color: #000000;
     width: 100%;
@@ -19,16 +18,13 @@ div.Contenedor{
     margin-left:24.5%;
 }
 .fila2Menu{
-
     display: flex;
     width: 56%;
     height: 50%;
     align-items: center;
     align-content: center;
-    margin: 0 auto;
-    margin-top: 2.5%;
-} 
-
+    justify-content: space-between;
+}
 /* -------------------------------------------------- */
 .icono{
     margin-top: -20%;
