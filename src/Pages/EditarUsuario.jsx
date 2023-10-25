@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "../Css/EditarUsuario.css";
 import { FaSearch } from "react-icons/fa";
+import Form from 'react-bootstrap/Form';
 import imgEliminar from "../Image/imgEditar/eliminarOp2.png";
 import imgEliminarHover from "../Image/imgEditar/eliminarOp2Hover.png";
 import imgAgregar from "../Image/imgEditar/agregarOp1.png";
@@ -37,36 +38,40 @@ const EditarUsuario = () => {
 
       <div className="contenerdorEditar" style={{ display: "flex" }}>
         <div className="col1">
-        <h4>Editar Datos</h4>
-          <div className="EditarFila1" style={{ display: "flex" }}>
+        
+          <div className="EditarFila1">
             <div className="BotonEliminar"
-            onMouseEnter={() => handleImagenHoverEliminar(imgEliminarHover)}
-            onMouseLeave={() => handleImagenHoverEliminar(imgEliminar)}
+            
             >
-              <button>
+              <button
+              onMouseEnter={() => handleImagenHoverEliminar(imgEliminarHover)}
+              onMouseLeave={() => handleImagenHoverEliminar(imgEliminar)}
+              >
               <img
             src={imagenHoverEliminar}
             alt=""          
-          />
+            />
               </button>
             </div>
+            <h4>Editar Datos</h4>
             <div className="BotonAgregar"
-            onMouseEnter={() => handleImagenHoverAgregar(imgAgregarHover)}
-            onMouseLeave={() => handleImagenHoverAgregar(imgAgregar)}
-            >
-              
-              <button>
+
+            > 
+              <button            
+              onMouseEnter={() => handleImagenHoverAgregar(imgAgregarHover)}
+              onMouseLeave={() => handleImagenHoverAgregar(imgAgregar)}>
               <img
             src={imagenHoverAgregar}
             alt=""          
-          />
+            />
               </button>
             </div>
           </div>
+          
           <div className="EditarFila2">
             <div className="row datos">
               <label for="nombre">Nombre:</label>
-              <input
+              <Form.Control
                 type="text"
                 id="nombre"
                 placeholder="Escribe nombre"
@@ -75,7 +80,7 @@ const EditarUsuario = () => {
             </div>
             <div className="row datos">
               <label for="ApellidoPaterno">Apellido Paterno:</label>
-              <input
+              <Form.Control
                 type="text"
                 placeholder="Escribe apellido paterno"
                 className="escribirDatos"
@@ -83,7 +88,7 @@ const EditarUsuario = () => {
             </div>
             <div className="row datos">
               <label for="nombre">Apellido Materno:</label>
-              <input
+              <Form.Control
                 type="text"
                 placeholder="Escribe apellido materno"
                 className="escribirDatos"
@@ -91,7 +96,7 @@ const EditarUsuario = () => {
             </div>
             <div className="row datos">
               <label for="nombre">Número telefonico:</label>
-              <input
+              <Form.Control
                 type="text"
                 placeholder="Escribe num. telefonico"
                 className="escribirDatos"
@@ -107,7 +112,7 @@ const EditarUsuario = () => {
           <h4 >Renovación de pagos</h4>
           <div className="NombreCol2">
             <label for="nombre">Nombre:</label>
-            <input type="text" value="NombreText" disabled />
+            <Form.Control type="text" value="NombreText" disabled />
           </div>
           <div className="RenovarPago" style={{marginTop:'2%'}}>
           <label for="nombre">Renovar pago:</label>
