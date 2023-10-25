@@ -4,7 +4,7 @@ import Logo from '../../Image/LogoGym.png';
 function Navbar() {
   return (
     <>
-    <div className="Columna">
+    <div className="ColumnaM">
         <div className="Fila1">
           <div className='ContenedorImgM'>
           <a href="/Menu"><img src={Logo} alt="" /></a>

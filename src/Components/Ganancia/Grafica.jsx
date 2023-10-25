@@ -19,7 +19,7 @@ ChartJS.register(
 );
 
 var valores=[10, 5, 20, 50];
-var opciones=['Inscripciones', 'Cancelaciones', 'Pagados', 'No pagados'];
+var opciones=['Mensualidades', 'Pagos por día', 'No pagados'];
 
 const mydata={
     labels:opciones,
@@ -28,10 +28,10 @@ const mydata={
             label:'Valor',
             data:valores,
             backgroundColor:[
-                'rgb(32, 145, 245)',
-                'rgb(255, 51, 15)',
-                'rgb(89, 254, 60)',
-                'rgb(255, 164, 66)'
+                // 'rgb(32, 145, 245)',
+                // 'rgb(255, 51, 15)',
+                // 'rgb(89, 254, 60)',
+                'black', 'grey','yellow'
             ],
             boderColor:'rgb(27, 27, 27)',
             boderWidth: 1
@@ -65,9 +65,11 @@ export default function Grafica(){
     return <>
     <div className='containergraphic'>
     <div className='Calender'>
-        <h3>Seleccione Día:</h3>
+        <Button className='btbarras'>Barras</Button>{' '}
+        <Button className='btescala'>Escala</Button>
+        <h3 className='indication'>Seleccione Día:</h3>
         <input className='inputCalender' type='date' onChange={e=>setDate(e.target.value)}/>
-        <h3>Grafica del Día:</h3>
+        <h3 className='indication'>Grafica del Día:</h3>
         <label className='lbDia'>{date}</label>
         <Button variant="dark" className='bt'>Perdidas</Button>
         <Button variant="dark" className='bt'>Ganancias</Button>
