@@ -68,15 +68,22 @@ width: 100%;
 .BotonEliminar,
 .BotonAgregar {
   position: absolute;
- 
+}
+
+.BotonEliminar button img,
+.BotonAgregar button img {
+  width: 15%;
 }
 
 .BotonEliminar {
   left: 0;
+  width: 50%;
 }
+
 
 .BotonAgregar {
   right: 0;
+  width: 50%;
 }
 
 .BotonGuardar button, .BotonGuardar2 button{
