@@ -1,10 +1,8 @@
 /* FFE600 color original amarillo fuerte */
 /* 3E3E3E color original negro fondo fuerte */
 body.containerGlobal{
-    position: relative;
-    margin: 0;
-
-    
+  position: relative;
+  margin: 0;
 }
 /***************************************************************/
 /* Estilo para la barra de navegación */
@@ -20,15 +18,15 @@ nav.NavbarSesion {
     padding: 0 20px; 
 
     color: #FFD600;
-    text-shadow: -0.3px -0.3px 0.3px #ffffff, 0.3px 0.3px 0.3px #ffffff, -0.3px 0.3px 0.3px #ffffff, 0.3px -0.3px 0.3px #ffffff;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+    text-shadow: -0.3px -0.3px 0.3px #ffffff, 0.3px 0.3px 0.3px #ffffff, -0.3px 0.3px 0.3px 
+    #ffffff,0.3px -0.3px 0.3px #ffffff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
   }
   
   /* Estilo para el contenedor del logo */
   div.containerLogo {
     position: relative;
-    /* background-color: aqua; */
     width: 15%;
     display: flex; 
     align-items: center; 
@@ -41,7 +39,7 @@ nav.NavbarSesion {
   }
   
   h1.tituloSesion {
-    color: black;
+    color: var(--bg-color-black);
     margin-left: -15%;
     text-align: center;
     font-size: 320%;
@@ -51,7 +49,7 @@ nav.NavbarSesion {
 
 /******************************************************************/
 main.mainSesion{
-    background-color: #3E3E3E;
+    background-color: var(--main-bg-negro);
     width: 100%;
     height: 85%;
     display: flex;
@@ -61,7 +59,7 @@ main.mainSesion{
 }
 
 div.containerSesion{
-    background-color: white;
+    background-color: var(--bg-color-white);
     width: 22%;
     height: 75%;
     position: absolute;
@@ -74,7 +72,6 @@ div.containerSesion-Logo{
     height: 20%;
     width: 35%;
     border-radius: 90px;
-    /* border: firebrick 5px solid; */
     margin-left: 27%;
 }
 
@@ -115,14 +112,14 @@ Button.bt-Acceder{
 
 @media(hover:hover){
   Button.bt-Acceder:hover{
-    background-color: #3E3E3E;
-    color: white;
+    background-color: var(--main-bg-negro);
+    color: var(--bg-color-white);
   }
 }
 
 /**********************CREANDO A LA ANIMACION*********************/
 .barra{
-  background-color: rgba(255, 230, 0, 0.934);
+  background-color: var(--animation-bg-fondo);
   border: black 5px solid;
   width: 50%;
   height: 6%;
@@ -156,7 +153,6 @@ Button.bt-Acceder{
 }
 
 .disco3Left{
-  background-color: rgba(255, 230, 0, 0.934);
   width: 2%;
   height: 15%;
   margin-right: 80.5%;
@@ -225,8 +221,8 @@ Button.bt-Acceder{
   to {
     margin-left: 60.7%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 @keyframes disco2Left {
@@ -238,8 +234,8 @@ Button.bt-Acceder{
   to {
     margin-left: 60.5%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 @keyframes disco3Left {
@@ -251,8 +247,8 @@ Button.bt-Acceder{
   to {
     margin-left: 36%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 
@@ -266,8 +262,8 @@ Button.bt-Acceder{
   to {
     margin-left: 36%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 @keyframes disco2Right {
@@ -279,8 +275,8 @@ Button.bt-Acceder{
   to {
     margin-left: 40.5%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 @keyframes disco3Right {
@@ -292,8 +288,8 @@ Button.bt-Acceder{
   to {
     margin-left: 45%;
     width: 2%;
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
   }
 }
 /*******************CODIGO PARA HCAER RESPONSIVO LAP PAGINA DE INICIO, SCREEN************/
@@ -311,7 +307,7 @@ Button.bt-Acceder{
   }
 
   div.containerSesion{
-    background-color: white;
+    background-color: var(--bg-color-white);
     width: 60%;
     height: 70%;
     position: absolute;
@@ -325,8 +321,8 @@ Button.bt-Acceder{
   }
 
   .barra{
-    background-color: rgba(255, 230, 0, 0.934);
-    border: black 5px solid;
+    background-color: var(--animation-bg-fondo);
+    border: var(--bg-color-black) 5px solid;
     width: 90%;
     height: 4%;
 
@@ -424,8 +420,8 @@ Button.bt-Acceder{
     to {
       margin-left: 60.7%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
   @keyframes disco2Left {
@@ -437,8 +433,8 @@ Button.bt-Acceder{
     to {
       margin-left: 60.5%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
   @keyframes disco3Left {
@@ -450,8 +446,8 @@ Button.bt-Acceder{
     to {
       margin-left: 36%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
   @keyframes disco1Right {
@@ -463,8 +459,8 @@ Button.bt-Acceder{
     to {
       margin-left: 36%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
   @keyframes disco2Right {
@@ -476,8 +472,8 @@ Button.bt-Acceder{
     to {
       margin-left: 40.5%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
   @keyframes disco3Right {
@@ -489,8 +485,8 @@ Button.bt-Acceder{
     to {
       margin-left: 45%;
       width: 4%;
-      background-color: rgba(255, 230, 0, 0.934);
-      border: black 4px solid;
+      background-color: var(--animation-bg-fondo);
+      border: var(--bg-color-black) 4px solid;
     }
   }
 }

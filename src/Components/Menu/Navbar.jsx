@@ -1,22 +1,19 @@
 import './Navbar.css';
 import Logo from '../../Image/LogoGym.png';
 
-
 function Navbar() {
   return (
     <>
     <div className="Columna">
-        
         <div className="Fila1">
-          <div className='ContenedorImg'>
+          <div className='ContenedorImgM'>
           <a href="/Menu"><img src={Logo} alt="" /></a>
           </div>
-          <div className='ContenedorLetra'>
+          <div className='ContenedorLetraM'>
             <h1>BLACK EAGLE GYM</h1>
           </div>
           <div>
-            <a href="/"> <button   className='Finalizar' >FINALIZAR DÍA</button></a>
-           
+            <a href="/"> <button className='FinalizarM'>FINALIZAR DÍA</button></a>
           </div>
         </div>
        

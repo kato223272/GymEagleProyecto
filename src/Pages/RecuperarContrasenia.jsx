@@ -39,7 +39,7 @@ const RecuperarContrasenia = () => {
     <div className='containerGlobal'>
       <header>
         <nav className='NavbarSesion'>
-          <h1>Recuperar contraseña</h1>
+          <h1 className='tituloRecuperar'>Recuperar contraseña</h1>
         </nav>
       </header>
 

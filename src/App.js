@@ -11,8 +11,8 @@ import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
 
 function App() {
-  const currentPath = window.location.pathname;
-  const navbarDisplay = (currentPath !== '/' && currentPath !== '/Menu' && currentPath !== '/RecuperarContraseña') ? "block" : "none";
+  const currentPath = window.location.pathname.toLowerCase(); // Convertir a minúsculas
+  const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
 
   return (
     <Router>
@@ -21,15 +21,16 @@ function App() {
       </div>
       <Routes>
         <Route path="/" element={<Inicio />} />
-        <Route path="/Menu" element={<Menu />} />
-        <Route path="/Rutinas" element={<Rutina />} />
-        <Route path="/Asistencias" element={<Asistencias />} />
-        <Route path="/Editar" element={<Editar />} />
-        <Route path="/RecuperarContraseña" element={<Recuperar />} />
-        <Route path="/Ganancias" element={<Ganancias />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/rutinas" element={<Rutina />} />
+        <Route path="/asistencias" element={<Asistencias />} />
+        <Route path="/editar" element={<Editar />} />
+        <Route path="/recuperarcontrasenia" element={<Recuperar />} />
+        <Route path="/ganancias" element={<Ganancias />} />
       </Routes>
     </Router>
   );
 }
+
 
 export default App;

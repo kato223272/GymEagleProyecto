@@ -72,7 +72,7 @@ const Menu = () => {
           {/* INICIO DE LA FILA 2 */}
      <div className='fila2Menu'>
     
-     <a href="/">
+     <a href="/Rutinas">
       <div className='rutina'    
          onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
          onMouseLeave={() => handleImagenHoverRutina(Rutina)}>

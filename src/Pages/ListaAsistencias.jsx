@@ -9,7 +9,7 @@ const ListaAsistencias = () => {
   return (
    <>
    
-   <div className='fila1' style={{display:'flex'}}>
+   <div className='fila1Lista' style={{display:'flex'}}>
    <div className='fecha'><p>Fecha: {fechaFormateada}</p></div>
    <div className='ContenedorCirculos'>
    <h5>color de los botones:</h5>

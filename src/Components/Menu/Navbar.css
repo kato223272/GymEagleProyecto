@@ -1,14 +1,14 @@
 .Columna{
     background-color: #212121;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-   width: 100%;
+    width: 100%;
 }
 /* ----------------------------------------------------------- */
 .Fila1{
     display: flex;
 }
 
-.ContenedorImg{
+.ContenedorImgM{
     margin-top: 1%;
     width: 6%;
     height: 90%;
@@ -19,35 +19,70 @@
     margin-bottom: 1%;
 }
 
- .ContenedorImg img{
-    
-        width: 100%; 
-        height: 100%;
-        object-fit: cover; 
+ .ContenedorImgM img{
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
  }
- .ContenedorLetra{
 
+ .ContenedorLetraM{
     margin-left: 20%;
-    
  }
- .ContenedorLetra h1{
-   
+ 
+ .ContenedorLetraM h1{
     color: #FFD600;
     margin-top: 9%;
     font-size: 200%;
-    text-shadow: -0.3px -0.3px 0.3px #ffffff, 0.3px 0.3px 0.3px #ffffff, -0.3px 0.3px 0.3px #ffffff, 0.3px -0.3px 0.3px #ffffff;
+    text-shadow: -0.3px -0.3px 0.3px #ffffff, 0.3px 0.3px 0.3px #ffffff, -0.3px 0.3px 0.3px #ffffff, 
+    0.3px -0.3px 0.3px #ffffff;
     letter-spacing: 5px;
  }
 
- .Finalizar{
+ .FinalizarM{
     background-color: #FFD600;
     border-radius: 9px;
     width: 100%;
     height: 40%;
     margin-top: 30%;
     margin-left: 400%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 630;
     cursor: pointer;
 }
  /* --------------------------------------------------------- */
+
+@media screen and (min-width: 360px) and (max-width: 480px){
+    .ContenedorImgM{
+        margin-top: 2%;
+        width: 25%;
+        height: 100%;
+        border-radius: 1090%; 
+        overflow: hidden;
+        margin-left: 4%;
+        background-color: rgb(255, 255, 255);
+        margin-bottom: 1%;
+    }
+    .ContenedorImgM img{
+        width: 100%; 
+        height: 100%;
+        object-fit: cover; 
+    }
+    .ContenedorLetraM{
+        margin-left: 4%;
+    }
+    .ContenedorLetraM h1{
+        text-align: center;
+        margin-top: 9%;
+        font-size: 160%;
+     }
+     .FinalizarM{
+        border-radius: 9px;
+        width: 100%;
+        height: 42%;
+        margin-top: 50%;
+        margin-left: 0;
+        font-weight: 630;
+        cursor: pointer;
+    }
+ }
