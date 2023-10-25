@@ -16,9 +16,9 @@ function Navbar() {
     <div className="Columna">
       <div className="Fila1">
         <div className='ContenedorImg'>
-          <NavLink to="/Menu">
+          <a href="/Menu">
             <img src={Logo} alt="" />
-          </NavLink>
+          </a>
         </div>
         <div className='ContenedorLetra'>
           <h1>BLACK EAGLE GYM</h1>
