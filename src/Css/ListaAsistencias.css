@@ -17,7 +17,6 @@
     margin-top: 0.5%;
 }
 .fila1 h6{
-    
     margin-top: 0.5%;
     width: 30%;
 }
@@ -27,8 +26,9 @@
     width: 30%;
 }
 .fila1{
-    margin-left: 6%;
-    width: 100%;
+    margin-left: 10%;
+    display: flex;
+    margin-top: 2.5%;
 }
 .fecha{  
     font-style: oblique;

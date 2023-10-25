@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useState } from 'react';
 import "../Css/EditarUsuario.css";
 import { FaSearch } from "react-icons/fa";
+import imgEliminar from "../Image/imgEditar/eliminarOp2.png";
+import imgEliminarHover from "../Image/imgEditar/eliminarOp2Hover.png";
+import imgAgregar from "../Image/imgEditar/agregarOp1.png";
+import imgAgregarHover from "../Image/imgEditar/agregarOp1Hover.png";
 
 const EditarUsuario = () => {
   const fechaActual = new Date();
   const fechaFormateada = fechaActual.toLocaleDateString();
+
+  const [imagenHoverEliminar, setImagenHoverEliminar] = useState(imgEliminarHover);
+  const [imagenHoverAgregar, setImagenHoverAgregar] = useState(imgAgregarHover);
+ 
+
+  const handleImagenHoverEliminar = (nuevaImagen) => {
+    setImagenHoverEliminar(nuevaImagen);
+  };
+  const handleImagenHoverAgregar = (nuevaImagen) => {
+    setImagenHoverAgregar(nuevaImagen);
+  };
+
   return (
     <>
       <div className="FilaSuperior" style={{ display: "flex" }}>
@@ -23,12 +39,28 @@ const EditarUsuario = () => {
         <div className="col1">
         <h4>Editar Datos</h4>
           <div className="EditarFila1" style={{ display: "flex" }}>
-            <div className="BotonEliminar">
-              <button>eliminar</button>
+            <div className="BotonEliminar"
+            onMouseEnter={() => handleImagenHoverEliminar(imgEliminarHover)}
+            onMouseLeave={() => handleImagenHoverEliminar(imgEliminar)}
+            >
+              <button>
+              <img
+            src={imagenHoverEliminar}
+            alt=""          
+          />
+              </button>
             </div>
-            <div className="BotonAgregar">
+            <div className="BotonAgregar"
+            onMouseEnter={() => handleImagenHoverAgregar(imgAgregarHover)}
+            onMouseLeave={() => handleImagenHoverAgregar(imgAgregar)}
+            >
               
-              <button>agregar</button>
+              <button>
+              <img
+            src={imagenHoverAgregar}
+            alt=""          
+          />
+              </button>
             </div>
           </div>
           <div className="EditarFila2">
