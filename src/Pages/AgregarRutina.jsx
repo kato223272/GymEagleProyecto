@@ -6,6 +6,7 @@ function AgregarRutina (){
     <>
       <div className='Container'>
       <div className='Ruticolumna1'>
+        
         <h3 className='tituRutina'>Información de Rutina</h3>
         <label className='labRutina'>Nombre:</label>
         <input type="text" placeholder="Nombre de rutina" className='inputRutina'/>
