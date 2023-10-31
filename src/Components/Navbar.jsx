@@ -32,13 +32,15 @@ function Navbar() {
         >
           <h4>LISTA DE ASISTENCIA</h4>
         </NavLink>
-        <NavLink
+        
+        {/* <NavLink
           to="/Editar"
           onClick={() => handleLinkClick('/Editar')}
           className={activeLink === '/Editar' ? 'nav-active' : ''}
         >
           <h4>EDITAR USUARIO</h4>
-        </NavLink>
+        </NavLink> */}
+
         <NavLink
           to="/Rutinas"
           onClick={() => handleLinkClick('/Rutinas')}

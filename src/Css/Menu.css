@@ -3,14 +3,19 @@ body{
 }
 
 div.Contenedor{
-    background-color: var(--bg-color-black);
+    margin-top: 5%;
+    margin-left: 2.5%;
     width: 100%;
+    height: 70%;
     align-items: center;
     align-content: center;
     justify-content: center;
-    margin-top: 6%;
+    position: absolute;
+    display: flex;
 }
-.fila1Menu{
+
+
+/* .fila1Menu{
     display: flex;
     width: 56%;
     height: 50%;
@@ -24,7 +29,7 @@ div.Contenedor{
     align-items: center;
     align-content: center;
     justify-content: space-between;
-}
+} */
 /* -------------------------------------------------- */
 .icono{
     margin-top: -20%;
@@ -59,7 +64,9 @@ div.Contenedor{
     height: 28%;
     transition: transform 0.5s;
     border-radius: 8%;
-    flex: 1; 
+    flex: 1;
+    margin-left: -35%;
+    margin-top: -10%;
 }
 .lista:hover, .rutina:hover{
     background-color: #383838;
@@ -67,22 +74,23 @@ div.Contenedor{
 }
 .rutina{
     background-color: #E6862E;
-    display: inline-table;
+    /* display: inline-table; */
     box-shadow: var(--bg-color-black);
     position: fixed;
     width: 20%;
-    height: 28%;
+    height: 29%;
     transition: transform 0.5s;
     border-radius: 8%;
     flex: 1; 
-    margin-top: 19.2%;
+    margin-left: -13%;
+    margin-top:-10%;
 }
 .rutina:hover{
     background-color: #cf7a2b;
     transform: scale(1.1);
 }
 /* ---------------------------------------------- */
-.editar{
+/* .editar{
     background-color: #19345C;
     display: inline-table;
     border-radius: 1%;
@@ -98,7 +106,7 @@ div.Contenedor{
 .editar:hover{
     background-color: #152c4f;
     transform: scale(1.1);
-}
+} */
 .ganancia{
     background-color: #2BA53E;
     display: inline-table;
@@ -106,11 +114,11 @@ div.Contenedor{
     text-align: center;
     position: fixed;
     width: 20%;
-    height: 28%;
+    height: 29%;
     transition: transform 0.5s;
     border-radius: 8%;
-    margin-top: 19.2%;
-
+    margin-left: 9%;
+    margin-top:-10%;
 }
 .ganancia:hover{
     background-color: #289b39;

@@ -1,3 +1,102 @@
-.chula{
-    background-color: aqua;
+.Container{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.containerButton{
+    width: 30%;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40.5%;
+    margin-left: 35%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.btRutina{
+    width: 100%;
+    height: 20%;
+    font-size: 1.3em;
+    padding: 2%;
+    background-color: rgb(0, 0, 0);
+    border-radius: 8px;
+    color: white;
+    border: 4px solid rgb(71, 71, 71);
+    transition:transform 0.3s;
+}
+.btRutina:hover{
+    background-color: rgba(0, 0, 0, 0.856);
+    border: 3px solid rgb(17, 17, 17);
+    color: rgba(255, 255, 255, 0.831);
+    transform: scale(1.07);
+}
+
+
+.Ruticolumna1{
+    background-color: rgb(18, 18, 18);
+    width: 40%;
+    height: 70%;
+    padding: 3%;
+    border-radius: 10px;
+    margin-right: 2%;
+    margin-bottom: 3%;
+}
+
+.Ruticolumna2{
+    background-color: rgb(18, 18, 18);
+    width: 40%;
+    height: 70%;
+    padding: 3%;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin-bottom: 3%;
+}
+.labRutina{
+    color:white;
+    font-size: 1.2em;
+    margin-top: 2%;
+}
+
+h3.tituRutina{
+    color:white;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.inputRutina{
+    outline: none;
+    border: 2px solid rgba(148, 153, 0, 0.868);
+    background-color: rgb(47, 47, 47);
+    color: white;
+    font-size: 1em;
+    width: 100%;
+    height: 10%;
+    padding-left: 3%;
+    text-align: left;
+    border-radius: 7px;
+}
+
+.inputRutinaDescrip{
+    outline: none;
+    border: 2px solid rgba(148, 153, 0, 0.868);
+    background-color: rgb(47, 47, 47);
+    color: white;
+    font-size: 1em;
+    width: 100%;
+    height: 20%;
+    padding-left: 3%;
+    text-align: left;
+    border-radius: 7px;
+    resize:none
+}
+
+
+
