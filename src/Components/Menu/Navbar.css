@@ -1,5 +1,5 @@
-.Columna{
-    background-color: #212121;
+.ColumnaM{
+    background-color: var(--bg-color-black);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
 }

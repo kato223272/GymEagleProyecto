@@ -6,6 +6,7 @@ import{
     BarElement, Title, Tooltip, Legend, Filler} 
 from 'chart.js';
 import { useState } from 'react';
+import {useLocation} from 'react-router-dom';
 
 ChartJS.register(
     CategoryScale,
@@ -19,7 +20,7 @@ ChartJS.register(
 );
 
 var valores=[10, 5, 20, 50];
-var opciones=['Inscripciones', 'Cancelaciones', 'Pagados', 'No pagados'];
+var opciones=['Mensualidades', 'Pagos por día', 'No pagados'];
 
 const mydata={
     labels:opciones,
@@ -28,10 +29,10 @@ const mydata={
             label:'Valor',
             data:valores,
             backgroundColor:[
-                'rgb(32, 145, 245)',
-                'rgb(255, 51, 15)',
-                'rgb(89, 254, 60)',
-                'rgb(255, 164, 66)'
+                // 'rgb(32, 145, 245)',
+                // 'rgb(255, 51, 15)',
+                // 'rgb(89, 254, 60)',
+                'black', 'grey','yellow'
             ],
             boderColor:'rgb(27, 27, 27)',
             boderWidth: 1
@@ -62,12 +63,39 @@ const myOptions={
 export default function Grafica(){
     const [date,setDate]=useState();
 
+    const [activo, setActivo] = useState(false);
+    const [activoEscala, setActivoEscala] = useState(false);
+
+    const handleClic = () => {
+      setActivo(!activo); // Cambiar el estado a su opuesto
+      setActivoEscala(false); 
+    };
+    const handleClicEscala = () => {
+        setActivoEscala(!activoEscala); // Cambiar el estado a su opuesto
+        setActivo(false);
+      };
+
     return <>
     <div className='containergraphic'>
     <div className='Calender'>
-        <h3>Seleccione Día:</h3>
+    <Button
+        variant="dark"
+        onClick={handleClic}
+        className={`btnBarras ${activo ? 'activo' : ''}`}>
+        Barras
+      </Button>
+        {' '}
+
+        <Button 
+            variant="dark" 
+            onClick={handleClicEscala}
+            className={`btnEscala ${activoEscala ? 'activo1' : ''}`}>
+            Escala
+        </Button>
+
+        <h3 className='indication'>Seleccione Día:</h3>
         <input className='inputCalender' type='date' onChange={e=>setDate(e.target.value)}/>
-        <h3>Grafica del Día:</h3>
+        <h3 className='indication'>Grafica del Día:</h3>
         <label className='lbDia'>{date}</label>
         <Button variant="dark" className='bt'>Perdidas</Button>
         <Button variant="dark" className='bt'>Ganancias</Button>
