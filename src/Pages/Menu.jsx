@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
+
+
 import Editar from '../Image/imgMenu/editargym.png';
 import EditarHover from '../Image/imgMenu/editarHoverGym.png';
 
@@ -15,7 +17,6 @@ import Ganancia from '../Image/imgMenu/GananciaGym.png'
 
 const Menu = () => {
   const [imagenHoverAsistencia, setImagenHoverAsistencia] = useState(AsistenciaHover);
-  const [imagenHoverEditar, setImagenHoverEditar] = useState(EditarHover);
   const [imagenHoverRutina, setImagenHoverRutina] = useState(RutinaHover);
   const [imagenHoverGanancia, setImagenHoverGanancia] = useState(Ganancia);
 
@@ -23,10 +24,6 @@ const Menu = () => {
     setImagenHoverAsistencia(nuevaImagen);
   };
   
-  const handleImagenHoverEditar = (nuevaImagen) => {
-    setImagenHoverEditar(nuevaImagen);
-  };
-
   const handleImagenHoverRutina = (nuevaImagen) => {
     setImagenHoverRutina(nuevaImagen);
   };

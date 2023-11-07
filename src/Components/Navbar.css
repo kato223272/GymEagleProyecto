@@ -1,60 +1,76 @@
-.Columna{
+/* NO BORRAR 
+https://www.youtube.com/watch?v=P3mmAuI6b5s
+https://www.youtube.com/watch?v=nVuDtzqkalo */
+
+.NavbarPrincipal{
    background-color: var(--bg-color-black);
    box-shadow: 0px 5px 10px var(--bg-color-black);
    width: 100%;
 }
+
+.tituloNavbar{
+   text-align: left;
+   color: var(--animation-bg-fondo);
+   font-size: 200%;
+   text-shadow: -0.3px -0.3px 0.3px var(--bg-color-white), 0.3px 0.3px 0.3px var(--bg-color-white), 
+   -0.3px 0.3px 0.3px var(--bg-color-white), 
+   0.3px -0.3px 0.3px var(--bg-color-white);
+   letter-spacing: 5px;
+}
 /* ----------------------------------------------------------- */
-.Fila1{ 
-   display: flex;
+.contenedorLink{
+  display: flex;
+  width: 100%;
 }
-
-.ContenedorImg{
-   margin-top: 1%;
-   width: 6%;
-   height: 90%;
-   border-radius: 1090%; 
-   overflow: hidden;
-   margin-left: 10%;
+/* ----------------------------------------------------------- */
+ .IconoTitulo{
+   justify-content: center;
+   align-items: center;
+   text-align: center;
+   width: 25%;
+   margin-left: 5%;
+ }
+ .ContenedorImg{
+   width:26%;
+   height:66%;
+   margin-top: 2%;
    background-color: var(--bg-color-white);
+   border-radius: 300px; 
+   margin-left: 30%;
+ }
+.LogoNav{
+   margin-top: 8%;
+   width: 90%;
+   border-radius: 310px; 
+}
+/* ----------------------------------------------------------- */
+
+.contenedorLinksIcon{
+  background-color: rgba(43, 43, 43, 0.692);
+  width: 15%;
+  padding: 1%;
+  margin-left: 5%;
+}
+.IconoNavbar{
+  width:30%;
+}
+.TituloLink{
+  text-decoration: none;
+  color: white;
+  font-family:  monospace;
 }
 
- .ContenedorImg img{ 
-   width: 100%; 
-   height: 100%;
-   object-fit: cover; 
- }
-
- .ContenedorLetra{
-   margin-left: 20%; 
- }
-
- .ContenedorLetra h1{
-    color: var(--animation-bg-fondo);
-    margin-top: 9%;
-    font-size: 200%;
-    text-shadow: -0.3px -0.3px 0.3px var(--bg-color-white), 0.3px 0.3px 0.3px var(--bg-color-white), 
-    -0.3px 0.3px 0.3px var(--bg-color-white), 
-    0.3px -0.3px 0.3px var(--bg-color-white);
-    letter-spacing: 5px;
- }
 
  /* --------------------------------------------------------- */
-.Fila2{
-   display: flex;
-}
 
- .Fila2 a{
-    text-decoration: none;
-    color: var(--animation-bg-fondo);
-    margin-left: 15%;
-    margin:0.5%;
-    width: 100%;
-    text-align: center;
-    font-size: larger;
-    font-family:  monospace;
+ .contenedorLinksIcon a{
+  text-decoration: none;
+  color:var(--animation-bg-fondo);
+  text-align: center;
+  font-size: large;
+  font-family: monospace;
  }
- 
- .Fila2 a :hover{
+ .contenedorLinksIcon a :hover{
    background-color:var(--animation-bg-fondo);
    color: var(--bg-color-black);
    border-radius: 10px;
@@ -62,31 +78,53 @@
    margin-left: 5%;
  }
 
- .Fila2 a.nav-active {
-   background-color: var(--animation-bg-fondo);
-   color: var(--bg-color-black);
-   border-radius: 10px;
-   width: 90%;
-
-   margin:0.5%;
-   width: 100%;
-   text-align: center;
-   font-size: larger;
-   font-family:  monospace;
+ .contenedorLinksIcon a.nav-active {
+  background-color: var(--animation-bg-fondo);
+  color: var(--bg-color-black);
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: larger;
+  font-family:  monospace;
+  text-decoration: none;
 }
 
-/* @media screen and (min-width: 360px) and (max-width: 480px){
-   .ContenedorImg{
-      margin-top: 1%;
-      width: 100%;
-      height: 1200%;
-   }
- .ContenedorImg img{ 
-   width: 100%; 
-   height: 100%;
-   object-fit: cover; 
- }
- .ContenedorLetra{
-   margin-left: 10%; 
- }
-} */
+
+
+/****** MEDIAS QUERYS PARA EL RESPONSIVO DE LOS DIFRERENTES DIFSPOSITIVOS ******/
+
+@media screen and (min-width: 360px) and (min-height:640px) and (max-width:480px){
+  .NavbarPrincipal{
+    width: 100%;
+  }
+  .IconoTitulo{
+    background-color: aqua;
+    display: flex;
+    width: 80%;
+    margin: 2;
+  }
+
+  .ContenedorImg{
+    width:32%;
+    height:80%;
+    margin-top: 0%;
+    background-color: var(--bg-color-white);
+    border-radius: 800px; 
+    margin-left: 2%;
+  }
+
+  .LogoNav{
+    margin-top: 8%;
+    width:100%;
+    border-radius: 350px; 
+  }
+  .tituloNavbar{
+    text-align: center;
+    font-size: 160%;
+  }
+
+  .contenedorLinksIcon{
+    display: none;
+  }
+}
+

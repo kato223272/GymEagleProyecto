@@ -26,6 +26,7 @@ const Inicio = () => {
 
           <label className='lb-text'>Ingrese Usuario:</label>
           <Form.Control className='inputs' type="text" placeholder="Usuario" />
+          
           <label className='lb-text'>Ingrese Contraseña:</label>
           <Form.Control className='inputs' type="password" placeholder="Contraseña" />
 
