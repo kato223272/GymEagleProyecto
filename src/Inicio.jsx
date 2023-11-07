@@ -1,11 +1,35 @@
 import React from 'react';
 import './inicio.css';
 import {Button, Image,Form } from 'react-bootstrap';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import axios from 'axios';
 import logo from './Image/favicongym.png';
 import icoSesion from './Image/imgInicio/icon-sesion.png';
 // import icoSesion from './Image/LogoGym.png'
 
 const Inicio = () => {
+  const [body, setBody] = useState({usuario: '', contraseña: ''});
+  const navigate = useNavigate();
+
+  const handleChange = ({target}) =>{
+    const {name, value} = target;
+    setBody({
+      ...body,
+      [name]:value
+    });
+  }
+
+  const toAccess = async() =>{
+    try {
+      await axios.post('http://localhost:9000/api/login', body);
+      alert('Bienvenido '+body.usuario)
+      navigate('/Menu')
+    } catch (error) {
+      console.log(error);
+      alert('Datos erroneos')
+    }
+  }
   return (
     <div className='containerGlobal'>
       <header>
@@ -26,13 +50,13 @@ const Inicio = () => {
 
           <label className='lb-text'>Ingrese Usuario:</label>
           <Form.Control className='inputs' type="text" placeholder="Usuario" />
-          
           <label className='lb-text'>Ingrese Contraseña:</label>
-          <Form.Control className='inputs' type="password" placeholder="Contraseña" />
+          <Form.Control className='inputs' type="password" placeholder="Contraseña" 
+          value={body.contraseña} name='contraseña' onChange={handleChange}/>
 
-          <a href='/Menu'>
-          <Button variant="warning" className='bt-Acceder'>Acceder</Button>
-          </a>
+          {/* <a href='/Menu'> */}
+          <Button variant="warning" className='bt-Acceder' onClick={toAccess}>Acceder</Button>
+          {/* </a> */}
           <a href='/recuperarcontrasenia' className='LinkA'>¿Olvidaste tu contraseña?</a>
         </div>
 
