@@ -7,6 +7,7 @@ body.containerGlobal{
 /***************************************************************/
 /* Estilo para la barra de navegación */
 nav.NavbarSesion {
+    background-color: var(--animation-bg-fondo);
     width: 100%;
     display: flex;
     position: relative; 
@@ -293,7 +294,7 @@ Button.bt-Acceder{
   }
 }
 /*******************CODIGO PARA HCAER RESPONSIVO LAP PAGINA DE INICIO, SCREEN************/
-@media screen and (min-width: 360px) and (max-width: 480px){
+@media screen and (min-width: 360px) and (min-height:640px) and (max-width: 480px){
   h1.tituloSesion {
     font-size: 160%;
   }  
@@ -309,15 +310,15 @@ Button.bt-Acceder{
   div.containerSesion{
     background-color: var(--bg-color-white);
     width: 60%;
-    height: 70%;
+    height: 80%;
     position: absolute;
     border-radius: 12px;
     padding: 5%;
   }
 
   .LinkA{
-    font-size: 100%;
-    margin-left: 10%;
+    font-size: 90%;
+    margin-left: 5%;
   }
 
   .barra{

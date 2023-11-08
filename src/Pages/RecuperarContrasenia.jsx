@@ -3,6 +3,7 @@ import {Button, Image, Form, FormGroup } from 'react-bootstrap';
 import '../Css/RecuperarContrasenia.css';
 import imgGrande from '../Image/LogoGym.png';
 import emailjs from '@emailjs/browser';
+import logo from '../Image/favicongym.png';
 
 const RecuperarContrasenia = () => {
   const [User, setUser]=useState("");
@@ -38,44 +39,47 @@ const RecuperarContrasenia = () => {
   return (
     <div className='containerGlobal'>
       <header>
-        <nav className='NavbarSesion'>
-          <h1 className='tituloRecuperar'>Recuperar contraseña</h1>
+        <nav className='RecuNavbarSesion'>
+          <h1 className='RecutituloSesion'>BLACK EAGLE GYM</h1>
         </nav>
       </header>
 
-      <main className='mainSesion'>
+     
+      <main className='RecumainSesion'>
+      <h1 className='tituloRecuperar'>Recuperar contraseña</h1>
         <div className='container'>
           <div className='columna1'>
             <Image className='imgGrande' src={imgGrande}></Image>
-            <h1 className='tituloColum1'>Black Eagle Gym</h1>
           </div>
           <div className='columna2'>
-
-            <FormGroup>
-              <label className='indicacionRecuperar'>Ingrese usuario:</label>
-              <Form.Control 
+            
+            <label className='indicacionRecuperar'>Ingrese usuario:</label>
+            <input
               className='inputsRecuperar' 
               type="text" 
               placeholder="Usuario"
               value={User}
-              onChange={handleUserChange}/>
-            </FormGroup>
-
-            <FormGroup>
-              <label className='indicacionRecuperar'>Correo electronico:</label>
-              <Form.Control 
+              onChange={handleUserChange}
+            />
+            
+            <label className='indicacionRecuperar'>Correo electronico:</label>
+            <input
               className='inputsRecuperar' 
               type="text" 
-              placeholder="Ejem: 9605658789" 
+              placeholder="Ejem: correo@gmail.com" 
               value={Correo}
-              onChange={handleCorreoChange}/>
-            </FormGroup>
+              onChange={handleCorreoChange}            
+            />
 
-            <Button className='bt-Recuperar' variant='warning' onClick={handleSubmit}>Eviar 
+            <Button className='bt-Recuperar' variant='warning' onClick={handleSubmit}>Enviar 
             mensaje</Button>
 
             <label className='indicacionRecuperar'>Ingrese contraseña nueva:</label>
-            <Form.Control className='inputsRecuperar' type="password" placeholder="Contraseña Nueva"/>
+            <input
+              className='inputsRecuperar' 
+              type="password" 
+              placeholder="Contraseña Nueva"
+            />
             <Button className='bt-Recuperar' variant='warning'>Acceder</Button>
           </div>
         </div>

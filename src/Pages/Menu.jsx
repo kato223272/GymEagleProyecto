@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
+
+
 import Editar from '../Image/imgMenu/editargym.png';
 import EditarHover from '../Image/imgMenu/editarHoverGym.png';
 
@@ -15,7 +17,6 @@ import Ganancia from '../Image/imgMenu/GananciaGym.png'
 
 const Menu = () => {
   const [imagenHoverAsistencia, setImagenHoverAsistencia] = useState(AsistenciaHover);
-  const [imagenHoverEditar, setImagenHoverEditar] = useState(EditarHover);
   const [imagenHoverRutina, setImagenHoverRutina] = useState(RutinaHover);
   const [imagenHoverGanancia, setImagenHoverGanancia] = useState(Ganancia);
 
@@ -23,10 +24,6 @@ const Menu = () => {
     setImagenHoverAsistencia(nuevaImagen);
   };
   
-  const handleImagenHoverEditar = (nuevaImagen) => {
-    setImagenHoverEditar(nuevaImagen);
-  };
-
   const handleImagenHoverRutina = (nuevaImagen) => {
     setImagenHoverRutina(nuevaImagen);
   };
@@ -39,8 +36,7 @@ const Menu = () => {
     <>
    <Navbar/>
     <div className='Contenedor'>
-     <div className='fila1Menu'> 
-     <a href="/Asistencias">
+    <a href="/Asistencias">
       <div className='lista'    
       onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
       onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}>
@@ -54,25 +50,9 @@ const Menu = () => {
           <h3>LISTA DE ASISTENCIA</h3>
         </div>
       </div>
-      </a>
+    </a>
 
-      <a href="/Editar">
-     <div className='editar'
-      onMouseEnter={() => handleImagenHoverEditar(EditarHover)}
-      onMouseLeave={() => handleImagenHoverEditar(Editar)}>
-     <div className='icono' style={{border: '#19345C 5px solid'}}>
-          <img src={imagenHoverEditar} alt=""/>
-     </div>
-     <div className='letra'>
-          <h3>EDITAR USUARIOS</h3>
-        </div>
-     </div>
-     </a>
-
-          {/* INICIO DE LA FILA 2 */}
-     <div className='fila2Menu'>
-    
-     <a href="/Rutinas">
+    <a href="/Rutinas">
       <div className='rutina'    
          onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
          onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
@@ -101,9 +81,6 @@ const Menu = () => {
         </div>
       </div>
       </a>
-    
-     </div>
-    </div>
     </div>
     </>
   )
