@@ -31,6 +31,7 @@ function Navbar() {
           className={activeLink === '/Asistencias' ? 'nav-active' : ''}
         >
           <h4>LISTA DE ASISTENCIA</h4>
+
         </NavLink>
         <NavLink
           to="/Editar"

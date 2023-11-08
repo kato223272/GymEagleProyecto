@@ -17,6 +17,7 @@
   margin-right: 5%; 
   position: relative;
   border-radius: 10px;
+  box-shadow: 0px 5px 10px var(--bg-color-black);
 }
 
 .row {
@@ -57,33 +58,39 @@ width: 100%;
 .BotonAgregar button,
 .BotonGuardar button,
 .BotonGuardar2 button {
-  margin-top: 4%;
+ 
   border: none; 
   text-decoration: none;
   background: none;
   outline: none;
   padding: 0; 
+  border-radius: 10px;
 }
 
 .BotonEliminar,
 .BotonAgregar {
   position: absolute;
+  /* margin-bottom: 20%; */
+  margin-top: -6%;
+ 
 }
 
 .BotonEliminar button img,
 .BotonAgregar button img {
-  width: 15%;
+  width: 100%;
+ 
+
 }
 
 .BotonEliminar {
   left: 0;
-  width: 50%;
+  width: 15%;
 }
 
 
 .BotonAgregar {
   right: 0;
-  width: 50%;
+  width: 15%;
 }
 
 .BotonGuardar button, .BotonGuardar2 button{
