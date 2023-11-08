@@ -16,8 +16,6 @@ function Navbar() {
             <a href="/"> <button className='FinalizarM'>FINALIZAR DÍA</button></a>
           </div>
         </div>
-       
-       
     </div>
     </>
   );

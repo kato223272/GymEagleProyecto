@@ -1,6 +1,6 @@
 /***************************************************************/
 /* Estilo para la barra de navegación */
-nav.NavbarSesion {
+nav.RecuNavbarSesion {
     background-color: var(--animation-bg-fondo);
     width: 100%;
     display: flex;
@@ -10,24 +10,35 @@ nav.NavbarSesion {
     top: 0;
     text-align: center;
     justify-content: center; 
+    align-items: center;
 }
 
-nav > .tituloRecuperar {
+.RecutituloSesion {
     color: var(--bg-color-black);
+    margin-left: -15%;
     text-align: center;
     font-size: 320%;
     font-weight: 700;
-    flex: 1;
+    margin: 0;
+  }  
+
+.tituloRecuperar {
+    background-color: var(--main-bg-negro);
+    color: var(--bg-color-white);
+    text-align: center;
+    font-size: 200%;
+    font-weight: 600;
+    margin: 0;
+    margin-top: 2%;
     letter-spacing:0;
     font-family:Inter;
 }
 
 /******************************************************************/
-main.mainSesion{
+main.RecumainSesion{
     background-color: var(--main-bg-negro);
     width: 100%;
     height: 85%;
-    display: flex;
     position: absolute;
     align-items: center;
     justify-content: center;
@@ -67,9 +78,16 @@ div.columna2 .indicacionRecuperar{
     font-weight: 600;
     margin-top: 5%;
 }
+
 .inputsRecuperar{
-    width: 95%;
+    background-color: rgb(206, 206, 206);
+    width: 100%;
+    height: 9.5%;
     margin-top: 2%;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding-left: 3%;
 }
 
 .bt-Recuperar{
@@ -89,6 +107,7 @@ div.columna2 .indicacionRecuperar{
     text-align: center;
     margin-left: 20%;
 }
+
 @media(hover:hover){
     Button.bt-Recuperar:hover{
         background-color: var(--main-bg-negro);
@@ -96,3 +115,61 @@ div.columna2 .indicacionRecuperar{
     }
 }
 
+
+
+/****** MEDIAS QUERYS PARA EL RESPONSIVO DE LOS DIFRERENTES DIFSPOSITIVOS ******/
+
+@media screen and (min-width: 360px) and (min-height:640px) and (max-width: 480px){
+    .RecutituloSesion {
+        font-size: 160%;
+    }  
+
+    main.RecumainSesion{
+        width: 100%;
+        height: 82.8%;
+    }
+
+    .tituloRecuperar {
+        font-size: 180%;
+    }
+    
+    div.container{
+        margin-top: 1%;
+        width: 86%;
+        height: 82%;
+    }
+
+    div.columna1{
+        width: 100%;
+    }
+    
+    div.columna1 > .imgGrande{
+        width: 100%;
+        height:80%;
+        margin-top: 7%;
+    }    
+
+    div.columna2{
+        background-color: rgba(255, 255, 255, 0.568);
+        width: 80%;
+        height: 80%;
+        position: absolute;
+    }
+
+    div.columna2 .indicacionRecuperar{
+        font-size: 120%;
+        font-weight: 700;
+        margin-top: 5%;
+    }
+
+    .inputsRecuperar{
+        border: rgb(86, 86, 86) 2px solid;
+    }
+
+    .bt-Recuperar{
+        margin-top: 8%;
+        width: 80%;
+        height: 10%;
+        margin-left: 10%;
+    }
+}

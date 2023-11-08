@@ -17,6 +17,7 @@
   margin-right: 5%; 
   position: relative;
   border-radius: 10px;
+  box-shadow: 0px 5px 10px var(--bg-color-black);
 }
 
 .row {
@@ -57,34 +58,47 @@ width: 100%;
 .BotonEliminar button,
 .BotonAgregar button,
 .BotonGuardar button,
+
+
 .BotonGuardar2 button{  
   margin-top: 3%;
+
   border: none; 
   text-decoration: none;
   background: none;
   outline: none;
+
+  padding: 0; 
+  border-radius: 10px;
 }
 
-.EditarFila1 {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.BotonEliminar,
+.BotonAgregar {
+  position: absolute;
+  /* margin-bottom: 20%; */
+  margin-top: -6%;
+ 
 }
-.BotonEliminar{
-  height: 40%;
-  width: 15%;
-  margin-left: 13%;
-}
-.BotonAgregar{
-  height: 40%;
-  width: 15%;
-  margin-right: 10%;
-}
+
 
 .BotonEliminar button img,
 .BotonAgregar button img {
   width: 100%;
+
+}
+
+.BotonEliminar {
+  left: 0;
+  width: 15%;
+}
+
+
+.BotonAgregar {
+  right: 0;
+  width: 15%;
+
   border-radius: 10px;
+
 }
 
 .BotonGuardar button, .BotonGuardar2 button{
