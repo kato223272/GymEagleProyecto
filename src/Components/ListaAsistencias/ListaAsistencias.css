@@ -1,9 +1,25 @@
 .botonPagado{
-background-color: red;
-border-radius: 10px;
+   background-color: var(--bg-color-red);
+   border-radius: 7px;
+   width: 60%;
+   color: white;
+   font-weight: bold;
 }
+
+.botonInformacion{
+   background-color: rgb(255, 255, 255);
+   border: white;
+   color: rgb(0, 0, 159);
+   text-decoration: underline;
+}
+
 .Tabla{
    margin-left: 8%;
    width: 85%;
    margin-top: 1%;
+}
+
+.modalInformacion{
+   background-color: rgb(21, 21, 21);
+   color: white;
 }
