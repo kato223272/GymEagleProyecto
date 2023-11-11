@@ -6,7 +6,6 @@ import{
     BarElement, Title, Tooltip, Legend, Filler} 
 from 'chart.js';
 import { useState } from 'react';
-import {useLocation} from 'react-router-dom';
 
 ChartJS.register(
     CategoryScale,

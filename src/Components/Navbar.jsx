@@ -7,6 +7,7 @@ import {Row, Image} from 'react-bootstrap';
 import imgAsistencia from '../Image/imgNavbar/asistenciaGymNavH.png';
 import imgRutina from '../Image/imgNavbar/RutinaGymNavH.png'; 
 import imgGanancia from '../Image/imgNavbar/GananciaGymNavH.png';
+import imgUsuario from '../Image/imgNavbar/usuarioGym.png';
 
 function Navbar() {
   const { pathname } = useLocation();
@@ -41,6 +42,16 @@ function Navbar() {
               className={activeLink === '/Asistencias' ? 'nav-active' : ''}>
               <h4 className='TituloLink'>ASISTENCIA</h4>
             </NavLink> 
+          </div>
+
+          <div className='contenedorLinksIcon'>
+            <Image className='IconoNavbar' src={imgUsuario}/>
+            <NavLink
+              to="/editar"
+              onClick={() => handleLinkClick('/editar')}
+              className={activeLink === '/editar' ? 'nav-active' : ''}>
+              <h4 className='TituloLink'>USUARIOS</h4>
+            </NavLink>
           </div>
 
           <div className='contenedorLinksIcon'>
