@@ -1,7 +1,7 @@
 import './Navbar.css';
 import Logo from '../Image/LogoGym.png';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Row, Image} from 'react-bootstrap';
 
 import imgAsistencia from '../Image/imgNavbar/asistenciaGymNavH.png';
@@ -16,6 +16,10 @@ function Navbar() {
   const handleLinkClick = (path) => {
     setActiveLink(path);
   };
+
+  useEffect(() => {
+    setActiveLink(pathname); 
+  }, [pathname]);
 
   return (
     <header className='NavbarPrincipal'>
@@ -37,7 +41,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <Image className='IconoNavbar' src={imgAsistencia}/>
             <NavLink
-              to="/Asistencias"
+              to="/Asistencias" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Asistencias')}
               className={activeLink === '/Asistencias' ? 'nav-active' : ''}>
               <h4 className='TituloLink'>ASISTENCIA</h4>
@@ -47,7 +51,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <Image className='IconoNavbar' src={imgUsuario}/>
             <NavLink
-              to="/editar"
+              to="/editar" activeClassName="nav-active"
               onClick={() => handleLinkClick('/editar')}
               className={activeLink === '/editar' ? 'nav-active' : ''}>
               <h4 className='TituloLink'>USUARIOS</h4>
@@ -57,7 +61,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <Image className='IconoNavbar' src={imgRutina}/>
             <NavLink
-              to="/Rutinas"
+              to="/Rutinas" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Rutinas')}
               className={activeLink === '/Rutinas' ? 'nav-active' : ''}>
               <h4 className='TituloLink'>RUTINAS</h4>
@@ -67,7 +71,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <Image className='IconoNavbar' src={imgGanancia}/>
             <NavLink
-              to="/Ganancias"
+              to="/Ganancias" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Ganancias')}
               className={activeLink === '/Ganancias' ? 'nav-active' : ''}>
               <h4 className='TituloLink'>GANANCIAS</h4>

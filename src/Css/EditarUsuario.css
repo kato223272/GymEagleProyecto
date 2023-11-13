@@ -1,31 +1,34 @@
 .contenerdorEditar {
-  width: 100%;
+  width: 90%;
+  height: 60%;
   position: absolute;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 7%;
 }
-
+.contenidoDatosEditar{
+  margin-left: 10%;
+}
 .Editarcolumna1{
   background-color: rgb(18, 18, 18);
-  width: 38%;
+  width: 80%;
   height: 88%;
   padding: 4%;
   border-radius: 10px;
-  margin-right: 2%;
-  margin-top: 3%;
+  margin: 3%;
   position: relative;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+  
 }
 
 .labEditar{
   color:white;
   font-size: 1.2em;
-  margin-top: 2%;
-  margin-left: 3%;
+  /* margin-top: 2%;
+  margin-left: 4%; */
+  margin-top: 3%;
+  padding-left: 3%;
+  margin-bottom: 2%;
 }
 
 
@@ -35,27 +38,26 @@
   background-color: rgb(47, 47, 47);
   color: white;
   font-size: 1em;
-  width: 95%;
+  width: 20%;
   height:7.5%;
-  padding-left: 3%;
+  padding-left: 1%;
   border-radius: 7px;
+  margin-top: 3%;
   margin-left: 2%;
   margin-bottom: 2%;
 }
 
 .btEditar{
   position: relative;
-  width: 50%;
-  height: 11%;
   font-size: 1.3em;
-  padding: 2%;
+  padding: 1%;
   background-color: rgb(213, 216, 3);
-  border-radius: 8px;
+  border-radius: 10px;
   color: rgb(0, 0, 0);
   border: 4px solid rgb(71, 71, 71);
   transition:transform 0.3s;
-  margin-top: 6%;
-  margin-left: 25%;
+  margin: 1%;
+  margin-left: 40%;
 }
 
 .btEditar:hover{
@@ -65,6 +67,10 @@
   transform: scale(1.07);
 }
 
+.checkEditar{
+  margin-left: 25%;
+ 
+}
 
 
 /* NO TOCAR DADO QUE MODIFICA LA POSICION DE LOS ICONOS */

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
-
-
-import Editar from '../Image/imgMenu/editargym.png';
-import EditarHover from '../Image/imgMenu/editarHoverGym.png';
+import BotonAsistencia from '../Components/Menu/Botones';
+import BotonRutina from '../Components/Menu/Botones';
+import BotonGanancias from '../Components/Menu/Botones';
 
 import Asistencia from '../Image/imgMenu/asistenciaGym.png';
 import AsistenciaHover from '../Image/imgMenu/asistenciaGymHover.png';
@@ -35,52 +34,38 @@ const Menu = () => {
   return (
     <>
    <Navbar/>
-    <div className='Contenedor'>
-    <a href="/Asistencias">
-      <div className='lista'    
-      onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
-      onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}>
-        <div className='icono' style={{border: '#434343 5px solid'}}>
-          <img
-            src={imagenHoverAsistencia}
-            alt=""          
-          />
-        </div>
-        <div className='letra'>
-          <h3>LISTA DE ASISTENCIA</h3>
-        </div>
-      </div>
-    </a>
+    <div className='ContenedorMenu'>
+    
+    <BotonAsistencia
+       image={imagenHoverAsistencia} 
+       href="/Asistencias" 
+       props={{ title: "Asistencias" }} 
+       uniqueClassName="lista" 
+        style={{border: '#434343 5px solid'}}
+        onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
+        onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
+      ></BotonAsistencia>
 
-    <a href="/Rutinas">
-      <div className='rutina'    
-         onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
-         onMouseLeave={() => handleImagenHoverRutina(Rutina)}>
-        <div className='icono' style={{border: '#E6862E 5px solid'}}>
-          <img
-            src={imagenHoverRutina}
-            alt=""          
-          />
-        </div>
-        <div className='letra'>
-          <h3>AGREGAR RUTINA</h3>
-        </div>
-      </div>
-      </a>
+     <BotonRutina
+       image={imagenHoverRutina} 
+       href="/Rutinas" 
+       props={{ title: "Rutinas" }} 
+       uniqueClassName="rutina" 
+        style={{border: '#E6862E 5px solid'}}
+        onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
+        onMouseLeave={() => handleImagenHoverRutina(Rutina)}
+      ></BotonRutina>
 
-      <a href="/Ganancias">
-      <div className='ganancia'
-      onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
-      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}>
-      <div className='icono' style={{border: '#2BA53E 5px solid'}}>
-     
-          <img src={imagenHoverGanancia} alt="" />
-        </div>
-        <div className='letra'>
-          <h3>VER GANANCIAS</h3>
-        </div>
-      </div>
-      </a>
+ <BotonGanancias
+       image={imagenHoverGanancia} 
+       href="/Ganancias" 
+       props={{ title: "VER GANANCIAS" }} 
+       uniqueClassName="ganancia" 
+        style={{border: '#2BA53E 5px solid'}}
+        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
+      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
+      ></BotonGanancias>
+
     </div>
     </>
   )
