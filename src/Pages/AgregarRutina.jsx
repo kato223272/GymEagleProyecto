@@ -3,14 +3,25 @@ import '../Css/AgregarRutina.css';
 import {Col, Row, InputGroup, Form} from  'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 function AgregarRutina (){
+  const [rutinas, setRutinas] = useState([]);
   const [body, setBody] = useState({nombre:'', descripcion:'', series: 0, repeticiones: 0});
   const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
   const descripcionValida = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s.0-9]+$/;
   let alertValues = {title:'', text:'', icon:''};
+
+  useEffect(()=>{
+    const getRutinas = () =>{
+      fetch('http://localhost:3001/gimnasio/rutina/buscar')
+      .then(res => res.json())
+      .then(res => setRutinas(res))
+    }
+    getRutinas()
+  },[])
 
   const messageAlert = (alertValues) => {
     Swal.fire({
@@ -45,7 +56,20 @@ function AgregarRutina (){
     });
   }
 
-  const handleRegisterRutina = () =>{
+  const handleRegisterRutina = async() =>{
+    try {
+      const respuesta = await axios.post('http://localhost:3001/gimnasio/rutina/registrar', body)
+      console.log(respuesta);
+      alertValues = {title: 'Agregado!', text: 'Rutina añadida exitosamente', icon: 'success'};
+      messageAlert(alertValues);
+    } catch (error) {
+      console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const handleValidateRutina = () =>{
     if (!body.nombre || !body.descripcion || body.series === 0 || body.repeticiones === 0){
       alertValues = {title: 'Error!', text: 'Todos los campos son obligatorios', icon: 'error'};
       messageAlert(alertValues);
@@ -56,10 +80,10 @@ function AgregarRutina (){
       alertValues = {title: 'Error, descripción inválida!', text: 'No se aceptan caracteres especiales, solo acentos y numeración', icon: 'error'};
       messageAlert(alertValues);
     }else{
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados', icon: 'success'};
-      messageAlert(alertValues);
+      handleRegisterRutina();
     }
   }
+  
   return(
     <>
       <div className='Container'>
@@ -96,7 +120,7 @@ function AgregarRutina (){
           </select>
         </Col>
       </Row>
-        <button className='btRutina' onClick={handleRegisterRutina}>Guardar Registro</button>
+        <button className='btRutina' onClick={handleValidateRutina}>Guardar Registro</button>
       </div>
 
       <div className='Ruticolumna2'>
