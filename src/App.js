@@ -20,13 +20,13 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/rutinas" element={<Rutina />} />
-        <Route path="/asistencias" element={<Asistencias />} />
-        <Route path="/editar" element={<Editar />} />
-        <Route path="/recuperarcontrasenia" element={<Recuperar />} />
-        <Route path="/ganancias" element={<Ganancias />} />
+        <Route exact path="/" element={<Inicio />} />
+        <Route exact path="/menu" element={<Menu />} />
+        <Route exact path="/rutinas" element={<Rutina />} />
+        <Route exact path="/asistencias" element={<Asistencias />} />
+        <Route exact path="/editar" element={<Editar />} />
+        <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
+        <Route exact path="/ganancias" element={<Ganancias />}></Route>
       </Routes>
     </Router>
   );

@@ -1,3 +1,4 @@
+import './grafica.css';
 import { Line } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -22,15 +23,15 @@ ChartJS.register(
     Filler
 );
 
-var beneficios = [0, 56, 20, 36, 80, 40, 30, -20, 25, 30, 12, 60];
-var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+var valores=[10, 5, 20, 50];
+var opciones=['Mensualidades', 'Pagos por día', 'No pagados'];
 
-var midata = {
-    labels: meses,
-    datasets: [ // Cada una de las líneas del gráfico
+var mydata = {
+    labels: opciones,
+    datasets: [ 
         {
-            label: 'Beneficios',
-            data: beneficios,
+            label: 'valores',
+            data: valores,
             tension: 0.5,
             fill : true,
             borderColor: 'rgb(255, 99, 132)',
@@ -38,15 +39,11 @@ var midata = {
             pointRadius: 5,
             pointBorderColor: 'rgba(255, 99, 132)',
             pointBackgroundColor: 'rgba(255, 99, 132)',
-        },
-        {
-            label: 'Otra línea',
-            data: [20, 25, 60, 65, 45, 10, 0, 25, 35, 7, 20, 25]
-        },
+        }
     ],
 };
 
-var misoptions = {
+var myOptions = {
     scales : {
         y : {
             min : 0
@@ -57,6 +54,12 @@ var misoptions = {
     }
 };
 
-export default function LinesChart() {
-    return <Line data={midata} options={misoptions}/>
+function LinesChart() {
+    return (
+        <div className='graficaEscala'>
+            <Line data={mydata} options={myOptions}/>
+        </div>
+    );
 }
+
+export default LinesChart;
