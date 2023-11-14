@@ -71,7 +71,7 @@ function AgregarRutina (){
 
   const handleValidateRutina = () =>{
     if (!body.nombre || !body.descripcion || body.series === 0 || body.repeticiones === 0){
-      alertValues = {title: 'Error!', text: 'Todos los campos son obligatorios', icon: 'error'};
+      alertValues = {title: 'Error, campos vacíos!', text: 'Todos los campos son obligatorios', icon: 'error'};
       messageAlert(alertValues);
     }else if (!permitido.test(body.nombre)){
       alertValues = {title: 'Error, nombre inválido!', text: 'No se aceptan caracteres especiales, solo acentos', icon: 'error'};
