@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import "../Css/EditarUsuario.css";
 import {Form, Row, Col} from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const EditarUsuario = () => {
-
-const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'' })
+const fechaActual = new Date();
+const fechaFormateada = fechaActual.toLocaleDateString();
+const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada })
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -40,6 +42,17 @@ const handleChange = ({target}) =>{
     [name]:value
   });
 }
+const handlePayDay = async() =>{
+  try {
+    const respuesta = await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
+    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+    messageAlert(alertValues);
+  } catch (error) {
+    console.log(error);
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    messageAlert(alertValues);
+  }
+}
 
 const handleRegister = () =>{
   if (!body.nombre || !body.apellidoPaterno || !body.apellidoMaterno || !body.celular || seleccionarBoton === null) {
@@ -60,9 +73,7 @@ const handleRegister = () =>{
       messageAlert(alertValues);
       console.log(body);
     } else if (seleccionarBoton === 'soloUnDia') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido solo un día', icon: 'success'};
-      messageAlert(alertValues);
-      console.log(body);
+      handlePayDay();
     }
   }
 }
