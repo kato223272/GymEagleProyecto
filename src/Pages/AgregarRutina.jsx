@@ -136,6 +136,7 @@ function AgregarRutina (){
             />
         </InputGroup>
         <select className='ListaRutinasSelect'>
+          <option value=''>Seleccione una rutina</option>
             <option value='1'>Rutina</option>
         </select>
       </div>
