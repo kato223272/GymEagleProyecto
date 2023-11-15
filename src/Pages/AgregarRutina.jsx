@@ -63,6 +63,7 @@ function AgregarRutina (){
       console.log(respuesta);
       alertValues = {title: 'Agregado!', text: 'Rutina añadida exitosamente', icon: 'success'};
       messageAlert(alertValues);
+      setBody({nombre:'', descripcion:'', series: 0, repeticiones: 0});
     } catch (error) {
       console.log(error);
       alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};

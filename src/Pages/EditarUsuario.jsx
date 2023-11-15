@@ -32,6 +32,8 @@ const handleSeleccionarBoton = (opcion) => {
 }
 
 const handleSelectRutina = () =>{
+  alertValues = {title: 'Nota!', text: 'El pago de un día no da acceso al cliente a la página de rutinas', icon: 'warning'};
+  messageAlert(alertValues);
   setRutina(!rutina);
 }
 
@@ -42,11 +44,15 @@ const handleChange = ({target}) =>{
     [name]:value
   });
 }
+
 const handlePayDay = async() =>{
   try {
     const respuesta = await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
     messageAlert(alertValues);
+    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setseleccionarBoton(null);
+    setRutina(false);
   } catch (error) {
     console.log(error);
     alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
@@ -66,12 +72,11 @@ const handleRegister = () =>{
     messageAlert(alertValues);
   } else {
     if (seleccionarBoton === 'PlanMensual') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual', icon: 'success'};
+      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual con rutinas', icon: 'success'};
       if (rutina) {
         alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
       }
       messageAlert(alertValues);
-      console.log(body);
     } else if (seleccionarBoton === 'soloUnDia') {
       handlePayDay();
     }
@@ -133,8 +138,8 @@ const handleRegister = () =>{
             type='radio'
             label="Adquirio rutina"
             aria-label="option"/><br/>
+        
             </div>
-
           <button className='btEditar' onClick={handleRegister}>Guardar Registro</button>
         </div>
       </div>
