@@ -9,6 +9,7 @@ import axios from 'axios';
 
 function AgregarRutina (){
   const [rutinas, setRutinas] = useState([]);
+  const [rutinaSeleccionada, setRutinaSeleccionada] = useState({ nombre: '', descripcion: '', series: 0, repeticiones: 0 });
   const [body, setBody] = useState({nombre:'', descripcion:'', series: 0, repeticiones: 0});
   const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
   const descripcionValida = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s.0-9]+$/;
@@ -84,6 +85,11 @@ function AgregarRutina (){
     }
   }
   
+  const handleRutinaSeleccionada = (e) => {
+    const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
+    setRutinaSeleccionada(selectedRutina);
+  };
+
   return(
     <>
       <div className='Container'>
@@ -135,10 +141,22 @@ function AgregarRutina (){
               className=" mr-sm-2"
             />
         </InputGroup>
-        <select className='ListaRutinasSelect'>
+        <select className='ListaRutinasSelect' onChange={handleRutinaSeleccionada}
+          value={rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}>
           <option value=''>Seleccione una rutina</option>
-            <option value='1'>Rutina</option>
+            {rutinas.map(rutina => (
+              <option key={rutina.id} value={rutina.nombre}>
+                {rutina.nombre}
+              </option>
+            ))}
         </select>
+         <label className="labRutina">Nombre: {rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}</label>
+        <br />
+        <label className="labRutina">Descripción de la rutina: {rutinaSeleccionada ? rutinaSeleccionada.descripcion : ''}</label>
+        <br />
+        <label className="labRutina">Series por día: {rutinaSeleccionada ? rutinaSeleccionada.series : ''}</label>
+        <br />
+        <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? rutinaSeleccionada.repeticiones : ''}</label>
       </div>
       
       </div>
