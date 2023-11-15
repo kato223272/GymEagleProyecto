@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import "../Css/EditarUsuario.css";
 import {Form, Row, Col} from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const EditarUsuario = () => {
-
-const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'' })
+const fechaActual = new Date();
+const fechaFormateada = fechaActual.toLocaleDateString();
+const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada })
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -30,6 +32,8 @@ const handleSeleccionarBoton = (opcion) => {
 }
 
 const handleSelectRutina = () =>{
+  alertValues = {title: 'Nota!', text: 'El pago de un día no da acceso al cliente a la página de rutinas', icon: 'warning'};
+  messageAlert(alertValues);
   setRutina(!rutina);
 }
 
@@ -39,6 +43,21 @@ const handleChange = ({target}) =>{
     ...body,
     [name]:value
   });
+}
+
+const handlePayDay = async() =>{
+  try {
+    const respuesta = await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
+    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+    messageAlert(alertValues);
+    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setseleccionarBoton(null);
+    setRutina(false);
+  } catch (error) {
+    console.log(error);
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    messageAlert(alertValues);
+  }
 }
 
 const handleRegister = () =>{
@@ -53,16 +72,13 @@ const handleRegister = () =>{
     messageAlert(alertValues);
   } else {
     if (seleccionarBoton === 'PlanMensual') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual', icon: 'success'};
+      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual con rutinas', icon: 'success'};
       if (rutina) {
         alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
       }
       messageAlert(alertValues);
-      console.log(body);
     } else if (seleccionarBoton === 'soloUnDia') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido solo un día', icon: 'success'};
-      messageAlert(alertValues);
-      console.log(body);
+      handlePayDay();
     }
   }
 }
@@ -122,8 +138,8 @@ const handleRegister = () =>{
             type='radio'
             label="Adquirio rutina"
             aria-label="option"/><br/>
+        
             </div>
-
           <button className='btEditar' onClick={handleRegister}>Guardar Registro</button>
         </div>
       </div>
