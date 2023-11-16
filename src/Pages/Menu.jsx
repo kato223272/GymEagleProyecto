@@ -47,6 +47,17 @@ const Menu = () => {
         onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
       ></BotonAsistencia>
 
+      <BotonAgregar
+       image={imagenHoverGanancia} 
+       href="/editar" 
+       props={{ title: "Agregar" }} 
+       uniqueClassName="ganancia" 
+        style={{border: '# 5px solid'}}
+        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
+      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
+      ></BotonAgregar>
+
+
      <BotonRutina
        image={imagenHoverRutina} 
        href="/Rutinas" 
@@ -67,15 +78,6 @@ const Menu = () => {
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
       ></BotonGanancias>
       
-      <BotonAgregar
-       image={imagenHoverGanancia} 
-       href="/EditarUsuario" 
-       props={{ title: "Agregar" }} 
-       uniqueClassName="ganancia" 
-        style={{border: '# 5px solid'}}
-        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
-      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
-      ></BotonAgregar>
 
     </div>
     </>

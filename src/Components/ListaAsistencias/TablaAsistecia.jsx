@@ -52,10 +52,6 @@ const TablaAsistencias = () => {
 
   const columns = [
     {
-      name: 'id',
-      label: 'No.Lista',
-    },
-    {
       name: 'Nombre',
       label: 'Nombre(s)'
     },
@@ -66,10 +62,6 @@ const TablaAsistencias = () => {
     {
       name: 'SegundoApellido',
       label: 'Apellido Materno'
-    },
-    {
-      name: 'pagos',
-      label: 'Pagos',
     },
     {
       name: 'asistencia',
@@ -92,7 +84,7 @@ const TablaAsistencias = () => {
           return (
             <button className="botonInformacion" onClick={() => 
             mostrarModalInformacion(tableMeta.rowData[0])}>
-              Usuario
+              Ver
             </button>
           );
         }

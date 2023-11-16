@@ -7,10 +7,12 @@
 }
 
 .botonInformacion{
-   background-color: rgb(255, 255, 255);
+   background-color: transparent;
    border: white;
    color: rgb(0, 0, 159);
    text-decoration: underline;
+   text-align: center;
+   justify-content: center;
 }
 
 .Tabla{

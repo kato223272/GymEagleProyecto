@@ -132,16 +132,6 @@ function AgregarRutina (){
 
       <div className='Ruticolumna2'>
         <h3 className='tituRutina'>Rutinas Registradas: </h3>
-        <InputGroup>
-          <InputGroup.Text id="basic-addon1">
-            <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#000000' }} />
-          </InputGroup.Text>
-            <Form.Control
-              type="text"
-              placeholder="Buscar"
-              className=" mr-sm-2"
-            />
-        </InputGroup>
         <select className='ListaRutinasSelect' onChange={handleRutinaSeleccionada}
           value={rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}>
           <option value=''>Seleccione una rutina</option>
@@ -166,4 +156,9 @@ function AgregarRutina (){
 }
 
 export default AgregarRutina;
+
+
+
+
+
 
