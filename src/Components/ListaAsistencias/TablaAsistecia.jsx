@@ -135,11 +135,9 @@ const TablaAsistencias = () => {
         <Modal.Body>
           {selectedUser && (
             <>
-              <p>ID: {selectedUser.id}</p>
               <p>Nombre: {selectedUser.Nombre}</p>
               <p>Apellido Paterno: {selectedUser.PrimerApellido}</p>
               <p>Apellido Materno: {selectedUser.SegundoApellido}</p>
-              <p>Pagos: {selectedUser.pagos}</p>
               <p>Asistencia: {selectedUser.asistencia}</p>
             </>
           )}
