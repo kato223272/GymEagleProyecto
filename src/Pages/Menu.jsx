@@ -5,6 +5,7 @@ import '../Css/Menu.css'
 import BotonAsistencia from '../Components/Menu/Botones';
 import BotonRutina from '../Components/Menu/Botones';
 import BotonGanancias from '../Components/Menu/Botones';
+import BotonAgregar from '../Components/Menu/Botones'
 
 import Asistencia from '../Image/imgMenu/asistenciaGym.png';
 import AsistenciaHover from '../Image/imgMenu/asistenciaGymHover.png';
@@ -47,7 +48,21 @@ const Menu = () => {
         onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
       />
 
-    <BotonRutina
+
+
+      <BotonAgregar
+       image={imagenHoverGanancia} 
+       href="/editar" 
+       props={{ title: "Agregar" }} 
+       uniqueClassName="ganancia" 
+        style={{border: '# 5px solid'}}
+        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
+      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
+      ></BotonAgregar>
+
+
+     <BotonRutina
+
        image={imagenHoverRutina} 
        href="/Rutinas" 
        props={{ title: "Rutinas" }} 
@@ -66,6 +81,7 @@ const Menu = () => {
         onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
       />
+
 
     </div>
     </>

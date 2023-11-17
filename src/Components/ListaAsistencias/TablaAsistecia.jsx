@@ -1,13 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import MUIDataTable from "mui-datatables";
 import "../ListaAsistencias/ListaAsistencias.css";
+import axios from 'axios';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [clientes, setClientes] = useState([]);
+  const [body, setBody] = useState({id:'', fecha:''});
+  const [asistencia, setAsistencia] = useState("falta");
 
+  const fechaActual = new Date();
+  
+  const obtenerFechaFormateada = (fecha) => {
+    const year = fecha.getFullYear();
+    const month = String(fecha.getMonth() + 1).padStart(2, '0');
+    const day = String(fecha.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  };
+  
+  const fechaFormateada = obtenerFechaFormateada(fechaActual);
+  
+  console.log(fechaFormateada);
+
+  useEffect(()=>{
+    const getClientes = () =>{
+      fetch('http://localhost:9000/gimnasio/clientes/obtenertodo')
+      .then(res => res.json())
+      .then(res => setClientes(res))
+    }
+    getClientes();
+  },[])
+  
+
+  const verificarEstatus = async() =>{
+    try {
+      const respuesta = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', body)
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
   const handleClose = () => {
     setShow(false);
     setSelectedUserId(null);
@@ -15,61 +51,26 @@ const TablaAsistencias = () => {
 
   const title = "Lista de asistencia";
 
-  const usuarios = [
-    {
-      id: 1,
-      Nombre: "Paola",
-      PrimerApellido: "Mayorga",
-      SegundoApellido: "Aguirre",
-      pagos: "Pagado",
-      asistencia: "Asistio"
-    },
-    {
-      id: 2,
-      Nombre: "Luisin",
-      PrimerApellido: "Alberto",
-      SegundoApellido: "Gutierrez",
-      pagos: "Pagado",
-      asistencia: "Asistio"
-    },
-    {
-      id: 3,
-      Nombre: "Joselin",
-      PrimerApellido: "Jesus",
-      SegundoApellido: "Kato",
-      pagos: "Pagado",
-      asistencia: "Asistio"
-    }
-  ];
-
   const mostrarModalInformacion = (userId) => {
     setSelectedUserId(userId);
     handleShow();
   };
 
-  const selectedUser = usuarios.find(user => user.id === selectedUserId);
+  const selectedUser = clientes.find(client => client.id_cliente === selectedUserId);
   const handleShow = () => setShow(true);
 
   const columns = [
     {
-      name: 'id',
-      label: 'No.Lista',
-    },
-    {
-      name: 'Nombre',
+      name: 'nombre',
       label: 'Nombre(s)'
     },
     {
-      name: 'PrimerApellido',
+      name: 'apellidoPaterno',
       label: 'Apellido Paterno'
     },
     {
-      name: 'SegundoApellido',
+      name: 'apellidoMaterno',
       label: 'Apellido Materno'
-    },
-    {
-      name: 'pagos',
-      label: 'Pagos',
     },
     {
       name: 'asistencia',
@@ -78,7 +79,7 @@ const TablaAsistencias = () => {
         customBodyRender: (val, tableMeta) => {
           return (
             <button className="botonPagado" onClick={() => mostrarModalInformacion(tableMeta.rowData[0])}>
-              Falto
+              {asistencia}
             </button>
           );
         }
@@ -92,7 +93,7 @@ const TablaAsistencias = () => {
           return (
             <button className="botonInformacion" onClick={() => 
             mostrarModalInformacion(tableMeta.rowData[0])}>
-              Usuario
+              Ver
             </button>
           );
         }
@@ -129,7 +130,7 @@ const TablaAsistencias = () => {
       <div className="Tabla">
         <MUIDataTable
           title={title}
-          data={usuarios}
+          data={clientes}
           columns={columns}
           options={options}
         />
@@ -143,23 +144,22 @@ const TablaAsistencias = () => {
         <Modal.Body>
           {selectedUser && (
             <>
-              <p>ID: {selectedUser.id}</p>
-              <p>Nombre: {selectedUser.Nombre}</p>
-              <p>Apellido Paterno: {selectedUser.PrimerApellido}</p>
-              <p>Apellido Materno: {selectedUser.SegundoApellido}</p>
-              <p>Pagos: {selectedUser.pagos}</p>
-              <p>Asistencia: {selectedUser.asistencia}</p>
+              <p>ID: {selectedUser.id_cliente}</p>
+              <p>Nombre: {selectedUser.nombre}</p>
+              <p>Apellido Paterno: {selectedUser.apellidoPaterno}</p>
+              <p>Apellido Materno: {selectedUser.apellidoMaterno}</p>
+              <p>Asistencia:{asistencia}</p>
             </>
           )}
         </Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerar
           </Button>
 
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Pagar
           </Button>
         </Modal.Footer>
       </Modal>
