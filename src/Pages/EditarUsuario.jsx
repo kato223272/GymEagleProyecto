@@ -6,7 +6,15 @@ import axios from 'axios';
 
 const EditarUsuario = () => {
 const fechaActual = new Date();
-const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada })
+const obtenerFechaFormateada = (fecha) => {
+  const year = fecha.getFullYear();
+  const month = String(fecha.getMonth() + 1).padStart(2, '0');
+  const day = String(fecha.getDate()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}`;
+};
+const fechaFormateada = obtenerFechaFormateada(fechaActual);
+const [body, setBody] = useState({id_cliente:'', nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada});
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -20,17 +28,7 @@ const messageAlert = (alertValues) => {
     icon: alertValues.icon,
     confirmButtonText: 'Aceptar'
   });
-};
-
-const obtenerFechaFormateada = (fecha) => {
-  const year = fecha.getFullYear();
-  const month = String(fecha.getMonth() + 1).padStart(2, '0');
-  const day = String(fecha.getDate()).padStart(2, '0');
-  
-  return `${year}-${month}-${day}`;
-};
-
-const fechaFormateada = obtenerFechaFormateada(fechaActual);
+}
 
 const handleSeleccionarBoton = (opcion) => {
   if (seleccionarBoton === opcion) {
@@ -59,7 +57,7 @@ const handlePayDay = async() =>{
     const respuesta = await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
     messageAlert(alertValues);
-    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setBody({id_cliente:'', nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
     setseleccionarBoton(null);
     setRutina(false);
   } catch (error) {
@@ -68,13 +66,21 @@ const handlePayDay = async() =>{
     messageAlert(alertValues);
   }
 }
-
+// const handleRegisterMensualidad = async() =>{
+//   try {
+//     await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', body)
+//   } catch (error) {
+    
+//   }
+// }
 const handlePayMonth = async() =>{
   try {
     const cliente = await axios.post('http://localhost:9000/gimnasio/clientes/registrar', body)
+    const idCliente = cliente.data.newCliente.id_cliente;
+    setBody({ ...body, id_cliente: idCliente });
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
     messageAlert(alertValues);
-    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setBody({ id_cliente:'', nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
     setseleccionarBoton(null);
     setRutina(false);
   } catch (error) {
@@ -96,12 +102,10 @@ const handleRegister = () =>{
     messageAlert(alertValues);
   } else {
     if (seleccionarBoton === 'PlanMensual') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual', icon: 'success'};
-      handlePayMonth();
-      if (rutina) {
-        alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
-      }
-      messageAlert(alertValues);
+      handlePayMonth()
+      // if (rutina) {
+      //   alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
+      // }
     } else if (seleccionarBoton === 'soloUnDia') {
       handlePayDay();
     }
