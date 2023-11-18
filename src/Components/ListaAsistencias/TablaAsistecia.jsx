@@ -52,6 +52,10 @@ const TablaAsistencias = () => {
 
   const columns = [
     {
+      name:'id',
+      label:'id'
+    },
+    {
       name: 'Nombre',
       label: 'Nombre(s)'
     },
@@ -135,6 +139,7 @@ const TablaAsistencias = () => {
         <Modal.Body>
           {selectedUser && (
             <>
+              <p>id:{selectedUser.id}</p>
               <p>Nombre: {selectedUser.Nombre}</p>
               <p>Apellido Paterno: {selectedUser.PrimerApellido}</p>
               <p>Apellido Materno: {selectedUser.SegundoApellido}</p>
@@ -145,11 +150,11 @@ const TablaAsistencias = () => {
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
 
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Aceptar
           </Button>
         </Modal.Footer>
       </Modal>

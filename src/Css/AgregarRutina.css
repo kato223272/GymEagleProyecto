@@ -99,13 +99,14 @@ h3.tituRutina{
     color: white;
     font-size: 1em;
     width: 60%;
-    height: 30px;
+    height: 35px;
     padding-left: 3%;
     text-align: center;
     border-radius: 7px;
+    margin-top: 2%;
 }
 
-.ListaRutinasSelect{
+/* .ListaRutinasSelect{
     outline: none;
     border: 2px solid rgba(148, 153, 0, 0.868);
     background-color: rgb(47, 47, 47);
@@ -117,7 +118,7 @@ h3.tituRutina{
     text-align: left;
     border-radius: 7px;
     margin-top: 7%;
-}
+} */
 
 .inputRutinaDescrip{
     outline: none;
@@ -132,6 +133,8 @@ h3.tituRutina{
     border-radius: 7px;
     resize:none
 }
+
+
 
 
 
