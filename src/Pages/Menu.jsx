@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
+
 import BotonAsistencia from '../Components/Menu/Botones';
 import BotonRutina from '../Components/Menu/Botones';
 import BotonGanancias from '../Components/Menu/Botones';
@@ -45,7 +46,9 @@ const Menu = () => {
         style={{border: '#434343 5px solid'}}
         onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
         onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
-      ></BotonAsistencia>
+      />
+
+
 
       <BotonAgregar
        image={imagenHoverGanancia} 
@@ -59,6 +62,7 @@ const Menu = () => {
 
 
      <BotonRutina
+
        image={imagenHoverRutina} 
        href="/Rutinas" 
        props={{ title: "Rutinas" }} 
@@ -66,9 +70,9 @@ const Menu = () => {
         style={{border: '#E6862E 5px solid'}}
         onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
         onMouseLeave={() => handleImagenHoverRutina(Rutina)}
-      ></BotonRutina>
+      />
 
- <BotonGanancias
+    <BotonGanancias
        image={imagenHoverGanancia} 
        href="/Ganancias" 
        props={{ title: "Ver ganancias" }} 
@@ -76,8 +80,8 @@ const Menu = () => {
         style={{border: '#2BA53E 5px solid'}}
         onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
-      ></BotonGanancias>
-      
+      />
+
 
     </div>
     </>

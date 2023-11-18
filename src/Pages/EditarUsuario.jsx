@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { addMonths, format }from 'date-fns';
 import "../Css/EditarUsuario.css";
 import {Form, Row, Col} from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -6,8 +7,16 @@ import axios from 'axios';
 
 const EditarUsuario = () => {
 const fechaActual = new Date();
-const fechaFormateada = fechaActual.toLocaleDateString();
-const [body, setBody] = useState({nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada })
+const obtenerFechaFormateada = (fecha) => {
+  const year = fecha.getFullYear();
+  const month = String(fecha.getMonth() + 1).padStart(2, '0');
+  const day = String(fecha.getDate()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}`;
+};
+const fechaFormateada = obtenerFechaFormateada(fechaActual);
+const [body, setBody] = useState({ nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada});
+const [mensualidad, setMensualidad] = useState({id_cliente: 0, fecha: ''});
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -21,7 +30,7 @@ const messageAlert = (alertValues) => {
     icon: alertValues.icon,
     confirmButtonText: 'Aceptar'
   });
-};
+}
 
 const handleSeleccionarBoton = (opcion) => {
   if (seleccionarBoton === opcion) {
@@ -45,9 +54,50 @@ const handleChange = ({target}) =>{
   });
 }
 
+const calcularProximoPago = () =>{
+  const fechaHoy = new Date(fechaActual);
+  const proximaFechaPago = addMonths(fechaHoy, 1);
+  if (proximaFechaPago.getMonth() === 0) {
+    proximaFechaPago.setFullYear(proximaFechaPago.getFullYear() + 1);
+  }
+  const formatoFecha = 'yyyy-MM-dd';
+  const fechaPago = format(proximaFechaPago, formatoFecha);
+  
+  return fechaPago;
+}
+
 const handlePayDay = async() =>{
   try {
-    const respuesta = await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
+    await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
+    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+    messageAlert(alertValues);
+    setBody({id_cliente:0, nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setseleccionarBoton(null);
+    setRutina(false);
+  } catch (error) {
+    console.log(error);
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    messageAlert(alertValues);
+  }
+}
+
+const handleRegisterMensualidad = async(id) =>{
+  const fechaPago = calcularProximoPago();
+  console.log(id, fechaPago);
+  try {
+    await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id, fecha:fechaPago})
+  } catch (error) {
+    console.log(error);
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    messageAlert(alertValues);
+  }
+}
+
+const handlePayMonth = async() =>{
+  try {
+    const cliente = await axios.post('http://localhost:9000/gimnasio/clientes/registrar', body)
+    const idCliente = cliente.data.newCliente.id_cliente;
+    handleRegisterMensualidad(idCliente);
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
     messageAlert(alertValues);
     setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
@@ -72,11 +122,10 @@ const handleRegister = () =>{
     messageAlert(alertValues);
   } else {
     if (seleccionarBoton === 'PlanMensual') {
-      alertValues = {title: 'Aceptado', text: 'Datos aceptados, se ha elegido el plan mensual con rutinas', icon: 'success'};
-      if (rutina) {
-        alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
-      }
-      messageAlert(alertValues);
+      handlePayMonth()
+      // if (rutina) {
+      //   alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
+      // }
     } else if (seleccionarBoton === 'soloUnDia') {
       handlePayDay();
     }
