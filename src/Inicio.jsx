@@ -4,6 +4,7 @@ import {Button, Image,Form } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import logo from './Image/favicongym.png';
 import icoSesion from './Image/imgInicio/icon-sesion.png';
 // import icoSesion from './Image/LogoGym.png'
@@ -11,6 +12,17 @@ import icoSesion from './Image/imgInicio/icon-sesion.png';
 const Inicio = () => {
   const [body, setBody] = useState({usuario: '', contraseña: ''});
   const navigate = useNavigate();
+  let alertValues = {title:'', text:'', icon:''};
+
+  const messageAlert = (alertValues) => {
+    Swal.fire({
+      title: alertValues.title,
+      text: alertValues.text,
+      icon: alertValues.icon,
+      confirmButtonText: 'Aceptar',
+      timer: 3000
+    })
+  }
 
   const handleChange = ({target}) =>{
     const {name, value} = target;
@@ -21,10 +33,25 @@ const Inicio = () => {
   }
 
   const toAccess = async() =>{
+    const permitido = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d]+$/;
+    const pswPermitida = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    console.log(body);
     try {
-      await axios.post('http://localhost:9000/api/login', body);
-      alert('Bienvenido '+body.usuario)
-      navigate('/Menu')
+      if(!body.usuario || !body.contraseña){
+        alertValues = {title: 'Oops!', text: 'Los campos son obligatorios', icon: 'error'};
+        messageAlert(alertValues);
+      }else if (!permitido.test(body.usuario)) {
+        alertValues = {title: 'Oops!', text: 'El usuario no debe tener espacios', icon: 'error'};
+        messageAlert(alertValues);
+      }else if (!pswPermitida.test(body.contraseña)) {
+        alertValues = {title: 'Oops!', text: 'La contraseña debe tener al menos 8 caracteres, al menos un número y un carácter especial', icon: 'error'};
+        messageAlert(alertValues);
+      }else{
+        await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
+        alertValues = {title: 'Bienvenido!', text: 'Bienvenido '+body.usuario , icon: 'success'};
+        messageAlert(alertValues);
+        navigate('/Menu')
+      }
     } catch (error) {
       console.log(error);
       alert('Datos erroneos')
@@ -49,14 +76,14 @@ const Inicio = () => {
           <h5 style={{textAlign:'center'}}>Bienvenido Administrador</h5>
 
           <label className='lb-text'>Ingrese Usuario:</label>
-          <Form.Control className='inputs' type="text" placeholder="Usuario" />
+          <Form.Control className='inputs' type="text" placeholder="Usuario"
+          value={body.usuario} name='usuario' onChange={handleChange}/>
           <label className='lb-text'>Ingrese Contraseña:</label>
           <Form.Control className='inputs' type="password" placeholder="Contraseña" 
           value={body.contraseña} name='contraseña' onChange={handleChange}/>
 
-          {/* <a href='/Menu'> */}
           <Button variant="warning" className='bt-Acceder' onClick={toAccess}>Acceder</Button>
-          {/* </a> */}
+
           <a href='/recuperarcontrasenia' className='LinkA'>¿Olvidaste tu contraseña?</a>
         </div>
 
