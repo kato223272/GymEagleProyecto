@@ -39,41 +39,42 @@ function Navbar() {
           </div>
 
           <div className='contenedorLinksIcon'>
-            <Image className='IconoNavbar' src={imgAsistencia}/>
             <NavLink
               to="/Asistencias" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Asistencias')}
               className={activeLink === '/Asistencias' ? 'nav-active' : ''}>
+              <Image className='IconoNavbar' src={imgAsistencia}/>
               <h4 className='TituloLink'>ASISTENCIA</h4>
             </NavLink> 
           </div>
 
           <div className='contenedorLinksIcon'>
-            <Image className='IconoNavbar' src={imgUsuario}/>
             <NavLink
               to="/editar" activeClassName="nav-active"
               onClick={() => handleLinkClick('/editar')}
               className={activeLink === '/editar' ? 'nav-active' : ''}>
+              <Image className='IconoNavbar' src={imgUsuario}/>
               <h4 className='TituloLink'>USUARIOS</h4>
             </NavLink>
           </div>
 
           <div className='contenedorLinksIcon'>
-            <Image className='IconoNavbar' src={imgRutina}/>
             <NavLink
               to="/Rutinas" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Rutinas')}
               className={activeLink === '/Rutinas' ? 'nav-active' : ''}>
+              <Image className='IconoNavbar' src={imgRutina}/>
               <h4 className='TituloLink'>RUTINAS</h4>
             </NavLink>
           </div>
 
           <div className='contenedorLinksIcon'>
-            <Image className='IconoNavbar' src={imgGanancia}/>
+            
             <NavLink
               to="/Ganancias" activeClassName="nav-active"
               onClick={() => handleLinkClick('/Ganancias')}
               className={activeLink === '/Ganancias' ? 'nav-active' : ''}>
+              <Image className='IconoNavbar' src={imgGanancia}/>
               <h4 className='TituloLink'>GANANCIAS</h4>
             </NavLink>
           </div>
