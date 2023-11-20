@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const EditarUsuario = () => {
-const fechaActual = new Date();
+const todayDate = new Date();
 const obtenerFechaFormateada = (fecha) => {
   const year = fecha.getFullYear();
   const month = String(fecha.getMonth() + 1).padStart(2, '0');
@@ -14,9 +14,9 @@ const obtenerFechaFormateada = (fecha) => {
   
   return `${year}-${month}-${day}`;
 };
-const fechaFormateada = obtenerFechaFormateada(fechaActual);
-const [body, setBody] = useState({ nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada});
-const [mensualidad, setMensualidad] = useState({id_cliente: 0, fecha: ''});
+const fechaFormateada = obtenerFechaFormateada(todayDate);
+
+const [body, setBody] = useState({ nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada})
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -55,7 +55,7 @@ const handleChange = ({target}) =>{
 }
 
 const calcularProximoPago = () =>{
-  const fechaHoy = new Date(fechaActual);
+  const fechaHoy = new Date(todayDate);
   const proximaFechaPago = addMonths(fechaHoy, 1);
   if (proximaFechaPago.getMonth() === 0) {
     proximaFechaPago.setFullYear(proximaFechaPago.getFullYear() + 1);
@@ -82,10 +82,16 @@ const handlePayDay = async() =>{
 }
 
 const handleRegisterMensualidad = async(id) =>{
+  const fechaActual = fechaFormateada;
   const fechaPago = calcularProximoPago();
   console.log(id, fechaPago);
   try {
-    await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id, fecha:fechaPago})
+    await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id, fechaActual:fechaActual, fecha:fechaPago})
+    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+    messageAlert(alertValues);
+    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setseleccionarBoton(null);
+    setRutina(false);
   } catch (error) {
     console.log(error);
     alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
@@ -97,12 +103,7 @@ const handlePayMonth = async() =>{
   try {
     const cliente = await axios.post('http://localhost:9000/gimnasio/clientes/registrar', body)
     const idCliente = cliente.data.newCliente.id_cliente;
-    handleRegisterMensualidad(idCliente);
-    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
-    messageAlert(alertValues);
-    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
-    setseleccionarBoton(null);
-    setRutina(false);
+    handleRegisterMensualidad(idCliente)
   } catch (error) {
     console.log(error);
     alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
