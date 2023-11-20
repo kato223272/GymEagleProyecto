@@ -63,14 +63,14 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
 
  /* --------------------------------------------------------- */
 
- .contenedorLinksIcon a{
+ .contenedorLinksIcon h4{
   text-decoration: none;
   color:var(--animation-bg-fondo);
   text-align: center;
   font-size: large;
   font-family: monospace;
  }
- .contenedorLinksIcon a :hover{
+ .contenedorLinksIcon h4 :hover{
    background-color:var(--animation-bg-fondo);
    color: var(--bg-color-black);
    border-radius: 10px;

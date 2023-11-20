@@ -1,11 +1,12 @@
 import React from 'react';
 import '../Css/AgregarRutina.css';
-import {Col, Row, InputGroup, Form} from  'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import {Col, Row, InputGroup, Form, Dropdown} from  'react-bootstrap'
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 
 function AgregarRutina (){
   const [rutinas, setRutinas] = useState([]);
@@ -86,17 +87,29 @@ function AgregarRutina (){
     }
   }
   
-  const handleRutinaSeleccionada = (e) => {
-    const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
-    setRutinaSeleccionada(selectedRutina);
+  // const handleRutinaSeleccionada = (e) => {
+  //   const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
+  //   setRutinaSeleccionada(selectedRutina);
+  // };
+
+  const handleRutinaSeleccionada = (selectedOption) => {
+    if (selectedOption) {
+      const selectedRutina = rutinas.find((rutina) => rutina.nombre === selectedOption.value);
+      setRutinaSeleccionada(selectedRutina);
+    } else {
+      // Manejar el caso en el que no hay una opción seleccionada
+      setRutinaSeleccionada(null);
+    }
   };
+  
+
 
   return(
     <>
       <div className='Container'>
       <div className='Ruticolumna1'>
         
-        <h3 className='tituRutina'>Información de Rutina</h3>
+        <h3 className='tituRutina'>Información de Rutina:</h3>
         <label className='labRutina'>Nombre:</label>
         <input type="text" placeholder="Nombre de rutina" className='inputRutina'
         value={body.nombre} name='nombre' onChange={handleChange}/>
@@ -109,7 +122,7 @@ function AgregarRutina (){
         <Col>
           <label className='labRutina'>Series por día:</label>
           <select className='inputRutinaSelec' onChange={handleSeriesChange} value={body.series}>
-            <option value={0} disabled>Resultados visto en:</option>
+            <option value={0} disabled>Repeticiones</option>
             <option value={3}>3</option>
             <option value={4}>4</option>
             <option value={5}>5</option>
@@ -119,7 +132,7 @@ function AgregarRutina (){
         <Col>
           <label className='labRutina'>Repeticiones:</label>
           <select className='inputRutinaSelec' onChange={handleRepeticionesChange} value={body.repeticiones}>
-            <option value={0} disabled>Repeticiones por día:</option>
+            <option value={0} disabled>Por día</option>
             <option value={6}>6</option>
             <option value={8}>8</option>
             <option value={10}>10</option>
@@ -132,22 +145,36 @@ function AgregarRutina (){
 
       <div className='Ruticolumna2'>
         <h3 className='tituRutina'>Rutinas Registradas: </h3>
-        <select className='ListaRutinasSelect' onChange={handleRutinaSeleccionada}
-          value={rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}>
-          <option value=''>Seleccione una rutina</option>
-            {rutinas.map(rutina => (
-              <option key={rutina.id} value={rutina.nombre}>
-                {rutina.nombre}
-              </option>
-            ))}
-        </select>
-         <label className="labRutina">Nombre: {rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}</label>
+                    
+        <div style={{display:'flex'}}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#ffff00'}}/>
+          <input
+          type="text"
+          list="data"
+          className='ListaRutinasSelect'
+          onChange={handleRutinaSeleccionada}
+          />
+        </div>
+
+        <datalist id="data" className='datalist'>
+          {rutinas.map(rutina => (
+            <option key={rutina.id} value={rutina.nombre}>
+              {rutina.nombre}
+            </option>
+          ))}
+        </datalist>
+
+
+        <label className="labRutina">Nombre: {rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}</label>
         <br />
-        <label className="labRutina">Descripción de la rutina: {rutinaSeleccionada ? rutinaSeleccionada.descripcion : ''}</label>
+        <label className="labRutina">Descripción de la rutina: {rutinaSeleccionada ? 
+        rutinaSeleccionada.descripcion : ''}</label>
         <br />
-        <label className="labRutina">Series por día: {rutinaSeleccionada ? rutinaSeleccionada.series : ''}</label>
+        <label className="labRutina">Series por día: {rutinaSeleccionada ? rutinaSeleccionada.series : ''}
+        </label>
         <br />
-        <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? rutinaSeleccionada.repeticiones : ''}</label>
+        <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? 
+        rutinaSeleccionada.repeticiones : ''}</label>
       </div>
       
       </div>

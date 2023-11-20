@@ -56,10 +56,14 @@ const TablaAsistencias = () => {
     handleShow();
   };
 
-  const selectedUser = clientes.find(client => client.id_cliente === selectedUserId);
+  const selectedUser = clientes.find(cliente => cliente.id_cliente === selectedUserId);
   const handleShow = () => setShow(true);
 
   const columns = [
+    {
+      name:'id_cliente',
+      label:'ID'
+    },
     {
       name: 'nombre',
       label: 'Nombre(s)'
@@ -123,8 +127,6 @@ const TablaAsistencias = () => {
     }
   };
 
-
-
   return (
     <>
       <div className="Tabla">
@@ -141,30 +143,26 @@ const TablaAsistencias = () => {
           <Modal.Title>Información de Usuario:</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body className='modalInformacion'>
           {selectedUser && (
             <>
-              <p>Nombre: {selectedUser.Nombre}</p>
-              <p>Apellido Paterno: {selectedUser.PrimerApellido}</p>
-              <p>Apellido Materno: {selectedUser.SegundoApellido}</p>
-              <p>Asistencia: {selectedUser.asistencia}</p>
-
               <p>ID: {selectedUser.id_cliente}</p>
-              <p>Nombre: {selectedUser.nombre}</p>
-              <p>Apellido Paterno: {selectedUser.apellidoPaterno}</p>
-              <p>Apellido Materno: {selectedUser.apellidoMaterno}</p>
-              <p>Asistencia:{asistencia}</p>
+              <p>Nombre: {selectedUser.nombre}</p><hr/>
+              <p>Apellido Paterno: {selectedUser.apellidoPaterno}</p><hr/>
+              <p>Apellido Materno: {selectedUser.apellidoMaterno}</p><hr/>
+              <p>Asistencia: {asistencia}</p>
             </>
           )}
+
         </Modal.Body>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerar
+        <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
+          <Button variant="success" onClick={handleClose}>
+            Pagar
           </Button>
 
           <Button variant="primary" onClick={handleClose}>
-            Pagar
+            Aceptar
           </Button>
         </Modal.Footer>
       </Modal>
