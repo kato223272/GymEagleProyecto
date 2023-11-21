@@ -35,7 +35,7 @@ const Inicio = () => {
   const toAccess = async() =>{
     const permitido = /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d]+$/;
     const pswPermitida = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    console.log(body);
+
     try {
       if(!body.usuario || !body.contraseña){
         alertValues = {title: 'Oops!', text: 'Los campos son obligatorios', icon: 'error'};
@@ -47,14 +47,21 @@ const Inicio = () => {
         alertValues = {title: 'Oops!', text: 'La contraseña debe tener al menos 8 caracteres, al menos un número y un carácter especial', icon: 'error'};
         messageAlert(alertValues);
       }else{
-        await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
-        alertValues = {title: 'Bienvenido!', text: 'Bienvenido '+body.usuario , icon: 'success'};
-        messageAlert(alertValues);
-        navigate('/Menu')
+        const admin = await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
+        console.log(admin.data);
+        if(admin.data===null){
+          alertValues = {title: 'No encontrado!', text: 'El usuario o la contraseña son incorrectos' , icon: 'warning'};
+          messageAlert(alertValues);      
+        }else{
+          alertValues = {title: 'Bienvenido!', text: 'Bienvenido '+body.usuario , icon: 'success'};
+          messageAlert(alertValues);
+          navigate('/Menu')
+        }
       }
     } catch (error) {
       console.log(error);
-      alert('Datos erroneos')
+      alertValues = {title: 'Error!', text: 'Error '+error.data , icon: 'error'};
+      messageAlert(alertValues);
     }
   }
   return (

@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import MUIDataTable from "mui-datatables";
 import "../ListaAsistencias/ListaAsistencias.css";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
@@ -11,6 +12,7 @@ const TablaAsistencias = () => {
   const [clientes, setClientes] = useState([]);
   const [body, setBody] = useState({id:'', fecha:''});
   const [asistencia, setAsistencia] = useState("falta");
+  let alertValues = {title:'', text:'', icon:''};
 
   const fechaActual = new Date();
   
@@ -23,8 +25,6 @@ const TablaAsistencias = () => {
   };
   
   const fechaFormateada = obtenerFechaFormateada(fechaActual);
-  
-  console.log(fechaFormateada);
 
   useEffect(()=>{
     const getClientes = () =>{
@@ -34,15 +34,58 @@ const TablaAsistencias = () => {
     }
     getClientes();
   },[])
-  
 
-  const verificarEstatus = async() =>{
+  const messageAlert = (alertValues) => {
+    Swal.fire({
+      title: alertValues.title,
+      text: alertValues.text,
+      icon: alertValues.icon,
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  const optionsAlert = ({id, idMensualidad}) => {
+    Swal.fire({
+      title: "Mensualidad vencida",
+      text: "Pagar mensualidad?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Pagar",
+      denyButtonText: `No pagar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        pagarMensualidad(idMensualidad);
+        Swal.fire("Mensualidad pagada!", "Su proximo pago es: ", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Mensualidad no pagada", 'Su estatus ha cambiado a "Adeudo"', "info");
+      }
+    });
+  }
+
+  const pagarMensualidad = async(idMensualidad) =>{
     try {
-      const respuesta = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', body)
+      const pastMesualidad = await axios.put('http://localhost:9000/gimnasio/mensualidades/pagar', {idMensualidad})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al pagar su mensualida', icon:'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const verificarEstatus = async(id_cliente) =>{
+
+    try {
+      const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', {id: id_cliente, fecha: fechaFormateada})
+      if(mensualidad.data===null){
+        console.log("Todo chido compa");
+      }else{
+        const idMensualidad = mensualidad.data.id_mensualidad;
+        optionsAlert({id_cliente, idMensualidad});
+      } 
     } catch (error) {
       console.log(error);
     }
-    
+
   }
   const handleClose = () => {
     setShow(false);
@@ -81,8 +124,9 @@ const TablaAsistencias = () => {
       label: 'Asistencia',
       options: {
         customBodyRender: (val, tableMeta) => {
+          const idCliente = tableMeta.rowData[0];
           return (
-            <button className="botonPagado" onClick={() => mostrarModalInformacion(tableMeta.rowData[0])}>
+            <button className="botonPagado" onClick={()=>{verificarEstatus(idCliente)}}>
               {asistencia}
             </button>
           );
