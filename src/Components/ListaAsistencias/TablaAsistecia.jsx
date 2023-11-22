@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { addMonths, addDays, format }from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import MUIDataTable from "mui-datatables";
@@ -44,7 +45,7 @@ const TablaAsistencias = () => {
     });
   }
 
-  const optionsAlert = ({id, idMensualidad}) => {
+  const optionsAlert = ({id_cliente, idMensualidad, fechaFin}) => {
     Swal.fire({
       title: "Mensualidad vencida",
       text: "Pagar mensualidad?",
@@ -55,11 +56,47 @@ const TablaAsistencias = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         pagarMensualidad(idMensualidad);
-        Swal.fire("Mensualidad pagada!", "Su proximo pago es: ", "success");
+        crearNuevaMensualidad({id_cliente, fechaFin})
+        const fechaPago = calcularProximoPago(fechaFin);
+        Swal.fire("Mensualidad pagada!", "El proximo pago es: "+fechaPago, "success");
       } else if (result.isDenied) {
+        cambiarEstatus(idMensualidad);
         Swal.fire("Mensualidad no pagada", 'Su estatus ha cambiado a "Adeudo"', "info");
       }
     });
+  }
+  const cambiarEstatus = async(idMensualidad) =>{
+    try {
+      const result = await axios.put('http://localhost:9000/gimnasio/mensualidades/cambiarestatus', {idMensualidad})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al cambiar el estatus', icon:'error'};
+      messageAlert(alertValues);
+    }
+  }
+  const calcularProximoPago = (fechaFin) =>{
+    const fecha = new Date(fechaFin);
+    const proximaFecha = addDays(fecha, 1);
+    const proximaFechaPago = addMonths(proximaFecha, 1);
+    if (proximaFechaPago.getMonth() === 0) {
+      proximaFechaPago.setFullYear(proximaFechaPago.getFullYear() + 1);
+    }
+    const formatoFecha = 'yyyy-MM-dd';
+    const fechaPago = format(proximaFechaPago, formatoFecha);
+    
+    return fechaPago;
+  }
+
+  const crearNuevaMensualidad = async({id_cliente, fechaFin}) =>{
+    const fechaPago = calcularProximoPago(fechaFin);
+    console.log(fechaPago);
+    try {
+      await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id_cliente, fechaActual:fechaActual, fecha:fechaPago})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al crear la nueva mensualidad', icon:'error'};
+      messageAlert(alertValues);
+    }
   }
 
   const pagarMensualidad = async(idMensualidad) =>{
@@ -67,7 +104,7 @@ const TablaAsistencias = () => {
       const pastMesualidad = await axios.put('http://localhost:9000/gimnasio/mensualidades/pagar', {idMensualidad})
     } catch (error) {
       console.log(error);
-      alertValues = {title:'Oops!', text:'Ha ocurrido un error al pagar su mensualida', icon:'error'};
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al pagar su mensualidad', icon:'error'};
       messageAlert(alertValues);
     }
   }
@@ -80,7 +117,8 @@ const TablaAsistencias = () => {
         console.log("Todo chido compa");
       }else{
         const idMensualidad = mensualidad.data.id_mensualidad;
-        optionsAlert({id_cliente, idMensualidad});
+        const fechaFin = mensualidad.data.fechaPago;
+        optionsAlert({id_cliente, idMensualidad, fechaFin});
       } 
     } catch (error) {
       console.log(error);
