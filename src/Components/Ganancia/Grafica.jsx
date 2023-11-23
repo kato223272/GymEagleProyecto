@@ -4,10 +4,13 @@ import {Bar} from 'react-chartjs-2';
 import GraficaEscala from './GraficaEscala';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import {DateRangePicker} from 'rsuite';
+
 // import 'rsuite/dist/styles/rsuite-default.css';
+// import 'rsuite/dist/styles/rsuite.min.css'
+// import 'rsuite/styles/less/index.less'; 
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -84,12 +87,12 @@ export default function Grafica(){
             }}
           />
         </DemoItem> */}
-      {/* <DatePicker
+      <DatePicker
         selected={selectedDate}
         onChange={(date) => setSelectedDate(date)}
         dateFormat="MM/yyyy"
         showMonthYearPicker
-      /> */}
+      />
 
       
       <h3 className='indication'>Grafica del Mes:</h3>

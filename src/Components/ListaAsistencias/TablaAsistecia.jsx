@@ -118,11 +118,11 @@ const TablaAsistencias = () => {
     const apellidoMaterno = userData.apellidoMaterno;
     try {
       await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplanmes', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
-      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lsiat de asistencia', icon: 'success'};
+      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lista de asistencia', icon: 'success'};
       messageAlert(alertValues);
     } catch (error) {
       console.log(error);
-      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error, no se ha añadido a la lista de asistencia', icon: 'error'};
       messageAlert(alertValues);
     }
   }
@@ -168,7 +168,7 @@ const TablaAsistencias = () => {
       console.log(respuesta);
     }catch(error){
       console.log(error);
-      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error, no se ha eliminado el usuario', icon: 'error'};
       messageAlert(alertValues);
     }
   };
