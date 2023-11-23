@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Inicio from '../src/Inicio';
 import Rutina from './Pages/AgregarRutina';
@@ -9,44 +9,50 @@ import Asistencias from './Pages/ListaAsistencias';
 import Editar from './Pages/EditarUsuario.jsx';
 import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
-import ProtectedRoute from './PrivateRoute.js';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const currentPath =window.location.pathname.toLowerCase();
+const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
+
+  const renderProtectedRoute = (Component) => {
+    return isAuthenticated ? <Component /> : <Navigate to="/" />;
+  };
 
   return (
     <Router>
       <div style={{ display: isAuthenticated ? 'block' : 'none' }}>
-        {isAuthenticated && <Navbar />}
+      {isAuthenticated }
       </div>
+      <div style={{display: navbarDisplay}}>
+       
+        <Navbar></Navbar>
+        </div>
       <Routes>
         <Route
           path="/"
           element={<Inicio setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />}
         />
         <Route
-          path="/menu"
-          element={<ProtectedRoute element={<Menu />} isAuthenticated={isAuthenticated} />}
+          exact path="/menu"
+          element={renderProtectedRoute(() => <Menu />)}
+        />
+         <Route
+          exact path="/rutinas"
+          element={<Rutina />}
         />
         <Route
-          path="/rutinas"
-          element={<ProtectedRoute element={<Rutina />} isAuthenticated={isAuthenticated} />}
+          exact path="/asistencias"
+          element={<Asistencias />}
         />
         <Route
-          path="/asistencias"
-          element={<ProtectedRoute element={<Asistencias />} isAuthenticated={isAuthenticated} />}
+          exact path="/editar"
+          element={<Editar />}
         />
+        <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
         <Route
-          path="/editar"
-          element={<ProtectedRoute element={<Editar />} isAuthenticated={isAuthenticated} />}
-        />
-        <Route
-          path="/recuperarcontrasenia"
-          element={<Recuperar />}
-        />
-        <Route
-          path="/ganancias"
-          element={<ProtectedRoute element={<Ganancias />} isAuthenticated={isAuthenticated} />}
+          exact path="/ganancias"
+          element={<Ganancias />}
         />
       </Routes>
     </Router>

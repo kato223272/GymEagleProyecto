@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ element, isAuthenticated, fallbackPath = '/' }) => {
+const ProtectedRoute = ({ element, isAuthenticated, fallbackPath = '/', redirectAfterLogin }) => {
   return isAuthenticated ? (
     <Route element={element} />
   ) : (
-    <Navigate to={fallbackPath} />
+    <Navigate to={redirectAfterLogin || fallbackPath} />
   );
 };
 
