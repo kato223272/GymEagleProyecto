@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
+import { saveAs } from 'file-saver';
+
 import BotonAsistencia from '../Components/Menu/Botones';
 import BotonRutina from '../Components/Menu/Botones';
 import BotonGanancias from '../Components/Menu/Botones';
+import BotonAgregar from '../Components/Menu/Botones'
 
 import Asistencia from '../Image/imgMenu/asistenciaGym.png';
 import AsistenciaHover from '../Image/imgMenu/asistenciaGymHover.png';
@@ -31,6 +34,21 @@ const Menu = () => {
     setImagenHoverGanancia(nuevaImagen);
   };
 
+
+
+
+  const descargarPDF = () => {
+    const rutaPDF = '/Manual de Usuario.pdf';
+    fetch(rutaPDF)
+      .then((response) => response.blob())
+      .then((blob) => {
+        saveAs(blob, 'Manual de Usuario.pdf');
+      })
+      .catch((error) => {
+        console.error('Error al descargar el PDF', error);
+      });
+  };
+
   return (
     <>
    <Navbar/>
@@ -44,9 +62,23 @@ const Menu = () => {
         style={{border: '#434343 5px solid'}}
         onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
         onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
-      ></BotonAsistencia>
+      />
+
+
+
+      <BotonAgregar
+       image={imagenHoverGanancia} 
+       href="/editar" 
+       props={{ title: "Agregar" }} 
+       uniqueClassName="ganancia" 
+        style={{border: '# 5px solid'}}
+        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
+      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
+      ></BotonAgregar>
+
 
      <BotonRutina
+
        image={imagenHoverRutina} 
        href="/Rutinas" 
        props={{ title: "Rutinas" }} 
@@ -54,18 +86,19 @@ const Menu = () => {
         style={{border: '#E6862E 5px solid'}}
         onMouseEnter={() => handleImagenHoverRutina(RutinaHover)}
         onMouseLeave={() => handleImagenHoverRutina(Rutina)}
-      ></BotonRutina>
+      />
 
- <BotonGanancias
+    <BotonGanancias
        image={imagenHoverGanancia} 
        href="/Ganancias" 
-       props={{ title: "VER GANANCIAS" }} 
+       props={{ title: "Ver ganancias" }} 
        uniqueClassName="ganancia" 
         style={{border: '#2BA53E 5px solid'}}
         onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
-      ></BotonGanancias>
+      />
 
+    <button onClick={descargarPDF}>Manual</button>
     </div>
     </>
   )

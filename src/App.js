@@ -13,7 +13,7 @@ import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
 
 function App() {
-  const currentPath = window.location.pathname.toLowerCase(); // Convertir a minúsculas
+  const currentPath = window.location.pathname.toLowerCase(); // Convierte a minusculas 
   const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
 
   return (
@@ -30,6 +30,7 @@ function App() {
         <Route path="/recuperarcontrasenia" element={<Recuperar />} />
         <ProtectedRoute path="/ganancias" element={<Ganancias />} />
       </Routes>
+    
     </Router>
   );
 }

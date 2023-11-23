@@ -1,7 +1,13 @@
 /* NO BORRAR 
 https://www.youtube.com/watch?v=P3mmAuI6b5s
 https://www.youtube.com/watch?v=nVuDtzqkalo */
-
+.row { 
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
 .NavbarPrincipal{
    background-color: var(--bg-color-black);
    box-shadow: 0px 5px 10px var(--bg-color-black);
@@ -54,6 +60,7 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
 .IconoNavbar{
   width:30%;
 }
+
 .TituloLink{
   text-decoration: none;
   color: white;
@@ -63,18 +70,20 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
 
  /* --------------------------------------------------------- */
 
- .contenedorLinksIcon a{
+ .contenedorLinksIcon h4{
   text-decoration: none;
   color:var(--animation-bg-fondo);
   text-align: center;
   font-size: large;
   font-family: monospace;
  }
- .contenedorLinksIcon a :hover{
+
+ .contenedorLinksIcon h4 :hover{
    background-color:var(--animation-bg-fondo);
    color: var(--bg-color-black);
    border-radius: 10px;
    margin-left: 5%;
+   text-decoration: none;
  }
 
 
@@ -86,7 +95,6 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
   padding: 1%;
   font-family:  monospace;
   
-
   text-align: center;
   font-size: larger;
   font-family:  monospace;
@@ -135,4 +143,5 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
   }
 
 }
+
 
