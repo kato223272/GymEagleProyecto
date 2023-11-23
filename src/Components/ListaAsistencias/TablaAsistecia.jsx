@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { addMonths, addDays, format }from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import MUIDataTable from "mui-datatables";
 import "../ListaAsistencias/ListaAsistencias.css";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [clientes, setClientes] = useState([]);
-  const [body, setBody] = useState({id:'', fecha:''});
+  // const [body, setBody] = useState({id:'', fecha:''});
   const [asistencia, setAsistencia] = useState("falta");
+  let alertValues = {title:'', text:'', icon:''};
 
   const fechaActual = new Date();
   
@@ -23,8 +26,6 @@ const TablaAsistencias = () => {
   };
   
   const fechaFormateada = obtenerFechaFormateada(fechaActual);
-  
-  console.log(fechaFormateada);
 
   useEffect(()=>{
     const getClientes = () =>{
@@ -34,15 +35,112 @@ const TablaAsistencias = () => {
     }
     getClientes();
   },[])
-  
 
-  const verificarEstatus = async() =>{
+  const messageAlert = (alertValues) => {
+    Swal.fire({
+      title: alertValues.title,
+      text: alertValues.text,
+      icon: alertValues.icon,
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  const optionsAlert = ({id_cliente, idMensualidad, fechaFin}) => {
+    Swal.fire({
+      title: "Mensualidad vencida",
+      text: "Pagar mensualidad?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Pagar",
+      denyButtonText: `No pagar`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        pagarMensualidad(idMensualidad);
+        crearNuevaMensualidad({id_cliente, fechaFin})
+        const fechaPago = calcularProximoPago(fechaFin);
+        Swal.fire("Mensualidad pagada!", "El proximo pago es: "+fechaPago, "success");
+      } else if (result.isDenied) {
+        cambiarEstatus(idMensualidad);
+        Swal.fire("Mensualidad no pagada", 'Su estatus ha cambiado a "Adeudo"', "info");
+      }
+    });
+  }
+  const cambiarEstatus = async(idMensualidad) =>{
     try {
-      const respuesta = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', body)
+      const result = await axios.put('http://localhost:9000/gimnasio/mensualidades/cambiarestatus', {idMensualidad})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al cambiar el estatus', icon:'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const calcularProximoPago = (fechaFin) =>{
+    const fecha = new Date(fechaFin);
+    const proximaFecha = addDays(fecha, 1);
+    const proximaFechaPago = addMonths(proximaFecha, 1);
+    if (proximaFechaPago.getMonth() === 0) {
+      proximaFechaPago.setFullYear(proximaFechaPago.getFullYear() + 1);
+    }
+    const formatoFecha = 'yyyy-MM-dd';
+    const fechaPago = format(proximaFechaPago, formatoFecha);
+    
+    return fechaPago;
+  }
+
+  const crearNuevaMensualidad = async({id_cliente, fechaFin}) =>{
+    const fechaPago = calcularProximoPago(fechaFin);
+    console.log(fechaPago);
+    try {
+      await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id_cliente, fechaActual:fechaActual, fecha:fechaPago})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al crear la nueva mensualidad', icon:'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const pagarMensualidad = async(idMensualidad) =>{
+    try {
+      const pastMesualidad = await axios.put('http://localhost:9000/gimnasio/mensualidades/pagar', {idMensualidad})
+    } catch (error) {
+      console.log(error);
+      alertValues = {title:'Oops!', text:'Ha ocurrido un error al pagar su mensualidad', icon:'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const registrarAsistencia = async(id_cliente) =>{
+    const userData = clientes.find(cliente => cliente.id_cliente === id_cliente);
+    const nombre = userData.nombre;
+    const apellidoPaterno = userData.apellidoPaterno;
+    const apellidoMaterno = userData.apellidoMaterno;
+    try {
+      await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
+      alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+      messageAlert(alertValues);
+    } catch (error) {
+      console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      messageAlert(alertValues);
+    }
+  }
+
+  const verificarEstatus = async(id_cliente) =>{
+    
+    try {
+      const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', {id: id_cliente, fecha: fechaFormateada})
+      if(mensualidad.data===null){
+        registrarAsistencia(id_cliente);
+      }else{
+        const idMensualidad = mensualidad.data.id_mensualidad;
+        const fechaFin = mensualidad.data.fechaPago;
+        optionsAlert({id_cliente, idMensualidad, fechaFin});
+      } 
     } catch (error) {
       console.log(error);
     }
-    
+
   }
   const handleClose = () => {
     setShow(false);
@@ -81,8 +179,9 @@ const TablaAsistencias = () => {
       label: 'Asistencia',
       options: {
         customBodyRender: (val, tableMeta) => {
+          const idCliente = tableMeta.rowData[0];
           return (
-            <button className="botonPagado" onClick={() => mostrarModalInformacion(tableMeta.rowData[0])}>
+            <button className="botonPagado" onClick={()=>{verificarEstatus(idCliente)}}>
               {asistencia}
             </button>
           );

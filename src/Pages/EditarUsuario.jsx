@@ -85,7 +85,7 @@ const handlePayDay = async() =>{
 const handleRegisterMensualidad = async(id) =>{
   const fechaActual = fechaFormateada;
   const fechaPago = calcularProximoPago();
-  console.log(id, fechaPago);
+  // console.log(id, fechaPago);
   try {
     await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id, fechaActual:fechaActual, fecha:fechaPago})
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};

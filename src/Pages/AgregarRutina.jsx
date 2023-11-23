@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 function AgregarRutina (){
   const [rutinas, setRutinas] = useState([]);
