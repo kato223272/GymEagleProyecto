@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
-
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Inicio from '../src/Inicio';
 import Rutina from './Pages/AgregarRutina';
@@ -11,27 +11,52 @@ import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
 
 function App() {
-  const currentPath = window.location.pathname.toLowerCase(); // Convierte a minusculas 
-  const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const currentPath =window.location.pathname.toLowerCase();
+const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
+
+  const renderProtectedRoute = (Component) => {
+    return isAuthenticated ? <Component /> : <Navigate to="/" />;
+  };
 
   return (
     <Router>
-      <div style={{ display: navbarDisplay }}>
-        <Navbar />
+      <div style={{ display: isAuthenticated ? 'block' : 'none' }}>
+      {isAuthenticated }
       </div>
+      <div style={{display: navbarDisplay}}>
+       
+        <Navbar></Navbar>
+        </div>
       <Routes>
-        <Route exact path="/" element={<Inicio />} />
-        <Route exact path="/menu" element={<Menu />} />
-        <Route exact path="/rutinas" element={<Rutina />} />
-        <Route exact path="/asistencias" element={<Asistencias />} />
-        <Route exact path="/editar" element={<Editar />} />
+        <Route
+          path="/"
+          element={<Inicio setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />}
+        />
+        <Route
+          exact path="/menu"
+          element={renderProtectedRoute(() => <Menu />)}
+        />
+         <Route
+          exact path="/rutinas"
+          element={<Rutina />}
+        />
+        <Route
+          exact path="/asistencias"
+          element={<Asistencias />}
+        />
+        <Route
+          exact path="/editar"
+          element={<Editar />}
+        />
         <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
-        <Route exact path="/ganancias" element={<Ganancias />}></Route>
+        <Route
+          exact path="/ganancias"
+          element={<Ganancias />}
+        />
       </Routes>
-    
     </Router>
   );
 }
-
 
 export default App;

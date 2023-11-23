@@ -1,15 +1,16 @@
 import React from 'react';
 import './inicio.css';
 import {Button, Image,Form } from 'react-bootstrap';
-import { useState } from 'react';
 import { useNavigate } from 'react-router';
+import { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import logo from './Image/favicongym.png';
 import icoSesion from './Image/imgInicio/icon-sesion.png';
 // import icoSesion from './Image/LogoGym.png'
 
-const Inicio = () => {
+const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
   const [body, setBody] = useState({usuario: '', contraseña: ''});
   const navigate = useNavigate();
   let alertValues = {title:'', text:'', icon:''};
@@ -55,6 +56,8 @@ const Inicio = () => {
         }else{
           alertValues = {title: 'Bienvenido!', text: 'Bienvenido '+body.usuario , icon: 'success'};
           messageAlert(alertValues);
+          setIsAuthenticated(true);
+          
           navigate('/Menu')
         }
       }
@@ -64,6 +67,11 @@ const Inicio = () => {
       messageAlert(alertValues);
     }
   }
+  useEffect(() => {
+    if (isAuthenticated) {
+      return <Navigate to="/menu" />;
+    }
+  }, [isAuthenticated]);
   return (
     <div className='containerGlobal'>
       <header>
