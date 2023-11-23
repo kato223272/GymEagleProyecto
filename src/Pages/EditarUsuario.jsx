@@ -85,17 +85,18 @@ const handlePayDay = async() =>{
 const handleRegisterMensualidad = async(id) =>{
   const fechaActual = fechaFormateada;
   const fechaPago = calcularProximoPago();
-  // console.log(id, fechaPago);
+
   try {
     await axios.post('http://localhost:9000/gimnasio/mensualidades/registrar', {id_cliente:id, fechaActual:fechaActual, fecha:fechaPago})
-    alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
-    messageAlert(alertValues);
-    setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
-    setseleccionarBoton(null);
-    setRutina(false);
+    if (rutina) {
+      registrarClienteRutinas();
+    }else{
+      alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+      messageAlert(alertValues);
+    }
   } catch (error) {
     console.log(error);
-    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error al registrar la mensualidad', icon: 'error'};
     messageAlert(alertValues);
   }
 }
@@ -107,8 +108,37 @@ const handlePayMonth = async() =>{
     handleRegisterMensualidad(idCliente)
   } catch (error) {
     console.log(error);
-    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+    alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error al añadir al cliente', icon: 'error'};
     messageAlert(alertValues);
+  }
+}
+
+const crearContraseña = () =>{
+  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+  const longitudContraseña = 8;
+
+    let contraseña = '';
+    for (let i = 0; i < longitudContraseña; i++) {
+      const caracterAleatorio = caracteres[Math.floor(Math.random() * caracteres.length)];
+      contraseña += caracterAleatorio;
+    }
+
+  return contraseña;
+}
+const registrarClienteRutinas = async() =>{
+  const contraseña = crearContraseña();
+  const nombre = body.nombre;
+  const apPaterno = body.apellidoPaterno;
+  const apMaterno = body.apellidoMaterno;
+  const celular = body.celular;
+  console.log(contraseña);
+  try {
+    const info = await axios.post('http://localhost:3001/gimnasio/clientesrutina/registrar',{nombre:nombre, apellidoPaterno:apPaterno, apellidoMaterno:apMaterno, celular:celular, contraseña:contraseña})
+    const contraseñaCliente = info.data.contraseña;
+    alertValues = {title: 'Agregado!', text: 'Cliente añadido con acceso a rutinas exitosamente, contraseña: '+contraseñaCliente, icon: 'success'};
+    messageAlert(alertValues);
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -124,10 +154,10 @@ const handleRegister = () =>{
     messageAlert(alertValues);
   } else {
     if (seleccionarBoton === 'PlanMensual') {
-      handlePayMonth()
-      // if (rutina) {
-      //   alertValues = { text: 'Datos aceptados, se ha elegido el plan mensual con acceso a las rutinas'};
-      // }
+      handlePayMonth();
+      setBody({ nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+      setseleccionarBoton(null);
+      setRutina(false);
     } else if (seleccionarBoton === 'soloUnDia') {
       handlePayDay();
     }
