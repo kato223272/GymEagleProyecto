@@ -60,6 +60,7 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
 .IconoNavbar{
   width:30%;
 }
+
 .TituloLink{
   text-decoration: none;
   color: white;
@@ -76,11 +77,13 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
   font-size: large;
   font-family: monospace;
  }
+
  .contenedorLinksIcon h4 :hover{
    background-color:var(--animation-bg-fondo);
    color: var(--bg-color-black);
    border-radius: 10px;
    margin-left: 5%;
+   text-decoration: none;
  }
 
 
@@ -92,7 +95,6 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
   padding: 1%;
   font-family:  monospace;
   
-
   text-align: center;
   font-size: larger;
   font-family:  monospace;

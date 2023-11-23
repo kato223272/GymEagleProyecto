@@ -98,7 +98,7 @@ const Menu = () => {
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
       />
 
-    <button onClick={descargarPDF}>PDF</button>
+    <button onClick={descargarPDF}>Manual</button>
     </div>
     </>
   )

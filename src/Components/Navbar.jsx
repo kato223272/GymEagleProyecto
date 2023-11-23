@@ -41,6 +41,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <NavLink
               to="/Asistencias" activeClassName="nav-active"
+              style={{textDecoration:'none'}}
               onClick={() => handleLinkClick('/Asistencias')}
               className={activeLink === '/Asistencias' ? 'nav-active' : ''}>
               <Image className='IconoNavbar' src={imgAsistencia}/>
@@ -51,6 +52,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <NavLink
               to="/editar" activeClassName="nav-active"
+              style={{textDecoration:'none'}}
               onClick={() => handleLinkClick('/editar')}
               className={activeLink === '/editar' ? 'nav-active' : ''}>
               <Image className='IconoNavbar' src={imgUsuario}/>
@@ -61,6 +63,7 @@ function Navbar() {
           <div className='contenedorLinksIcon'>
             <NavLink
               to="/Rutinas" activeClassName="nav-active"
+              style={{textDecoration:'none'}}
               onClick={() => handleLinkClick('/Rutinas')}
               className={activeLink === '/Rutinas' ? 'nav-active' : ''}>
               <Image className='IconoNavbar' src={imgRutina}/>
@@ -72,6 +75,7 @@ function Navbar() {
             
             <NavLink
               to="/Ganancias" activeClassName="nav-active"
+              style={{textDecoration:'none'}}
               onClick={() => handleLinkClick('/Ganancias')}
               className={activeLink === '/Ganancias' ? 'nav-active' : ''}>
               <Image className='IconoNavbar' src={imgGanancia}/>
