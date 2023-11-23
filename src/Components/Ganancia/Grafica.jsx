@@ -4,6 +4,10 @@ import {Bar} from 'react-chartjs-2';
 import GraficaEscala from './GraficaEscala';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+import {DateRangePicker} from 'rsuite';
+// import 'rsuite/dist/styles/rsuite-default.css';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -17,7 +21,7 @@ import {
 } from 'chart.js';
 
 export default function Grafica(){
-    const [date,setDate] = useState();
+    const [selectedDate, setSelectedDate] = useState(null);
     const [asistenciasMes, setAsistenciasMes] = useState(0);
     const [asistenciasDia, setAsistenciasDia] = useState(0);
 
@@ -68,11 +72,31 @@ export default function Grafica(){
         <>
           <div className='containergraphic'>
             <div className='Calender'>
-              <h3 className='indication'>Seleccione Día:</h3>
-              <input className='inputCalender' type='date' onChange={(e) => setDate(e.target.value)} />
-              <h3 className='indication'>Grafica del Día:</h3>
-              <label className='lbDia'>{date}</label>
-              <Button variant="dark" className='bt'>
+            <h3 className='indication'>Seleccione Mes:</h3>
+            <DateRangePicker/>
+            {/* <DemoItem label="Static variant" component="StaticDateRangePicker">
+          <StaticDateRangePicker
+            defaultValue={[dayjs('2022-04-17'), dayjs('2022-04-21')]}
+            sx={{
+              [`.${pickersLayoutClasses.contentWrapper}`]: {
+                alignItems: 'center',
+              },
+            }}
+          />
+        </DemoItem> */}
+      {/* <DatePicker
+        selected={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
+        dateFormat="MM/yyyy"
+        showMonthYearPicker
+      /> */}
+
+      
+      <h3 className='indication'>Grafica del Mes:</h3>
+      <label className='lbDia'>
+        {selectedDate ? selectedDate.toLocaleString('default', { month: 'long', year: 'numeric' }) : ''}
+      </label>
+              {/* <Button variant="dark" className='bt'>
                 Perdidas
               </Button>
               <Button variant="dark" className='bt'>
@@ -80,7 +104,7 @@ export default function Grafica(){
               </Button>
               <Button variant="dark" className='bt'>
                 Decargar PDF
-              </Button>
+              </Button> */}
             </div>
             <div className='graphic'>
               <Line data={mydata} options={myOptions}/>

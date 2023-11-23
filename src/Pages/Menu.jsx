@@ -17,10 +17,14 @@ import RutinaHover from '../Image/imgMenu/rutinaGymHover.png';
 import GananciaHover from '../Image/imgMenu/GananciaGymHover.png'
 import Ganancia from '../Image/imgMenu/GananciaGym.png'
 
+import Agregar from '../Image/imgMenu/editargym.png'
+import AgregarHover from '../Image/imgMenu/editarHoverGym.png'
+
 const Menu = () => {
   const [imagenHoverAsistencia, setImagenHoverAsistencia] = useState(AsistenciaHover);
   const [imagenHoverRutina, setImagenHoverRutina] = useState(RutinaHover);
   const [imagenHoverGanancia, setImagenHoverGanancia] = useState(Ganancia);
+  const [imagenHoverAgregar, setImagenHoverAgregar] = useState(Agregar);
 
   const handleImagenHoverAsistencia = (nuevaImagen) => {
     setImagenHoverAsistencia(nuevaImagen);
@@ -34,6 +38,9 @@ const Menu = () => {
     setImagenHoverGanancia(nuevaImagen);
   };
 
+  const handleImagenHoverAgregar = (nuevaImagen) => {
+    setImagenHoverAgregar(nuevaImagen);
+  };
 
 
 
@@ -67,13 +74,13 @@ const Menu = () => {
 
 
       <BotonAgregar
-       image={imagenHoverGanancia} 
+       image={imagenHoverAgregar} 
        href="/editar" 
        props={{ title: "Agregar" }} 
-       uniqueClassName="ganancia" 
-        style={{border: '# 5px solid'}}
-        onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
-      onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
+       uniqueClassName="agregar" 
+        style={{border: 'rgb(218, 208, 69) 5px solid'}}
+        onMouseEnter={() => handleImagenHoverAgregar(Agregar)}
+      onMouseLeave={() => handleImagenHoverAgregar(AgregarHover)}
       ></BotonAgregar>
 
 

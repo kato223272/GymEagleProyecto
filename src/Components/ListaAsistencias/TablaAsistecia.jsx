@@ -129,7 +129,6 @@ const TablaAsistencias = () => {
   }
 
   const verificarEstatus = async(id_cliente) =>{
-    
     try {
       const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', {id: id_cliente, fecha: fechaFormateada})
       if(mensualidad.data===null){
@@ -156,14 +155,23 @@ const TablaAsistencias = () => {
     handleShow();
   };
 
+  // FUNCION PARA EDITAR A UN CLIENTE
   const modalEditarUsuario = (userId) => {
     setSelectedUserId(userId);
     handleShow();
   };
 
-  const modalElminarUsuario = (userId) => {
-    setSelectedUserId(userId);
-    handleShow();
+
+  // FUNCION PARA ELIMINAR A UN CLIENTE
+  const modalElminarUsuario = async(userId) => {
+    try{
+      const respuesta = await axios.delete('http://localhost:9000/gimnasio/clientes/eliminar',userId)
+      console.log(respuesta);
+    }catch(error){
+      console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      messageAlert(alertValues);
+    }
   };
 
   const selectedUser = clientes.find(cliente => cliente.id_cliente === selectedUserId);
@@ -219,24 +227,11 @@ const TablaAsistencias = () => {
       label:'Editar',
       options: {
         customBodyRender:  (val, tableMeta) => {
+          const idCliente = tableMeta.rowData[0];
           return (
-            <button className="botonEditarUsuario" onClick={() => 
-              modalEditarUsuario(tableMeta.rowData[0])}>
-                <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
-            </button>
-          );
-        }
-      }
-    },
-    {
-      name:'Eliminar',
-      label:'Eliminar',
-      options: {
-        customBodyRender:  (val, tableMeta) => {
-          return (
-            <button className="botonEliminarUsuario" onClick={() => 
-              modalElminarUsuario(tableMeta.rowData[0])}>
-                <FontAwesomeIcon icon={faTrash} size="xl" style={{color: "#000000",}} />
+            <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
+              {/* {asistencia} */}
+              <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
             </button>
           );
         }

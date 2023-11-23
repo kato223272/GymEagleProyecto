@@ -58,19 +58,19 @@ function AgregarRutina (){
     });
   }
 
-  // const handleEliminarRutina = async()=>{
-  //   try{
-  //     const respuesta = await axios.delete('http://localhost:3001/gimnasio/rutina/eliminar', body)
-  //     console.log(respuesta);
-  //     alertValues = {title: 'Eliminado!', text: 'Rutina eliminada exitosamente', icon: 'warning'};
-  //     messageAlert(alertValues);
-  //     setBody({nombre:'', descripcion:'', series: 0, repeticiones: 0});
-  //   }catch(error){
-  //     console.log(error);
-  //     alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
-  //     messageAlert(alertValues);
-  //   }
-  // }
+  const handleEliminarRutina = async()=>{
+    try{
+      const respuesta = await axios.delete('http://localhost:3001/gimnasio/rutina/eliminar', body)
+      console.log(respuesta);
+      alertValues = {title: 'Eliminado!', text: 'Rutina eliminada exitosamente', icon: 'warning'};
+      messageAlert(alertValues);
+      setBody({nombre:'', descripcion:'', series: 0, repeticiones: 0});
+    }catch(error){
+      console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      messageAlert(alertValues);
+    }
+  }
 
   const handleRegisterRutina = async() =>{
     try {
@@ -189,10 +189,10 @@ function AgregarRutina (){
         </label>
         <br />
         <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? 
-        rutinaSeleccionada.repeticiones : ''}</label>
+        rutinaSeleccionada.repeticiones : ''}</label><br/>
 
-        {/* <button onClick={handleEliminarRutina}>Eliminar</button>
-        <button>Modificar</button> */}
+        <button className='btModificarRutina'>Modificar</button>
+        <button onClick={handleEliminarRutina} className='btEliminarRutina'>Eliminar</button>
       </div>
       
       </div>

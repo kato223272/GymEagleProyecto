@@ -6,9 +6,20 @@ div.ContenedorMenu{
     display: flex;
     /* position: relative;  */
     justify-content: space-around; 
-    margin-right: 20%;
+    margin-left: -4%;
+    width: 115%;
 }
 /* ---------------------------------------------- */
+.agregar{
+    background-color: rgb(218, 208, 69);
+    /* display: inline-table; */
+    box-shadow: var(--bg-color-black);
+    text-align: center;
+    transition: transform 0.5s;
+    flex: 1;
+}
+
+
 .lista{
      background-color: #434343;
   /* display: inline-table; */
@@ -16,10 +27,15 @@ div.ContenedorMenu{
   text-align: center;
   transition: transform 0.5s;
   flex: 1;
+  
 }
 .lista:hover, .rutina:hover{
     background-color: #383838;
     transform: scale(1.1);
+}
+.agregar:hover{
+    transform: scale(1.1);
+    background-color: rgb(203, 193, 45);
 }
 .rutina{
     background-color: #E6862E;

@@ -134,7 +134,23 @@ h3.tituRutina{
     resize:none
 }
 
+.btEliminarRutina{
+    background-color: rgba(243, 61, 0, 0.881);
+    width: 32%;
+    height: 11%;
+    border-radius: 7px;
+    border: 2px solid;
+    margin-top: 5%;
+}
 
-
+.btModificarRutina{
+    background-color: rgba(0, 216, 65, 0.881);
+    width: 32%;
+    height: 11%;
+    border-radius: 7px;
+    border: 2px solid;
+    margin-top: 5%;
+    margin-left: 5%;
+}
 
 
