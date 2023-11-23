@@ -101,6 +101,7 @@ function AgregarRutina (){
     }
   }
   
+  
   const handleRutinaSeleccionada = (e) => {
     const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
     setRutinaSeleccionada(selectedRutina);
