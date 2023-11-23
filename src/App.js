@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
+import { useState } from 'react';
 
 import Navbar from './Components/Navbar';
 import Inicio from '../src/Inicio';
@@ -11,6 +12,7 @@ import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const currentPath = window.location.pathname.toLowerCase(); // Convierte a minusculas 
   const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && currentPath !== '/recuperarcontrasenia') ? "block" : "none";
 
@@ -20,13 +22,13 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route exact path="/" element={<Inicio />} />
-        <Route exact path="/menu" element={<Menu />} />
-        <Route exact path="/rutinas" element={<Rutina />} />
-        <Route exact path="/asistencias" element={<Asistencias />} />
-        <Route exact path="/editar" element={<Editar />} />
-        <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
-        <Route exact path="/ganancias" element={<Ganancias />}></Route>
+      <Route path="/" element={<Inicio setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />} />
+        <Route path="/menu" element={isAuthenticated ? <Menu /> : <Navigate to="/" />} />
+        <Route path="/rutinas" element={isAuthenticated ? <Rutina /> : <Navigate to="/" />} />
+        <Route path="/asistencias" element={isAuthenticated ? <Asistencias /> : <Navigate to="/" />} />
+        <Route path="/editar" element={isAuthenticated ? <Editar /> : <Navigate to="/" />} />
+        <Route path="/recuperarcontrasenia" element={<Recuperar />} />
+        <Route path="/ganancias" element={isAuthenticated ? <Ganancias /> : <Navigate to="/" />} />
       </Routes>
     
     </Router>
