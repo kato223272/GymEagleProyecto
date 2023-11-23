@@ -1,7 +1,13 @@
 /* NO BORRAR 
 https://www.youtube.com/watch?v=P3mmAuI6b5s
 https://www.youtube.com/watch?v=nVuDtzqkalo */
-
+.row { 
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
 .NavbarPrincipal{
    background-color: var(--bg-color-black);
    box-shadow: 0px 5px 10px var(--bg-color-black);
@@ -135,4 +141,5 @@ https://www.youtube.com/watch?v=nVuDtzqkalo */
   }
 
 }
+
 

@@ -58,6 +58,20 @@ function AgregarRutina (){
     });
   }
 
+  // const handleEliminarRutina = async()=>{
+  //   try{
+  //     const respuesta = await axios.delete('http://localhost:3001/gimnasio/rutina/eliminar', body)
+  //     console.log(respuesta);
+  //     alertValues = {title: 'Eliminado!', text: 'Rutina eliminada exitosamente', icon: 'warning'};
+  //     messageAlert(alertValues);
+  //     setBody({nombre:'', descripcion:'', series: 0, repeticiones: 0});
+  //   }catch(error){
+  //     console.log(error);
+  //     alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+  //     messageAlert(alertValues);
+  //   }
+  // }
+
   const handleRegisterRutina = async() =>{
     try {
       const respuesta = await axios.post('http://localhost:3001/gimnasio/rutina/registrar', body)
@@ -87,29 +101,28 @@ function AgregarRutina (){
     }
   }
   
-  // const handleRutinaSeleccionada = (e) => {
-  //   const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
-  //   setRutinaSeleccionada(selectedRutina);
-  // };
-
-  const handleRutinaSeleccionada = (selectedOption) => {
-    if (selectedOption) {
-      const selectedRutina = rutinas.find((rutina) => rutina.nombre === selectedOption.value);
-      setRutinaSeleccionada(selectedRutina);
-    } else {
-      // Manejar el caso en el que no hay una opción seleccionada
-      setRutinaSeleccionada(null);
-    }
+  const handleRutinaSeleccionada = (e) => {
+    const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
+    setRutinaSeleccionada(selectedRutina);
   };
-  
 
+  // const handleRutinaSeleccionada = (selectedOption) => {
+  //   if (selectedOption) {
+  //     const selectedRutina = rutinas.find((rutina) => rutina.nombre === selectedOption.value);
+  //     setRutinaSeleccionada(selectedRutina);
+  //   } else {
+  //     // Manejar el caso en el que no hay una opción seleccionada
+  //     setRutinaSeleccionada(null);
+  //   }
+  // };
+  
 
   return(
     <>
       <div className='Container'>
       <div className='Ruticolumna1'>
         
-        <h3 className='tituRutina'>Información de Rutina:</h3>
+        <h3 className='tituRutina'>Alta de Rutina:</h3>
         <label className='labRutina'>Nombre:</label>
         <input type="text" placeholder="Nombre de rutina" className='inputRutina'
         value={body.nombre} name='nombre' onChange={handleChange}/>
@@ -140,14 +153,16 @@ function AgregarRutina (){
           </select>
         </Col>
       </Row>
-        <button className='btRutina' onClick={handleValidateRutina}>Guardar Registro</button>
+        <button className='btRutina' onClick={handleValidateRutina}>Guardar Rutina</button>
       </div>
 
       <div className='Ruticolumna2'>
         <h3 className='tituRutina'>Rutinas Registradas: </h3>
                     
         <div style={{display:'flex'}}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: '#ffff00'}}/>
+          <FontAwesomeIcon icon={faMagnifyingGlass} 
+          style={{ color: '#ffff00', position:'absolute', marginTop:'0.7%', marginLeft:'0.7%'}}/>
+
           <input
           type="text"
           list="data"
@@ -164,7 +179,6 @@ function AgregarRutina (){
           ))}
         </datalist>
 
-
         <label className="labRutina">Nombre: {rutinaSeleccionada ? rutinaSeleccionada.nombre : ''}</label>
         <br />
         <label className="labRutina">Descripción de la rutina: {rutinaSeleccionada ? 
@@ -175,6 +189,9 @@ function AgregarRutina (){
         <br />
         <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? 
         rutinaSeleccionada.repeticiones : ''}</label>
+
+        {/* <button onClick={handleEliminarRutina}>Eliminar</button>
+        <button>Modificar</button> */}
       </div>
       
       </div>

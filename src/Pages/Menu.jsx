@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
+import { saveAs } from 'file-saver';
 
 import BotonAsistencia from '../Components/Menu/Botones';
 import BotonRutina from '../Components/Menu/Botones';
@@ -31,6 +32,21 @@ const Menu = () => {
 
   const handleImagenHoverGanancia = (nuevaImagen) => {
     setImagenHoverGanancia(nuevaImagen);
+  };
+
+
+
+
+  const descargarPDF = () => {
+    const rutaPDF = '/Manual de Usuario.pdf';
+    fetch(rutaPDF)
+      .then((response) => response.blob())
+      .then((blob) => {
+        saveAs(blob, 'Manual de Usuario.pdf');
+      })
+      .catch((error) => {
+        console.error('Error al descargar el PDF', error);
+      });
   };
 
   return (
@@ -82,7 +98,7 @@ const Menu = () => {
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
       />
 
-
+    <button onClick={descargarPDF}>PDF</button>
     </div>
     </>
   )

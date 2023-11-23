@@ -1,10 +1,11 @@
 .Container{
     width: 100%;
     position: absolute;
-    height: 100%;
+    height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
 .containerButton{
@@ -43,34 +44,31 @@
     transform: scale(1.07);
 }
 
-
 .Ruticolumna1{
     background-color: rgb(18, 18, 18);
-    width: 36%;
-    height: 70%;
+    width: 34%;
+    height: 83%;
     padding: 3%;
     border-radius: 10px;
     margin-right: 2%;
-    margin-bottom: 8%;
     justify-content: center;
     align-items: center;
 }
 
 .Ruticolumna2{
     background-color: rgb(18, 18, 18);
-    width: 36%;
-    height: 70%;
+    width: 34%;
+    height: 83%;
     padding: 3%;
     border: 5px solid black;
     border-radius: 10px;
-    margin-bottom: 8%;
     justify-content: center;
     align-items: center;
 }
 .labRutina{
     color:white;
     font-size: 1.2em;
-    margin-top: 2%;
+    margin-top:3%;
 }
 
 h3.tituRutina{
@@ -80,6 +78,7 @@ h3.tituRutina{
 }
 
 .inputRutina{
+    margin-top: 1%;
     outline: none;
     border: 2px solid rgba(148, 153, 0, 0.868);
     background-color: rgb(47, 47, 47);
@@ -93,6 +92,7 @@ h3.tituRutina{
 }
 
 .inputRutinaSelec{
+    margin-top: 1%;
     outline: none;
     border: 2px solid rgba(148, 153, 0, 0.868);
     background-color: rgb(47, 47, 47);
@@ -106,21 +106,21 @@ h3.tituRutina{
     margin-top: 2%;
 }
 
-/* .ListaRutinasSelect{
+.ListaRutinasSelect{
     outline: none;
     border: 2px solid rgba(148, 153, 0, 0.868);
     background-color: rgb(47, 47, 47);
     color: white;
     font-size: 1em;
     width: 100%;
-    height: 10%;
-    padding-left: 3%;
+    height: 35px;
+    padding-left: 8%;
     text-align: left;
     border-radius: 7px;
-    margin-top: 7%;
-} */
+}
 
 .inputRutinaDescrip{
+    margin-top: 1%;
     outline: none;
     border: 2px solid rgba(148, 153, 0, 0.868);
     background-color: rgb(47, 47, 47);
