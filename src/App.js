@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
+import { AuthProvider } from './AuthContext';
+import ProtectedRoute from './RutaProtejida.js';
 
 import Navbar from './Components/Navbar';
 import Inicio from '../src/Inicio';
@@ -20,13 +22,13 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route exact path="/" element={<Inicio />} />
-        <Route exact path="/menu" element={<Menu />} />
-        <Route exact path="/rutinas" element={<Rutina />} />
-        <Route exact path="/asistencias" element={<Asistencias />} />
-        <Route exact path="/editar" element={<Editar />} />
-        <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
-        <Route exact path="/ganancias" element={<Ganancias />}></Route>
+      <Route path="/" element={<Inicio />} />
+        <ProtectedRoute path="/menu" element={<Menu />} />
+        <ProtectedRoute path="/rutinas" element={<Rutina />} />
+        <ProtectedRoute path="/asistencias" element={<Asistencias />} />
+        <ProtectedRoute path="/editar" element={<Editar />} />
+        <Route path="/recuperarcontrasenia" element={<Recuperar />} />
+        <ProtectedRoute path="/ganancias" element={<Ganancias />} />
       </Routes>
     </Router>
   );
