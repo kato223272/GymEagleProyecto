@@ -1,25 +1,31 @@
 .botonPagado{
-   background-color: var(--bg-color-red);
+   background-color: var(--animation-bg-fondo);
    border-radius: 7px;
    width: 60%;
-   color: white;
+   color: black;
    font-weight: bold;
 }
 
-.botonInformacion{
-   background-color: rgb(255, 255, 255);
+.botonInformacion, .botonEditarUsuario, .botonEliminarUsuario{
+   background-color: transparent;
    border: white;
    color: rgb(0, 0, 159);
    text-decoration: underline;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   align-tracks: center;
 }
 
 .Tabla{
-   margin-left: 8%;
-   width: 85%;
+   margin-left: 12%;
+   width: 77%;
    margin-top: 1%;
+   font-size: 1em;
 }
 
 .modalInformacion{
    background-color: rgb(21, 21, 21);
    color: white;
+   font-size: 1.2em;
 }
