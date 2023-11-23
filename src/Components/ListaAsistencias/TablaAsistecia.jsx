@@ -11,7 +11,7 @@ const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [clientes, setClientes] = useState([]);
-  const [body, setBody] = useState({id:'', fecha:''});
+  // const [body, setBody] = useState({id:'', fecha:''});
   const [asistencia, setAsistencia] = useState("falta");
   let alertValues = {title:'', text:'', icon:''};
 
@@ -74,6 +74,7 @@ const TablaAsistencias = () => {
       messageAlert(alertValues);
     }
   }
+
   const calcularProximoPago = (fechaFin) =>{
     const fecha = new Date(fechaFin);
     const proximaFecha = addDays(fecha, 1);
@@ -109,12 +110,28 @@ const TablaAsistencias = () => {
     }
   }
 
-  const verificarEstatus = async(id_cliente) =>{
+  const registrarAsistencia = async(id_cliente) =>{
+    const userData = clientes.find(cliente => cliente.id_cliente === id_cliente);
+    const nombre = userData.nombre;
+    const apellidoPaterno = userData.apellidoPaterno;
+    const apellidoMaterno = userData.apellidoMaterno;
+    try {
+      await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
+      alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+      messageAlert(alertValues);
+    } catch (error) {
+      console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
+      messageAlert(alertValues);
+    }
+  }
 
+  const verificarEstatus = async(id_cliente) =>{
+    
     try {
       const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', {id: id_cliente, fecha: fechaFormateada})
       if(mensualidad.data===null){
-        console.log("Todo chido compa");
+        registrarAsistencia(id_cliente);
       }else{
         const idMensualidad = mensualidad.data.id_mensualidad;
         const fechaFin = mensualidad.data.fechaPago;
