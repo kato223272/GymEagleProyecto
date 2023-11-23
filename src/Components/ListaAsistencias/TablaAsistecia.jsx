@@ -118,8 +118,8 @@ const TablaAsistencias = () => {
     const apellidoPaterno = userData.apellidoPaterno;
     const apellidoMaterno = userData.apellidoMaterno;
     try {
-      await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
-      alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
+      await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplanmes', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
+      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lsiat de asistencia', icon: 'success'};
       messageAlert(alertValues);
     } catch (error) {
       console.log(error);

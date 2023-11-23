@@ -17,7 +17,7 @@ const obtenerFechaFormateada = (fecha) => {
 };
 const fechaFormateada = obtenerFechaFormateada(todayDate);
 
-const [body, setBody] = useState({ nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada})
+const [body, setBody] = useState({ nombre:'', apellidoPaterno:'', apellidoMaterno:'', celular:'', fecha: fechaFormateada, plan:''})
 const [seleccionarBoton, setseleccionarBoton]= useState(null);
 const [rutina, setRutina] = useState(false);
 const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
@@ -69,10 +69,10 @@ const calcularProximoPago = () =>{
 
 const handlePayDay = async() =>{
   try {
-    await axios.post('http://localhost:3001/gimnasio/asistencia/registrar', body)
+    await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplandia', body)
     alertValues = {title: 'Agregado!', text: 'Cliente añadido exitosamente', icon: 'success'};
     messageAlert(alertValues);
-    setBody({id_cliente:0, nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada });
+    setBody({id_cliente:0, nombre: '', apellidoPaterno: '', apellidoMaterno: '', celular: '', fecha: fechaFormateada, plan:''});
     setseleccionarBoton(null);
     setRutina(false);
   } catch (error) {
