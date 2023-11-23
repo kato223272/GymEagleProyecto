@@ -57,6 +57,25 @@ function AgregarRutina (){
       repeticiones: repeticionesAux
     });
   }
+  const handleModificarRutina = async(nombre)=>{
+    if(!nombre){
+      alertValues = {title: 'Oops!', text: 'Se debe seleccionar una rutina', icon: 'info'};
+      messageAlert(alertValues)
+    }else if(!body.descripcion || !body.series || !body.repeticiones){
+      alertValues = {title: 'Error!', text: 'Se debe llenar descripción, series y repeticiones', icon: 'error'};
+      messageAlert(alertValues)
+    }else{
+      try {
+        await axios.put('http://localhost:3001/gimnasio/rutina/modificarutina', {nombre:nombre, descripcion:body.descripcion, series:body.series, repeticiones:body.repeticiones})
+        alertValues = {title: 'Modificado!', text: 'Rutina modificada exitosamente', icon: 'success'};
+        messageAlert(alertValues)
+      } catch (error) {
+        console.log(error);
+      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error al modificar la rutina', icon: 'error'};
+      messageAlert(alertValues)
+      }
+    }
+  }
 
   const handleEliminarRutina = async(nombre)=>{
     try{
@@ -177,7 +196,8 @@ function AgregarRutina (){
         <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? 
         rutinaSeleccionada.repeticiones : ''}</label><br/>
 
-        <button className='btModificarRutina'>Modificar</button>
+        <button className='btModificarRutina' onClick={() => handleModificarRutina(rutinaSeleccionada.nombre)}>Modificar</button>
+        
         <button onClick={() => handleEliminarRutina(rutinaSeleccionada.nombre)} className='btEliminarRutina'>Eliminar</button>
       </div>
       

@@ -13,8 +13,7 @@ const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [clientes, setClientes] = useState([]);
-  // const [body, setBody] = useState({id:'', fecha:''});
-  const [asistencia, setAsistencia] = useState("falta");
+  const [asistencia, setAsistencia] = useState("Asistencia");
   let alertValues = {title:'', text:'', icon:''};
 
   const fechaActual = new Date();
@@ -230,7 +229,7 @@ const TablaAsistencias = () => {
           const idCliente = tableMeta.rowData[0];
           return (
             <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
-              {/* {asistencia} */}
+
               <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
             </button>
           );

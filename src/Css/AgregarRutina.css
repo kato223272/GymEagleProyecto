@@ -140,7 +140,8 @@ h3.tituRutina{
     height: 11%;
     border-radius: 7px;
     border: 2px solid;
-    margin-top: 5%;
+    margin-top: 6%;
+    margin-left: 10%;
 }
 
 .btModificarRutina{
@@ -149,8 +150,8 @@ h3.tituRutina{
     height: 11%;
     border-radius: 7px;
     border: 2px solid;
-    margin-top: 5%;
-    margin-left: 5%;
+    margin-top: 6%;
+    margin-left: 12%;
 }
 
 

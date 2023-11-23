@@ -1,8 +1,8 @@
 .botonPagado{
-   background-color: var(--bg-color-red);
+   background-color: var(--animation-bg-fondo);
    border-radius: 7px;
    width: 60%;
-   color: white;
+   color: black;
    font-weight: bold;
 }
 

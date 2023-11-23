@@ -11,7 +11,6 @@ const BotonMenu = ({  image, href, props,uniqueClassName, style, onMouseEnter, o
     <div className='TituloMenuBotones'>
     <h4>{props.title}</h4>
     </div>
-    navigate ({props.navigate})
     </div>
     
     </a>
