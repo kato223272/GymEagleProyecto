@@ -58,17 +58,15 @@ function AgregarRutina (){
     });
   }
 
-  const handleEliminarRutina = async()=>{
+  const handleEliminarRutina = async(nombre)=>{
     try{
-      const respuesta = await axios.delete('http://localhost:3001/gimnasio/rutina/eliminar', body)
-      console.log(respuesta);
-      alertValues = {title: 'Eliminado!', text: 'Rutina eliminada exitosamente', icon: 'warning'};
-      messageAlert(alertValues);
-      setBody({nombre:'', descripcion:'', series: 0, repeticiones: 0});
+      await axios.delete('http://localhost:3001/gimnasio/rutina/eliminarutina', { data: { nombre: nombre }})
+      alertValues = {title: 'Eliminado!', text: 'Rutina eliminada exitosamente', icon: 'success'};
+      messageAlert(alertValues)
     }catch(error){
       console.log(error);
       alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error', icon: 'error'};
-      messageAlert(alertValues);
+      messageAlert(alertValues)
     }
   }
 
@@ -101,22 +99,10 @@ function AgregarRutina (){
     }
   }
   
-  
   const handleRutinaSeleccionada = (e) => {
     const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
     setRutinaSeleccionada(selectedRutina);
   };
-
-  // const handleRutinaSeleccionada = (selectedOption) => {
-  //   if (selectedOption) {
-  //     const selectedRutina = rutinas.find((rutina) => rutina.nombre === selectedOption.value);
-  //     setRutinaSeleccionada(selectedRutina);
-  //   } else {
-  //     // Manejar el caso en el que no hay una opción seleccionada
-  //     setRutinaSeleccionada(null);
-  //   }
-  // };
-  
 
   return(
     <>
@@ -192,7 +178,7 @@ function AgregarRutina (){
         rutinaSeleccionada.repeticiones : ''}</label><br/>
 
         <button className='btModificarRutina'>Modificar</button>
-        <button onClick={handleEliminarRutina} className='btEliminarRutina'>Eliminar</button>
+        <button onClick={() => handleEliminarRutina(rutinaSeleccionada.nombre)} className='btEliminarRutina'>Eliminar</button>
       </div>
       
       </div>
