@@ -6,7 +6,7 @@
    font-weight: bold;
 }
 
-.botonInformacion{
+.botonInformacion, .botonEditarUsuario, .botonEliminarUsuario{
    background-color: transparent;
    border: white;
    color: rgb(0, 0, 159);

@@ -6,6 +6,8 @@ import MUIDataTable from "mui-datatables";
 import "../ListaAsistencias/ListaAsistencias.css";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
@@ -154,6 +156,16 @@ const TablaAsistencias = () => {
     handleShow();
   };
 
+  const modalEditarUsuario = (userId) => {
+    setSelectedUserId(userId);
+    handleShow();
+  };
+
+  const modalElminarUsuario = (userId) => {
+    setSelectedUserId(userId);
+    handleShow();
+  };
+
   const selectedUser = clientes.find(cliente => cliente.id_cliente === selectedUserId);
   const handleShow = () => setShow(true);
 
@@ -197,6 +209,34 @@ const TablaAsistencias = () => {
             <button className="botonInformacion" onClick={() => 
             mostrarModalInformacion(tableMeta.rowData[0])}>
               Ver
+            </button>
+          );
+        }
+      }
+    },
+    {
+      name:'Editar',
+      label:'Editar',
+      options: {
+        customBodyRender:  (val, tableMeta) => {
+          return (
+            <button className="botonEditarUsuario" onClick={() => 
+              modalEditarUsuario(tableMeta.rowData[0])}>
+                <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
+            </button>
+          );
+        }
+      }
+    },
+    {
+      name:'Eliminar',
+      label:'Eliminar',
+      options: {
+        customBodyRender:  (val, tableMeta) => {
+          return (
+            <button className="botonEliminarUsuario" onClick={() => 
+              modalElminarUsuario(tableMeta.rowData[0])}>
+                <FontAwesomeIcon icon={faTrash} size="xl" style={{color: "#000000",}} />
             </button>
           );
         }
