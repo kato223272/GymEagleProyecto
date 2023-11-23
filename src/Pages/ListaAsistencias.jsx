@@ -6,6 +6,7 @@ const ListaAsistencias = () => {
   const fechaActual = new Date();
   const fechaFormateada = fechaActual.toLocaleDateString();
 
+  
   return (
   <>
     <div className='fila1Lista' style={{display:'flex'}}>
