@@ -6,8 +6,8 @@ div.ContenedorMenu{
     display: flex;
     /* position: relative;  */
     justify-content: space-around; 
-    margin-left: -4%;
-    width: 115%;
+    margin-left: -8%;
+    width: 100%;
 }
 /* ---------------------------------------------- */
 .agregar{
@@ -17,6 +17,7 @@ div.ContenedorMenu{
     text-align: center;
     transition: transform 0.5s;
     flex: 1;
+    margin-left: -0.3%;
 }
 
 
@@ -27,6 +28,7 @@ div.ContenedorMenu{
   text-align: center;
   transition: transform 0.5s;
   flex: 1;
+  margin-left: 3%;
   
 }
 .lista:hover, .rutina:hover{
@@ -42,6 +44,7 @@ div.ContenedorMenu{
     box-shadow: var(--bg-color-black);
     transition: transform 0.5s;
     flex: 1;
+    margin-left: -3.5%;
 }
 .rutina:hover{
     background-color: #cf7a2b;
@@ -54,6 +57,7 @@ div.ContenedorMenu{
   box-shadow: var(--bg-color-black);
   text-align: center;
   transition: transform 0.5s;
+  margin-left: -7%;
 }
 .ganancia:hover{
     background-color: #289b39;

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Menu/Navbar'
 import '../Css/Menu.css'
-import { saveAs } from 'file-saver';
 
-import BotonAsistencia from '../Components/Menu/Botones';
-import BotonRutina from '../Components/Menu/Botones';
-import BotonGanancias from '../Components/Menu/Botones';
-import BotonAgregar from '../Components/Menu/Botones'
+import BotonAsistencia from '../Components/Menu/Boton';
+import BotonRutina from '../Components/Menu/Boton';
+import BotonGanancias from '../Components/Menu/Boton';
+import BotonAgregar from '../Components/Menu/Boton'
 
 import Asistencia from '../Image/imgMenu/asistenciaGym.png';
 import AsistenciaHover from '../Image/imgMenu/asistenciaGymHover.png';
@@ -44,17 +43,6 @@ const Menu = () => {
 
 
 
-  const descargarPDF = () => {
-    const rutaPDF = '/Manual de Usuario.pdf';
-    fetch(rutaPDF)
-      .then((response) => response.blob())
-      .then((blob) => {
-        saveAs(blob, 'Manual de Usuario.pdf');
-      })
-      .catch((error) => {
-        console.error('Error al descargar el PDF', error);
-      });
-  };
 
   return (
     <>
@@ -70,8 +58,6 @@ const Menu = () => {
         onMouseEnter={() => handleImagenHoverAsistencia(AsistenciaHover)}
         onMouseLeave={() => handleImagenHoverAsistencia(Asistencia)}
       />
-
-
 
       <BotonAgregar
        image={imagenHoverAgregar} 
@@ -95,7 +81,7 @@ const Menu = () => {
         onMouseLeave={() => handleImagenHoverRutina(Rutina)}
       />
 
-    <BotonGanancias
+    {/* <BotonGanancias
        image={imagenHoverGanancia} 
        href="/Ganancias" 
        props={{ title: "Ver ganancias" }} 
@@ -103,10 +89,9 @@ const Menu = () => {
         style={{border: '#2BA53E 5px solid'}}
         onMouseEnter={() => handleImagenHoverGanancia(Ganancia)}
       onMouseLeave={() => handleImagenHoverGanancia(GananciaHover)}
-      />
-
-    <button onClick={descargarPDF}>Manual</button>
+      /> */}
     </div>
+    
     </>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Menu/Botones.css'
+import '../Menu/Boton.css'
 
 const BotonMenu = ({  image, href, props,uniqueClassName, style, onMouseEnter, onMouseLeave  }) => {
   return (

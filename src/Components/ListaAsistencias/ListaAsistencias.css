@@ -1,11 +1,14 @@
 .botonPagado{
-   background-color: var(--animation-bg-fondo);
+   background-color: red;
    border-radius: 7px;
-   width: 60%;
+   width: 90px;
    color: black;
    font-weight: bold;
 }
-
+.asistenciaAñadida {
+   background-color: rgb(0, 216, 0); 
+ }
+ 
 .botonInformacion, .botonEditarUsuario, .botonEliminarUsuario{
    background-color: transparent;
    border: white;

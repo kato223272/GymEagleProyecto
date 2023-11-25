@@ -11,9 +11,12 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
+  const [showEditar, setShowEditar] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [clientes, setClientes] = useState([]);
   const [asistencia, setAsistencia] = useState("Asistencia");
+  const [asistenciaAñadida, setAsistenciaAñadida] = useState({});
+  
   let alertValues = {title:'', text:'', icon:''};
 
   const fechaActual = new Date();
@@ -29,10 +32,20 @@ const TablaAsistencias = () => {
   const fechaFormateada = obtenerFechaFormateada(fechaActual);
 
   useEffect(()=>{
-    const getClientes = () =>{
+    const getClientes = () => {
       fetch('http://localhost:9000/gimnasio/clientes/obtenertodo')
-      .then(res => res.json())
-      .then(res => setClientes(res))
+        .then(res => res.json())
+        .then(res => {
+          // Inicializa el estado de asistencia para cada cliente
+          const asistenciaInicial = {};
+          res.forEach(cliente => {
+            asistenciaInicial[cliente.id_cliente] = false;
+          });
+          setAsistenciaAñadida(asistenciaInicial);
+  
+          // Actualiza el estado de los clientes
+          setClientes(res);
+        })
     }
     getClientes();
   },[])
@@ -118,7 +131,8 @@ const TablaAsistencias = () => {
     const apellidoMaterno = userData.apellidoMaterno;
     try {
       await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplanmes', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
-      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lsiat de asistencia', icon: 'success'};
+      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lista de asistencia', icon: 'success'};
+
       messageAlert(alertValues);
     } catch (error) {
       console.log(error);
@@ -127,16 +141,31 @@ const TablaAsistencias = () => {
     }
   }
 
+  const handleEditarUsuario=()=>{
+    
+  }
+
   const verificarEstatus = async(id_cliente) =>{
     try {
-      const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar', {id: id_cliente, fecha: fechaFormateada})
-      if(mensualidad.data===null){
+      const mensualidad = await axios.post(
+        'http://localhost:9000/gimnasio/mensualidades/buscar',
+        { id: id_cliente, fecha: fechaFormateada }
+      );
+      if (mensualidad.data === null) {
         registrarAsistencia(id_cliente);
-      }else{
+        // Actualiza el estado de asistencia solo para este cliente
+        setAsistenciaAñadida(prevState => ({
+          ...prevState,
+          [id_cliente]: {
+            asistio: true,
+            // text: 'Asistio'
+          }
+        }));
+      } else {
         const idMensualidad = mensualidad.data.id_mensualidad;
         const fechaFin = mensualidad.data.fechaPago;
-        optionsAlert({id_cliente, idMensualidad, fechaFin});
-      } 
+        optionsAlert({ id_cliente, idMensualidad, fechaFin });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -147,6 +176,11 @@ const TablaAsistencias = () => {
     setSelectedUserId(null);
   };
 
+  const handleCloseShow2=()=>{
+    setShowEditar(false);
+    setSelectedUserId(null);
+  }
+
   const title = "Lista de asistencia";
 
   const mostrarModalInformacion = (userId) => {
@@ -154,10 +188,14 @@ const TablaAsistencias = () => {
     handleShow();
   };
 
+  const mostrarModalEditar = (userId)=>{
+    setSelectedUserId(userId);
+  }
+
   // FUNCION PARA EDITAR A UN CLIENTE
   const modalEditarUsuario = (userId) => {
     setSelectedUserId(userId);
-    handleShow();
+    handleShowEditar();
   };
 
 
@@ -175,6 +213,7 @@ const TablaAsistencias = () => {
 
   const selectedUser = clientes.find(cliente => cliente.id_cliente === selectedUserId);
   const handleShow = () => setShow(true);
+  const handleShowEditar=()=>setShowEditar(true);
 
   const columns = [
     {
@@ -199,9 +238,18 @@ const TablaAsistencias = () => {
       options: {
         customBodyRender: (val, tableMeta) => {
           const idCliente = tableMeta.rowData[0];
+          // const { asistio, texto } = asistenciaAñadida[idCliente];
+          
           return (
-            <button className="botonPagado" onClick={()=>{verificarEstatus(idCliente)}}>
+            <button
+              className={`botonPagado ${asistenciaAñadida[idCliente] ? 'asistenciaAñadida' : ''}`}
+              id="btAsistencia"
+              onClick={() => {
+                verificarEstatus(idCliente);
+              }}
+            >
               {asistencia}
+              {/* {texto} */}
             </button>
           );
         }
@@ -220,22 +268,21 @@ const TablaAsistencias = () => {
           );
         }
       }
-    },
-    {
-      name:'Editar',
-      label:'Editar',
-      options: {
-        customBodyRender:  (val, tableMeta) => {
-          const idCliente = tableMeta.rowData[0];
-          return (
-            <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
-
-              <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
-            </button>
-          );
-        }
-      }
-    }
+     }
+    // {
+    //   name:'Editar',
+    //   label:'Editar',
+    //   options: {
+    //     customBodyRender:  (val, tableMeta) => {
+    //       const idCliente = tableMeta.rowData[0];
+    //       return (
+    //         <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
+    //           <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
+    //         </button>
+    //       );
+    //     }
+    //   }
+    // }
   ];
 
   const options = {
@@ -271,6 +318,7 @@ const TablaAsistencias = () => {
         />
       </div>
 
+      {/* ESTE MODAL ES PARA VER LA INFORMACION GENERAL DEL USUARIO */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton className='modalInformacion'>
           <Modal.Title>Información de Usuario:</Modal.Title>
@@ -283,6 +331,7 @@ const TablaAsistencias = () => {
               <p>Nombre: {selectedUser.nombre}</p><hr/>
               <p>Apellido Paterno: {selectedUser.apellidoPaterno}</p><hr/>
               <p>Apellido Materno: {selectedUser.apellidoMaterno}</p><hr/>
+              {/* <p>Número Celular: {selectedUser.celular}</p><hr/> */}
               <p>Asistencia: {asistencia}</p>
             </>
           )}
@@ -296,6 +345,37 @@ const TablaAsistencias = () => {
 
           <Button variant="primary" onClick={handleClose}>
             Aceptar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+      {/* ESTE MODAL ES PARA EDITAR LA INFORMACION DEL USUARIO */}
+      <Modal show={showEditar} onHide={handleCloseShow2} centered>
+        <Modal.Header closeButton className='modalInformacion'>
+          <Modal.Title>Información de Usuario:</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body className='modalInformacion'>
+          {selectedUser && (
+            <>
+              <p>ID: {selectedUser.id_cliente}</p>
+              <p>Nombre: <input type='text' value={selectedUser.nombre}/></p><hr/>
+              <p>Apellido Paterno: <input type='text' value={selectedUser.apellidoPaterno}/></p><hr/>
+              <p>Apellido Materno: <input type='text' value={selectedUser.apellidoMaterno}/></p><hr/>
+              <p>Asistencia: {asistencia}</p>
+            </>
+          )}
+
+        </Modal.Body>
+
+        <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
+          <Button variant="danger" onClick={handleCloseShow2}>
+            Cancelar
+          </Button>
+
+          <Button variant="warning" onClick={handleCloseShow2}>
+            Modificar
           </Button>
         </Modal.Footer>
       </Modal>
