@@ -1,20 +1,38 @@
-import React from 'react';
 import '../Css/AgregarRutina.css';
 import {Col, Row, InputGroup, Form, Dropdown} from  'react-bootstrap'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 // import Select from 'react-select';
 
-function AgregarRutina (){
+const AgregarRutina = ()=>{
+
   const [rutinas, setRutinas] = useState([]);
   const [rutinaSeleccionada, setRutinaSeleccionada] = useState({ nombre: '', descripcion: '', series: 0, repeticiones: 0 });
   const [body, setBody] = useState({nombre:'', descripcion:'', series: 0, repeticiones: 0});
   const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
   const descripcionValida = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s.0-9]+$/;
+  const [ShowModal, setShowModal] = useState(false);
   let alertValues = {title:'', text:'', icon:''};
+
+  const [rutinaModificada, setRutinaModificada] = useState({
+    nombre: '',
+    descripcion: '',
+    series: 0,
+    repeticiones: 0,
+  });
+  
+  const handleShow = () => setShowModal(true);
+
+  const handleCloseShowModal=()=>{
+    setShowModal(false);
+  }
+
 
   useEffect(()=>{
     const getRutinas = () =>{
@@ -57,18 +75,19 @@ function AgregarRutina (){
       repeticiones: repeticionesAux
     });
   }
-  const handleModificarRutina = async(nombre)=>{
-    if(!nombre){
+  const handleModificarRutina = async()=>{
+    if(!rutinaModificada.nombre){
       alertValues = {title: 'Oops!', text: 'Se debe seleccionar una rutina', icon: 'info'};
       messageAlert(alertValues)
-    }else if(!body.descripcion || !body.series || !body.repeticiones){
+    }else if(!rutinaModificada.descripcion || !rutinaModificada.series || !rutinaModificada.repeticiones){
       alertValues = {title: 'Error!', text: 'Se debe llenar descripción, series y repeticiones', icon: 'error'};
       messageAlert(alertValues)
     }else{
       try {
-        await axios.put('http://localhost:3001/gimnasio/rutina/modificarutina', {nombre:nombre, descripcion:body.descripcion, series:body.series, repeticiones:body.repeticiones})
+        await axios.put('http://localhost:3001/gimnasio/rutina/modificarutina', {nombre:rutinaModificada.nombre, descripcion:rutinaModificada.descripcion, series:rutinaModificada.series, repeticiones:rutinaModificada.repeticiones})
         alertValues = {title: 'Modificado!', text: 'Rutina modificada exitosamente', icon: 'success'};
         messageAlert(alertValues)
+        handleCloseShowModal();
       } catch (error) {
         console.log(error);
       alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error al modificar la rutina', icon: 'error'};
@@ -121,8 +140,9 @@ function AgregarRutina (){
   const handleRutinaSeleccionada = (e) => {
     const selectedRutina = rutinas.find((rutina) => rutina.nombre === e.target.value);
     setRutinaSeleccionada(selectedRutina);
+    setRutinaModificada(selectedRutina || { nombre: '', descripcion: '', series: 0, repeticiones: 0 });
   };
-
+  
   return(
     <>
       <div className='Container'>
@@ -160,6 +180,7 @@ function AgregarRutina (){
         </Col>
       </Row>
         <button className='btRutina' onClick={handleValidateRutina}>Guardar Rutina</button>
+        
       </div>
 
       <div className='Ruticolumna2'>
@@ -196,12 +217,63 @@ function AgregarRutina (){
         <label className="labRutina">Repeticiones por día: {rutinaSeleccionada ? 
         rutinaSeleccionada.repeticiones : ''}</label><br/>
 
-        <button className='btModificarRutina' onClick={() => handleModificarRutina(rutinaSeleccionada.nombre)}>Modificar</button>
         
+         <button className='btModificarRutina' onClick={() => handleShow(rutinaSeleccionada.nombre)}>Modificar</button>
         <button onClick={() => handleEliminarRutina(rutinaSeleccionada.nombre)} className='btEliminarRutina'>Eliminar</button>
       </div>
       
       </div>
+
+
+      <Modal show={ShowModal} onHide={handleCloseShowModal} aria-labelledby="contained-modal-title-vcenter">
+  <Modal.Header closeButton>
+    <Modal.Title id="contained-modal-title-vcenter">
+      Modificar Rutina
+    </Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <Container>
+      <Form>
+        <Form.Group controlId="formNombre">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control type="text" placeholder="Nombre de rutina" value={rutinaModificada.nombre} onChange={(e) => setRutinaModificada({ ...rutinaModificada, nombre: e.target.value })} />
+        </Form.Group>
+        <Form.Group controlId="formDescripcion">
+          <Form.Label>Descripción</Form.Label>
+          <Form.Control as="textarea" rows={3} placeholder="Descripción" value={rutinaModificada.descripcion} onChange={(e) => setRutinaModificada({ ...rutinaModificada, descripcion: e.target.value })} />
+        </Form.Group>
+        <Form.Group controlId="formSeries">
+          <Form.Label>Series por día</Form.Label>
+          <Form.Control as="select" value={rutinaModificada.series} onChange={(e) => setRutinaModificada({ ...rutinaModificada, series: parseInt(e.target.value, 10) })}>
+            <option value={0} disabled>Selecciona</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+            <option value={5}>5</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group controlId="formRepeticiones">
+          <Form.Label>Repeticiones por día</Form.Label>
+          <Form.Control as="select" value={rutinaModificada.repeticiones} onChange={(e) => setRutinaModificada({ ...rutinaModificada, repeticiones: parseInt(e.target.value, 10) })}>
+            <option value={0} disabled>Selecciona</option>
+            <option value={6}>6</option>
+            <option value={8}>8</option>
+            <option value={10}>10</option>
+            <option value={12}>12</option>
+          </Form.Control>
+        </Form.Group>
+      </Form>
+    </Container>
+  </Modal.Body>
+  <Modal.Footer>
+    <Button variant="danger" onClick={handleCloseShowModal}>
+      Cancelar
+    </Button>
+    <Button variant="warning" onClick={() => handleModificarRutina()}>
+      Modificar
+    </Button>
+  </Modal.Footer>
+</Modal>
+
     </>
   )
 }

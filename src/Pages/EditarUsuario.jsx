@@ -131,10 +131,11 @@ const registrarClienteRutinas = async() =>{
   const apPaterno = body.apellidoPaterno;
   const apMaterno = body.apellidoMaterno;
   const celular = body.celular;
-  console.log(contraseña);
+
   try {
     const info = await axios.post('http://localhost:3001/gimnasio/clientesrutina/registrar',{nombre:nombre, apellidoPaterno:apPaterno, apellidoMaterno:apMaterno, celular:celular, contraseña:contraseña})
-    const contraseñaCliente = info.data.contraseña;
+    console.log(info);
+    const contraseñaCliente = info.data.newCliente.contraseña;
     alertValues = {title: 'Agregado!', text: 'Cliente añadido con acceso a rutinas exitosamente, contraseña: '+contraseñaCliente, icon: 'success'};
     messageAlert(alertValues);
   } catch (error) {

@@ -28,7 +28,7 @@ function Navbar() {
 
           <div className='IconoTitulo'>
             <div className='ContenedorImg'>
-              <a href="/Menu">
+              <a href="/menu">
                 <Image className='LogoNav' src={Logo} alt="" />
               </a>
             </div>
@@ -71,7 +71,7 @@ function Navbar() {
             </NavLink>
           </div>
 
-          <div className='contenedorLinksIcon'>
+          {/* <div className='contenedorLinksIcon'>
             
             <NavLink
               to="/Ganancias" activeClassName="nav-active"
@@ -81,7 +81,7 @@ function Navbar() {
               <Image className='IconoNavbar' src={imgGanancia}/>
               <h4 className='TituloLink'>GANANCIAS</h4>
             </NavLink>
-          </div>
+          </div> */}
         </div>
 
       </Row>

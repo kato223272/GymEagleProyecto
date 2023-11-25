@@ -30,12 +30,12 @@ const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && current
         </div>
       <Routes>
         <Route
-          path="/"
+          exact path="/"
           element={<Inicio setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} />}
         />
         <Route
           exact path="/menu"
-          element={renderProtectedRoute(() => <Menu />)}
+          element={<Menu />}
         />
          <Route
           exact path="/rutinas"
