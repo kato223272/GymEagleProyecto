@@ -129,10 +129,18 @@ const TablaAsistencias = () => {
     const nombre = userData.nombre;
     const apellidoPaterno = userData.apellidoPaterno;
     const apellidoMaterno = userData.apellidoMaterno;
+
     try {
-      await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplanmes', {nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
-      alertValues = {title: 'Añadido!', text: nombre+' añadido a la lista de asistencia', icon: 'success'};
-      messageAlert(alertValues);
+      const asistio = await axios.post('http://localhost:3001/gimnasio/asistencia/buscarasistencia', {id_cliente: id_cliente, fecha: fechaFormateada});
+      console.log(asistio.data.cliente);
+      if (asistio.data.cliente === null){
+        await axios.post('http://localhost:3001/gimnasio/asistencia/registrarplanmes', { id_cliente:id_cliente, nombre: nombre, apellidoPaterno:apellidoPaterno, apellidoMaterno: apellidoMaterno, fecha: fechaFormateada})
+        alertValues = {title: 'Añadido!', text: nombre+' añadido a la lista de asistencia', icon: 'success'};
+        messageAlert(alertValues);
+      }else{
+        alertValues = {title: 'Oops!', text: nombre+' ya se marcó su asistencia', icon: 'warning'};
+        messageAlert(alertValues);
+      }
     } catch (error) {
       console.log(error);
       alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error, no se ha añadido a la lista de asistencia', icon: 'error'};
@@ -146,20 +154,10 @@ const TablaAsistencias = () => {
 
   const verificarEstatus = async(id_cliente) =>{
     try {
-      const mensualidad = await axios.post(
-        'http://localhost:9000/gimnasio/mensualidades/buscar',
-        { id: id_cliente, fecha: fechaFormateada }
-      );
+      const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar',{ id: id_cliente, fecha: fechaFormateada });
       if (mensualidad.data === null) {
         registrarAsistencia(id_cliente);
-        // Actualiza el estado de asistencia solo para este cliente
-        setAsistenciaAñadida(prevState => ({
-          ...prevState,
-          [id_cliente]: {
-            asistio: true,
-            // text: 'Asistio'
-          }
-        }));
+
       } else {
         const idMensualidad = mensualidad.data.id_mensualidad;
         const fechaFin = mensualidad.data.fechaPago;
@@ -237,7 +235,6 @@ const TablaAsistencias = () => {
       options: {
         customBodyRender: (val, tableMeta) => {
           const idCliente = tableMeta.rowData[0];
-          // const { asistio, texto } = asistenciaAñadida[idCliente];
           
           return (
             <button
@@ -247,8 +244,7 @@ const TablaAsistencias = () => {
                 verificarEstatus(idCliente);
               }}
             >
-              {asistencia}
-              {/* {texto} */}
+              Asistencia
             </button>
           );
         }
@@ -328,10 +324,11 @@ const TablaAsistencias = () => {
             <>
               <p>ID: {selectedUser.id_cliente}</p>
               <p>Nombre: {selectedUser.nombre}</p><hr/>
-              <p>Apellido Paterno: {selectedUser.apellidoPaterno}</p><hr/>
-              <p>Apellido Materno: {selectedUser.apellidoMaterno}</p><hr/>
-              {/* <p>Número Celular: {selectedUser.celular}</p><hr/> */}
-              <p>Asistencia: {asistencia}</p>
+              <p>Apellido paterno: {selectedUser.apellidoPaterno}</p><hr/>
+              <p>Apellido materno: {selectedUser.apellidoMaterno}</p><hr/>
+              <p>Número celular: {selectedUser.numeroCelular}</p><hr/>
+              <p>Fecha Inscripción: {selectedUser.fechaInscripcion}</p><hr/>
+              {/* <p>Asistencia: {asistencia}</p> */}
             </>
           )}
 
@@ -339,7 +336,7 @@ const TablaAsistencias = () => {
 
         <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
           <Button variant="success" onClick={handleClose}>
-            Pagar
+            Cerrar
           </Button>
 
           <Button variant="primary" onClick={handleClose}>

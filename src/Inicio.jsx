@@ -11,7 +11,7 @@ import icoSesion from './Image/imgInicio/icon-sesion.png';
 // import icoSesion from './Image/LogoGym.png'
 
 const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
-  const [body, setBody] = useState({usuario: '', contraseña: ''});
+  const [body, setBody] = useState({usuario: '', password: ''});
   const navigate = useNavigate();
   let alertValues = {title:'', text:'', icon:''};
 
@@ -38,19 +38,19 @@ const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
     const pswPermitida = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     try {
-      if(!body.usuario || !body.contraseña){
+      if(!body.usuario || !body.password){
         alertValues = {title: 'Oops!', text: 'Los campos son obligatorios', icon: 'error'};
         messageAlert(alertValues);
       }else if (!permitido.test(body.usuario)) {
         alertValues = {title: 'Oops!', text: 'El usuario no debe tener espacios', icon: 'error'};
         messageAlert(alertValues);
-      }else if (!pswPermitida.test(body.contraseña)) {
+      }else if (!pswPermitida.test(body.password)) {
         alertValues = {title: 'Oops!', text: 'La contraseña debe tener al menos 8 caracteres, al menos un número y un carácter especial', icon: 'error'};
         messageAlert(alertValues);
       }else{
         const admin = await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
-        console.log(admin.data);
-        if(admin.data===null){
+        // console.log(admin);
+        if(admin.status !== 200){
           alertValues = {title: 'No encontrado!', text: 'El usuario o la contraseña son incorrectos' , icon: 'warning'};
           messageAlert(alertValues);      
         }else{
@@ -63,7 +63,8 @@ const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
       }
     } catch (error) {
       console.log(error);
-      alertValues = {title: 'Error!', text: 'Error '+error.data , icon: 'error'};
+      const errorMessage = error.response.data.error;
+      alertValues = {title: 'Error!', text: 'Error: '+errorMessage , icon: 'error'};
       messageAlert(alertValues);
     }
   }
@@ -95,7 +96,7 @@ const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
           value={body.usuario} name='usuario' onChange={handleChange}/>
           <label className='lb-text'>Ingrese Contraseña:</label>
           <Form.Control className='inputs' type="password" placeholder="Contraseña" 
-          value={body.contraseña} name='contraseña' onChange={handleChange}/>
+          value={body.password} name='password' onChange={handleChange}/>
 
           <Button variant="warning" className='bt-Acceder' onClick={toAccess}>Acceder</Button>
 
