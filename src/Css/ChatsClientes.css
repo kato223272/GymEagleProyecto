@@ -1,17 +1,36 @@
 .containerChats{
-    display: flex;
+
     position: relative;
     width: 100%;
-    padding: 2%;
     background-color: rgb(218, 218, 32);
 }
 
-.containerClientes{
-    width: 30%;
+/* .containerClientes{
+    width: 20%;
     background-color: aquamarine;
-}
+} */
 
 .containerMensajes{
-    width: 70%;
+    width:100%;
     background-color: blueviolet;
 }
+
+.container {
+    width: 100%;
+  }
+  
+  #content-chat{
+    height: 600px;
+    overflow-y: scroll;
+  }
+  
+  #nickname{
+    width: 12em;
+  }
+  
+  @media only screen and (max-width: 1000px) {
+    .container {
+      width: 100%;
+    }
+  }
+  
