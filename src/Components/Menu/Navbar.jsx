@@ -1,7 +1,7 @@
 import './Navbar.css';
 import Logo from '../../Image/LogoGym.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilePdf,faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf,faPersonWalkingArrowRight,faComments } from '@fortawesome/free-solid-svg-icons';
 import { saveAs } from 'file-saver';
 
 function Navbar() {
@@ -31,6 +31,15 @@ function Navbar() {
           </div>
 
           <div className='cajaPdfCerrarSesion'>
+
+            <a href="/chats"> 
+              <button className='FinalizarM'>
+                  <FontAwesomeIcon icon={faComments} size="2xl" style={{ color: '#ffff00'}}/>
+                  <br/>
+                    Mensajes
+              </button>
+            </a>
+            
           <button onClick={descargarPDF} className='bt-PDFManual'>
             <FontAwesomeIcon icon={faFilePdf} size="2xl" style={{color: "#ffff00",}} /><br/>
               Manual

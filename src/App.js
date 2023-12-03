@@ -9,6 +9,7 @@ import Asistencias from './Pages/ListaAsistencias';
 import Editar from './Pages/EditarUsuario.jsx';
 import Recuperar from './Pages/RecuperarContrasenia';
 import Ganancias from './Pages/Ganancias';
+import ChatsClientes from './Pages/ChatsClientes.jsx';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -49,10 +50,16 @@ const navbarDisplay = (currentPath !== '/' && currentPath !== '/menu' && current
           exact path="/editar"
           element={<Editar />}
         />
-        <Route exact path="/recuperarcontrasenia" element={<Recuperar />} />
+        <Route 
+          exact path="/recuperarcontrasenia" 
+          element={<Recuperar />} />
         <Route
           exact path="/ganancias"
           element={<Ganancias />}
+        />
+        <Route
+          exact path="/chats"
+          element={<ChatsClientes />}
         />
       </Routes>
     </Router>

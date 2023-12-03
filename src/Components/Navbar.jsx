@@ -7,6 +7,8 @@ import {Row, Image} from 'react-bootstrap';
 import imgAsistencia from '../Image/imgNavbar/asistenciaGymNavH.png';
 import imgRutina from '../Image/imgNavbar/RutinaGymNavH.png'; 
 import imgGanancia from '../Image/imgNavbar/GananciaGymNavH.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 import imgUsuario from '../Image/imgNavbar/usuarioGym.png';
 
 function Navbar() {
@@ -82,6 +84,18 @@ function Navbar() {
               <h4 className='TituloLink'>GANANCIAS</h4>
             </NavLink>
           </div> */}
+          
+          <div className='contenedorLinksIcon'>
+            <NavLink
+              to="/chats" activeClassName="nav-active"
+              style={{textDecoration:'none'}}
+              onClick={() => handleLinkClick('/chats')}
+              className={activeLink === '/chats' ? 'nav-active' : ''}>
+              <FontAwesomeIcon icon={faComments} size="2xl"
+              style={{ color: '#ffff00'}}/>
+              <h4 className='TituloLink'>Mensajes</h4>
+            </NavLink>
+          </div>
         </div>
 
       </Row>

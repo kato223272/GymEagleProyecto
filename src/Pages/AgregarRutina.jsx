@@ -226,15 +226,15 @@ const AgregarRutina = ()=>{
 
 
       <Modal show={ShowModal} onHide={handleCloseShowModal} aria-labelledby="contained-modal-title-vcenter">
-  <Modal.Header closeButton>
+  <Modal.Header closeButton className='modalRutinaModificar'>
     <Modal.Title id="contained-modal-title-vcenter">
       Modificar Rutina
     </Modal.Title>
   </Modal.Header>
-  <Modal.Body>
-    <Container>
-      <Form>
-        <Form.Group controlId="formNombre">
+  <Modal.Body className='modalRutinaModificar'>
+    <Container style={{backgroundColor:'rgb(21, 21, 21)'}}>
+      <Form >
+        <Form.Group controlId="formNombre" >
           <Form.Label>Nombre</Form.Label>
           <Form.Control type="text" placeholder="Nombre de rutina" value={rutinaModificada.nombre} onChange={(e) => setRutinaModificada({ ...rutinaModificada, nombre: e.target.value })} />
         </Form.Group>
@@ -263,8 +263,8 @@ const AgregarRutina = ()=>{
         </Form.Group>
       </Form>
     </Container>
-  </Modal.Body>
-  <Modal.Footer>
+  </Modal.Body >
+  <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
     <Button variant="danger" onClick={handleCloseShowModal}>
       Cancelar
     </Button>

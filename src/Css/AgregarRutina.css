@@ -154,4 +154,7 @@ h3.tituRutina{
     margin-left: 12%;
 }
 
-
+.modalRutinaModificar{
+    background-color: rgb(21, 21, 21);
+    color: white;
+}
