@@ -279,9 +279,3 @@ const AgregarRutina = ()=>{
 }
 
 export default AgregarRutina;
-
-
-
-
-
-

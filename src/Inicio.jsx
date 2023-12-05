@@ -8,7 +8,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import logo from './Image/favicongym.png';
 import icoSesion from './Image/imgInicio/icon-sesion.png';
-// import icoSesion from './Image/LogoGym.png'
+
 
 const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
   const [body, setBody] = useState({usuario: '', password: ''});
@@ -49,7 +49,6 @@ const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
         messageAlert(alertValues);
       }else{
         const admin = await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
-        // console.log(admin);
         if(admin.status !== 200){
           alertValues = {title: 'No encontrado!', text: 'El usuario o la contraseña son incorrectos' , icon: 'warning'};
           messageAlert(alertValues);      

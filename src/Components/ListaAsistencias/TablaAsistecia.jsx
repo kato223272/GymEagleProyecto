@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { addMonths, addDays, format }from 'date-fns';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Container from 'react-bootstrap/Container';
+import { Form } from  'react-bootstrap'
 import MUIDataTable from "mui-datatables";
 import "../ListaAsistencias/ListaAsistencias.css";
 import axios from 'axios';
@@ -11,12 +13,19 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const TablaAsistencias = () => {
   const [show, setShow] = useState(false);
-  const [showEditar, setShowEditar] = useState(false);
+  const [ShowModal, setShowModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [clientes, setClientes] = useState([]);
   const [asistencia, setAsistencia] = useState("Asistencia");
   const [asistenciaAñadida, setAsistenciaAñadida] = useState({});
-  
+  const [body, setbody] = useState({
+    nombre:'',
+    apellidoPaterno:'',
+    apellidoMaterno:'',
+    celular:''
+  })
+  const permitido = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
+  const celularPermitido = /^[1-9]\d{9}$/;
   let alertValues = {title:'', text:'', icon:''};
 
   const fechaActual = new Date();
@@ -36,14 +45,14 @@ const TablaAsistencias = () => {
       fetch('http://localhost:9000/gimnasio/clientes/obtenertodo')
         .then(res => res.json())
         .then(res => {
-          // Inicializa el estado de asistencia para cada cliente
-          const asistenciaInicial = {};
-          res.forEach(cliente => {
-            asistenciaInicial[cliente.id_cliente] = false;
-          });
-          setAsistenciaAñadida(asistenciaInicial);
+          // // Inicializa el estado de asistencia para cada cliente
+          // const asistenciaInicial = {};
+          // res.forEach(cliente => {
+          //   asistenciaInicial[cliente.id_cliente] = false;
+          // });
+          // setAsistenciaAñadida(asistenciaInicial);
   
-          // Actualiza el estado de los clientes
+          // // Actualiza el estado de los clientes
           setClientes(res);
         })
     }
@@ -101,7 +110,7 @@ const TablaAsistencias = () => {
     
     return fechaPago;
   }
-
+  
   const crearNuevaMensualidad = async({id_cliente, fechaFin}) =>{
     const fechaPago = calcularProximoPago(fechaFin);
     console.log(fechaPago);
@@ -148,10 +157,6 @@ const TablaAsistencias = () => {
     }
   }
 
-  const handleEditarUsuario=()=>{
-    
-  }
-
   const verificarEstatus = async(id_cliente) =>{
     try {
       const mensualidad = await axios.post('http://localhost:9000/gimnasio/mensualidades/buscar',{ id: id_cliente, fecha: fechaFormateada });
@@ -168,13 +173,14 @@ const TablaAsistencias = () => {
     }
 
   }
+
   const handleClose = () => {
     setShow(false);
     setSelectedUserId(null);
   };
 
   const handleCloseShow2=()=>{
-    setShowEditar(false);
+    setShowModal(false);
     setSelectedUserId(null);
   }
 
@@ -185,9 +191,9 @@ const TablaAsistencias = () => {
     handleShow();
   };
 
-  const mostrarModalEditar = (userId)=>{
-    setSelectedUserId(userId);
-  }
+  // const mostrarModalEditar = (userId)=>{
+  //   setSelectedUserId(userId);
+  // }
 
   // FUNCION PARA EDITAR A UN CLIENTE
   const modalEditarUsuario = (userId) => {
@@ -195,22 +201,34 @@ const TablaAsistencias = () => {
     handleShowEditar();
   };
 
-
-  // FUNCION PARA ELIMINAR A UN CLIENTE
-  const modalElminarUsuario = async(userId) => {
-    try{
-      const respuesta = await axios.delete('http://localhost:9000/gimnasio/clientes/eliminar',userId)
-      console.log(respuesta);
-    }catch(error){
-      console.log(error);
-      alertValues = {title: 'Error!', text: 'Oh, ha ocurrido un error, no se ha eliminado el usuario', icon: 'error'};
+  const handleUpdate = async() =>{
+    const id = selectedUser.id_cliente;
+    if (!body.nombre || !body.apellidoPaterno || !body.apellidoMaterno || !body.celular) {
+      alertValues = {title: 'Error!', text: 'Faltan campos por llenar', icon: 'error'};
       messageAlert(alertValues);
+    } else if (!permitido.test(body.nombre) || !permitido.test(body.apellidoPaterno) || !permitido.test(body.apellidoMaterno)) {
+      alertValues = {title: 'Error!', text: 'No se aceptan caracteres especiales, solo acentos', icon: 'error'};
+      messageAlert(alertValues);
+    } else if (!celularPermitido.test(body.celular)) {
+      alertValues = {title: 'Error!', text: 'El número de celular debe tener 10 números y no puede empezar en 0', icon: 'error'};
+      messageAlert(alertValues);
+    } else {
+      try {
+        const info = await axios.put('http://localhost:9000/gimnasio/clientes/modificar', {id_cliente:id, nombre:body.nombre, apellidoPaterno:body.apellidoPaterno, apellidoMaterno:body.apellidoMaterno, celular:body.celular})
+        alertValues = {title: 'Modificado!', text:'Datos modificados exitosamente', icon: 'success'};
+        messageAlert(alertValues);
+        handleCloseShow2();
+      } catch (error) {
+        console.log(error)
+        alertValues = {title: 'Oops!', text:'Ha ocurrido un error al modificar los datos', icon: 'error'};
+        messageAlert(alertValues);       
+      }
     }
-  };
-
+  }
+ 
   const selectedUser = clientes.find(cliente => cliente.id_cliente === selectedUserId);
   const handleShow = () => setShow(true);
-  const handleShowEditar=()=>setShowEditar(true);
+  const handleShowEditar=()=>setShowModal(true);
 
   const columns = [
     {
@@ -263,21 +281,21 @@ const TablaAsistencias = () => {
           );
         }
       }
-     }
-    // {
-    //   name:'Editar',
-    //   label:'Editar',
-    //   options: {
-    //     customBodyRender:  (val, tableMeta) => {
-    //       const idCliente = tableMeta.rowData[0];
-    //       return (
-    //         <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
-    //           <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
-    //         </button>
-    //       );
-    //     }
-    //   }
-    // }
+     },
+    {
+      name:'Editar',
+      label:'Editar',
+      options: {
+        customBodyRender:  (val, tableMeta) => {
+          const idCliente = tableMeta.rowData[0];
+          return (
+            <button className="botonEditarUsuario" onClick={()=>{modalEditarUsuario(idCliente)}}>
+              <FontAwesomeIcon icon={faPen} size="xl" style={{color: "#000000",}} />
+            </button>
+          );
+        }
+      }
+    }
   ];
 
   const options = {
@@ -328,7 +346,6 @@ const TablaAsistencias = () => {
               <p>Apellido materno: {selectedUser.apellidoMaterno}</p><hr/>
               <p>Número celular: {selectedUser.numeroCelular}</p><hr/>
               <p>Fecha Inscripción: {selectedUser.fechaInscripcion}</p><hr/>
-              {/* <p>Asistencia: {asistencia}</p> */}
             </>
           )}
 
@@ -347,34 +364,45 @@ const TablaAsistencias = () => {
 
 
       {/* ESTE MODAL ES PARA EDITAR LA INFORMACION DEL USUARIO */}
-      <Modal show={showEditar} onHide={handleCloseShow2} centered>
-        <Modal.Header closeButton className='modalInformacion'>
-          <Modal.Title>Información de Usuario:</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body className='modalInformacion'>
-          {selectedUser && (
-            <>
-              <p>ID: {selectedUser.id_cliente}</p>
-              <p>Nombre: <input type='text' value={selectedUser.nombre}/></p><hr/>
-              <p>Apellido Paterno: <input type='text' value={selectedUser.apellidoPaterno}/></p><hr/>
-              <p>Apellido Materno: <input type='text' value={selectedUser.apellidoMaterno}/></p><hr/>
-              <p>Asistencia: {asistencia}</p>
-            </>
-          )}
-
-        </Modal.Body>
-
-        <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
-          <Button variant="danger" onClick={handleCloseShow2}>
-            Cancelar
-          </Button>
-
-          <Button variant="warning" onClick={handleCloseShow2}>
-            Modificar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Modal show={ShowModal} onHide={handleCloseShow2} aria-labelledby="contained-modal-title-vcenter">
+  <Modal.Header closeButton className='modalRutinaModificar'>
+    <Modal.Title id="contained-modal-title-vcenter">
+      Modificar datos dle cliente
+    </Modal.Title>
+  </Modal.Header>
+  <Modal.Body className='modalRutinaModificar'>
+  {/* {selectedUser && ( */}
+    <Container style={{backgroundColor:'rgb(21, 21, 21)'}}>
+      <Form >
+        <Form.Group controlId="formNombre" >
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control type="text" placeholder="Nombre" value={body.nombre} onChange={(e) => setbody({ ...body, nombre: e.target.value })} />
+        </Form.Group>
+        <Form.Group controlId="formDescripcion">
+          <Form.Label>Apellido paterno:</Form.Label>
+          <Form.Control type="text" placeholder="Apellido paterno" value={body.apellidoPaterno} onChange={(e) => setbody({ ...body, apellidoPaterno: e.target.value })} />
+        </Form.Group>
+        <Form.Group controlId="formSeries">
+          <Form.Label>Apellido materno:</Form.Label>
+          <Form.Control type="text" placeholder="Apellido materno" value={body.apellidoMaterno} onChange={(e) => setbody({ ...body, apellidoMaterno: e.target.value })} />
+        </Form.Group>
+        <Form.Group controlId="formRepeticiones">
+          <Form.Label>Número de celular:</Form.Label>
+          <Form.Control type="text" placeholder="Número de celular" value={body.celular} onChange={(e) => setbody({ ...body, celular: e.target.value })} />
+        </Form.Group>
+      </Form>
+    </Container>
+  {/* )} */}
+  </Modal.Body >
+  <Modal.Footer style={{backgroundColor:'rgb(21, 21, 21)'}}>
+    <Button variant="danger" onClick={handleCloseShow2}>
+      Cancelar
+    </Button>
+    <Button variant="success" onClick={handleUpdate}>
+      Modificar
+    </Button>
+  </Modal.Footer>
+</Modal>
     </>
   );
 };
