@@ -1,8 +1,7 @@
 .containerChats{
-
     position: relative;
     width: 100%;
-    background-color: rgb(218, 218, 32);
+  
 }
 
 /* .containerClientes{
@@ -12,14 +11,14 @@
 
 .containerMensajes{
     width:100%;
-    background-color: blueviolet;
 }
 
 .container {
-    width: 100%;
+    width: 150%;
   }
   
   #content-chat{
+    width: 600px;
     height: 600px;
     overflow-y: scroll;
   }

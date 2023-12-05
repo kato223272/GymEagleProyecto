@@ -13,8 +13,22 @@ const ChatsClientes = () => {
     const [messages, setMessages] = useState([])
     const [storedMessages, setStoredMessages] = useState([])
     const [firstTime, setfirstTime] = useState(false)
+    const [newMessageCount, setNewMessageCount] = useState(0);
   
     const url = "http://localhost:4000/api/"
+
+    useEffect(() => {
+      const handleNewMessageNotification = (message) => {
+        // Incrementar el contador de notificaciones o realizar acciones adicionales
+        setNewMessageCount((prevCount) => prevCount + 1);
+      };
+    
+      socket.on('newMessage', handleNewMessageNotification);
+    
+      return () => {
+        socket.off('newMessage', handleNewMessageNotification);
+      };
+    }, []);
   
     useEffect(() =>{
       const receivedMessage = (message) =>{
@@ -23,13 +37,14 @@ const ChatsClientes = () => {
       
       }
       socket.on('message', receivedMessage)
-  
+      
+
+
+    
       //Desuscribimos el estado del componente cuando ya no es necesario utilizarlo
       return () => {
         socket.off('message', receivedMessage)
       }
-      
-  
     }, [messages])
   
     //Cargamos los mensajes guardados en la BDD la primera vez
@@ -80,8 +95,6 @@ const ChatsClientes = () => {
       setDisabled(true)
     }
 
-
-
     return(
         <div className="containerChats">
             {/* <div className="containerClientes">
@@ -94,12 +107,14 @@ const ChatsClientes = () => {
 <div className="card shadow border-0">
 <div className="card-body">
   <h5 className="text-center mb-3">CHAT</h5>
-
+  {newMessageCount > 0 && (
+        <p>Tienes {newMessageCount} nuevos mensajes de clientes</p>
+      )}
   {/* nickname */}
 
   <form onSubmit={nicknameSubmit}>
     <div className="d-flex mb-3">
-      <input type="text" className="form-control" id="nickname" placeholder="Nickname..." disabled={disabled} onChange={e => setNickname(e.target.value)} value={nickname} required/>
+      <input type="text" className="form-control" id="nickname" placeholder="Mensaje..." disabled={disabled} onChange={e => setNickname(e.target.value)} value={nickname} required/>
       <button className="btn btn-success mx-3" type="submit" id="btn-nickname" disabled={disabled}>Establecer</button>
     </div>
   </form>
@@ -108,7 +123,7 @@ const ChatsClientes = () => {
 
   <form onSubmit={handlerSubmit}>
     <div className="d-flex">
-      <input type="text" className="form-control" placeholder="Mensaje..." onChange={e => setMessage(e.target.value)} value={message}/>
+      <textarea type="text" className="form-control" placeholder="Mensaje..." onChange={e => setMessage(e.target.value)} value={message}/>
       <button className="btn btn-success mx-3" type="submit">Enviar</button>
     </div>
   </form> 
