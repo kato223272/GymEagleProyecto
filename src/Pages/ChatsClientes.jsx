@@ -19,7 +19,6 @@ const ChatsClientes = () => {
 
     useEffect(() => {
       const handleNewMessageNotification = (message) => {
-        // Incrementar el contador de notificaciones o realizar acciones adicionales
         setNewMessageCount((prevCount) => prevCount + 1);
       };
     
@@ -32,22 +31,14 @@ const ChatsClientes = () => {
   
     useEffect(() =>{
       const receivedMessage = (message) =>{
-        //console.log(message)
         setMessages([message, ...messages])
-      
       }
       socket.on('message', receivedMessage)
-      
-
-
-    
-      //Desuscribimos el estado del componente cuando ya no es necesario utilizarlo
       return () => {
         socket.off('message', receivedMessage)
       }
     }, [messages])
   
-    //Cargamos los mensajes guardados en la BDD la primera vez
     if(!firstTime){
       axios.get(url + "messages").then(res => {
         setStoredMessages(res.data.messages);
@@ -57,13 +48,9 @@ const ChatsClientes = () => {
     
   
     const handlerSubmit = (e) => {
-      //Evitamos recargar la página
       e.preventDefault()
   
-      //Enviamos el mensaje sólo si se ha establecido un nickname
       if(nickname !== ''){
-        //console.log(message)
-        //Enviamos el mensaje al servidor
         socket.emit('message', message, nickname)
   
         //Nuestro mensaje
@@ -71,12 +58,8 @@ const ChatsClientes = () => {
           body: message,
           from: 'Yo'
         }
-        //Añadimos el mensaje y el resto de mensajes enviados
         setMessages([newMessage, ...messages])
-        //Limpiamos el mensaje
         setMessage('')
-  
-        //Petición http por POST para guardar el artículo:
         axios.post(url + 'save', {
           message: message,
           from: nickname
@@ -91,17 +74,12 @@ const ChatsClientes = () => {
     const nicknameSubmit = (e) => {
       e.preventDefault()
       setNickname(nickname)
-      //console.log(nickname)
       setDisabled(true)
     }
 
     return(
         <div className="containerChats">
-            {/* <div className="containerClientes">
-                <p>Div lateral para los clientres</p>
-            </div> */}
-
-            <div className="containerMensajes">
+          <div className="containerMensajes">
             <div className="container mt-3">
 
 <div className="card shadow border-0">

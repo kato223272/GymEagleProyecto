@@ -8,7 +8,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import logo from './Image/favicongym.png';
 import icoSesion from './Image/imgInicio/icon-sesion.png';
-
+const apiSql = process.env.REACT_APP_ROUTE_SQL;
 
 const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
   const [body, setBody] = useState({usuario: '', password: ''});
@@ -48,7 +48,7 @@ const Inicio = ({ setIsAuthenticated, isAuthenticated }) => {
         alertValues = {title: 'Oops!', text: 'La contraseña debe tener al menos 8 caracteres, al menos un número y un carácter especial', icon: 'error'};
         messageAlert(alertValues);
       }else{
-        const admin = await axios.post('http://localhost:9000/gimnasio/administradores/loginadmin', body);
+        const admin = await axios.post(apiSql+'/gimnasio/administradores/loginadmin', body);
         if(admin.status !== 200){
           alertValues = {title: 'No encontrado!', text: 'El usuario o la contraseña son incorrectos' , icon: 'warning'};
           messageAlert(alertValues);      
